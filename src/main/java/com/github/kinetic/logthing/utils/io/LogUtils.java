@@ -1,10 +1,9 @@
 package com.github.kinetic.logthing.utils.io;
 
-import java.lang.classfile.instruction.LocalVariable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-@SuppressWarnings("CallToPrintStackTrace")
+@SuppressWarnings({"CallToPrintStackTrace", "unused"})
 public class LogUtils {
 
     private static final String RESET = "\u001B[0m";

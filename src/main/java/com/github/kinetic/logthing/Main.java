@@ -3,6 +3,7 @@ package com.github.kinetic.logthing;
 import com.github.kinetic.logthing.utils.io.LogUtils;
 import com.github.kinetic.logthing.web.Server;
 
+@SuppressWarnings("unused")
 public class Main {
     private static final short port = 9595;
     private static final LogUtils lu = new LogUtils();
