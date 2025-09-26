@@ -2,7 +2,7 @@ package com.github.kinetic.logthing.module;
 
 import java.util.*;
 
-@SuppressWarnings("unchecked")
+@SuppressWarnings({"unchecked", "unused"})
 public class ModuleRepository {
     private static final ModuleRepository INSTANCE = new ModuleRepository();
     private final Map<String, Module> modules = new HashMap<>();
