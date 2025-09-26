@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "gradle",
+            "name": "LogThing: Run",
+            "tasks": [
+                "run"
+            ]
+        }
+    ]
+}

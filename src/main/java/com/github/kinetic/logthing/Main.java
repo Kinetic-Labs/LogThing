@@ -24,7 +24,7 @@ public class Main {
         ModuleRepository.getInstance().getEnabledModules().forEach(module -> {
             log.info("Removing module: " + module.getName());
 
-            if(module.isEnabled())
+            if (module.isEnabled())
                 module.toggle();
         });
     }
@@ -32,13 +32,13 @@ public class Main {
     private static void disableControlEcho() {
         try {
             String os = System.getProperty("os.name").toLowerCase();
-            if(!os.contains("win") && !terminal.isIntellijDebug()) {
+            if (!os.contains("win") && !terminal.isIntellijDebug()) {
                 new ProcessBuilder("stty", "-echoctl")
                         .inheritIO()
                         .start()
                         .waitFor();
             }
-        } catch(IOException | InterruptedException _) {
+        } catch (IOException | InterruptedException _) {
         }
     }
 
@@ -46,13 +46,13 @@ public class Main {
         try {
             String os = System.getProperty("os.name").toLowerCase();
 
-            if(!os.contains("win") && !terminal.isIntellijDebug()) {
+            if (!os.contains("win") && !terminal.isIntellijDebug()) {
                 new ProcessBuilder("stty", "echoctl")
                         .inheritIO()
                         .start()
                         .waitFor();
             }
-        } catch(IOException | InterruptedException _) {
+        } catch (IOException | InterruptedException _) {
         }
     }
 
@@ -67,7 +67,7 @@ public class Main {
                 log.info("Received termination signal, shutting down gracefully...");
                 System.exit(0);
             });
-        } catch(IllegalArgumentException ex) {
+        } catch (IllegalArgumentException ex) {
             log.warn("Signal handling not supported on this platform: " + ex.getMessage());
         }
     }
@@ -103,7 +103,7 @@ public class Main {
     static void main(String[] args) {
         Thread.currentThread().setName("Main");
 
-        if(terminal.isIntellijDebug()) log.debug("terminal.isDebug()");
+        if (terminal.isIntellijDebug()) log.debug("terminal.isDebug()");
 
         initialize();
 
@@ -111,7 +111,7 @@ public class Main {
 
         try {
             Thread.currentThread().join();
-        } catch(InterruptedException e) {
+        } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
             log.info("Main thread interrupted");
         }
