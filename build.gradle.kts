@@ -1,9 +1,13 @@
 plugins {
     id("java")
+    id("application")
 }
+
 
 group = "com.github.kinetic.logthing"
 version = "1.0-SNAPSHOT"
+
+var logThingMainClass = "com.github.kinetic.logthing.Main"
 
 repositories {
     mavenCentral()
@@ -17,4 +21,8 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+}
+
+application {
+    mainClass.set(logThingMainClass)
 }

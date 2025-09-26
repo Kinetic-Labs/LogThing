@@ -1,6 +1,9 @@
 package com.github.kinetic.logthing.web;
 
-import com.github.kinetic.logthing.utils.io.LogUtils;
+import com.github.kinetic.logthing.utils.io.log.LogUtils;
+import com.github.kinetic.logthing.web.impl.ProcessHandler;
+import com.github.kinetic.logthing.web.impl.RootHandler;
+import com.github.kinetic.logthing.web.impl.WebHandler;
 import com.sun.net.httpserver.HttpServer;
 
 import java.io.IOException;
@@ -12,7 +15,7 @@ public class Server {
     private final short port;
 
     public Server(short port) {
-        log = new LogUtils();
+        this.log = new LogUtils();
         this.port = port;
     }
 
@@ -26,8 +29,9 @@ public class Server {
             System.exit(-1);
         }
 
-        server.createContext("/", new Root());
+        server.createContext("/", new RootHandler());
         server.createContext("/web", new WebHandler());
+        server.createContext("/api/process", new ProcessHandler());
         server.setExecutor(null);
 
         log.info("Server started on :" + port);

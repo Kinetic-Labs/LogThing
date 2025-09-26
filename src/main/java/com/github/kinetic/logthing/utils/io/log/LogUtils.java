@@ -1,4 +1,4 @@
-package com.github.kinetic.logthing.utils.io;
+package com.github.kinetic.logthing.utils.io.log;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -50,12 +50,15 @@ public class LogUtils {
         String threadName = Thread.currentThread().getName();
         String colorCode = getColorForLevel(level);
         String levelName = level.name();
+        String threadCol = String.format("[%s]", threadName);
+        String levelCol  = String.format("[%s]", levelName);
 
-        System.out.printf("%s%s :: [%-10s] [%-5s] %s%s%n",
+        System.out.printf(
+                "%s%s %-6s %-8s %s%s%n",
                 colorCode,
                 timestamp,
-                threadName,
-                levelName,
+                threadCol,
+                levelCol,
                 msg,
                 RESET
         );

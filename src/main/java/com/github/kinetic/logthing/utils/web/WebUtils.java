@@ -1,25 +1,28 @@
-package com.github.kinetic.logthing.utils.io;
+package com.github.kinetic.logthing.utils.web;
 
+import com.github.kinetic.logthing.utils.io.fs.Resource;
 import com.sun.net.httpserver.HttpExchange;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 
 public class WebUtils {
-    private final LogUtils log;
-
     public WebUtils() {
-        log = new LogUtils();
     }
 
     public void send404(HttpExchange exchange) throws IOException {
-        String response = "404 Not Found";
-        exchange.sendResponseHeaders(404, response.length());
+        sendResponse(exchange, 404, "404 Not Found");
+    }
 
+    public void sendResponse(HttpExchange exchange, int statusCode, String response) throws IOException {
+        exchange.sendResponseHeaders(statusCode, response.length());
         try(OutputStream os = exchange.getResponseBody()) {
             os.write(response.getBytes());
         }
+    }
+
+    public void send405(HttpExchange exchange) throws IOException {
+        sendResponse(exchange, 405, "405 Method Not Allowed");
     }
 
     private String getContentType(String fileName) {
@@ -46,21 +49,19 @@ public class WebUtils {
     }
 
     public void serveResource(HttpExchange exchange, String resourcePath) throws IOException {
-        try(InputStream inputStream = getClass().getClassLoader().getResourceAsStream(resourcePath)) {
-            if(inputStream != null) {
-                byte[] content = inputStream.readAllBytes();
+        Resource resource = new Resource("", resourcePath);
+        byte[] content = resource.readBytes();
 
-                String contentType = getContentType(resourcePath);
-                exchange.getResponseHeaders().set("Content-Type", contentType);
-                exchange.sendResponseHeaders(200, content.length);
+        if(content != null) {
+            String contentType = getContentType(resourcePath);
+            exchange.getResponseHeaders().set("Content-Type", contentType);
+            exchange.sendResponseHeaders(200, content.length);
 
-                try(OutputStream os = exchange.getResponseBody()) {
-                    os.write(content);
-                }
-            } else {
-                log.error("Resource not found: " + resourcePath);
-                send404(exchange);
+            try(OutputStream os = exchange.getResponseBody()) {
+                os.write(content);
             }
+        } else {
+            send404(exchange);
         }
     }
 }
