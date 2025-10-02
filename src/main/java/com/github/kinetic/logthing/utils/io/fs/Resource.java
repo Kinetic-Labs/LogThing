@@ -1,5 +1,6 @@
 package com.github.kinetic.logthing.utils.io.fs;
 
+import com.github.kinetic.logthing.utils.Utils;
 import com.github.kinetic.logthing.utils.io.log.LogUtils;
 
 import java.io.IOException;
@@ -7,7 +8,7 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
 @SuppressWarnings("unused")
-public class Resource {
+public class Resource extends Utils {
     private final String domain;
     private final String path;
     private final LogUtils log;
@@ -16,6 +17,8 @@ public class Resource {
         this.domain = domain;
         this.path = path;
         this.log = new LogUtils();
+
+        super("resource");
     }
 
     public String read() {
@@ -30,8 +33,8 @@ public class Resource {
                 log.error("Resource not found: " + resourcePath);
                 return null;
             }
-        } catch(IOException ex) {
-            log.trace("Failed to read resource: " + resourcePath, ex);
+        } catch(IOException ioException) {
+            log.trace("Failed to read resource: " + resourcePath, ioException);
             return null;
         }
 
@@ -41,15 +44,17 @@ public class Resource {
     public boolean exists() {
         String resourcePath = domain + path;
         InputStream in = getClass().getClassLoader().getResourceAsStream(resourcePath);
-        if (in != null) {
+
+        if(in != null) {
             try {
                 in.close();
                 return true;
-            } catch (IOException ex) {
+            } catch(IOException ex) {
                 log.trace("Error closing stream while checking existence", ex);
                 return false;
             }
         }
+
         return false;
     }
 

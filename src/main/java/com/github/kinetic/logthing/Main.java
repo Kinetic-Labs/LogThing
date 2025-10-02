@@ -1,85 +1,60 @@
 package com.github.kinetic.logthing;
 
+import com.github.kinetic.logthing.event.EventBus;
 import com.github.kinetic.logthing.module.ModuleBuilder;
 import com.github.kinetic.logthing.module.ModuleRepository;
+import com.github.kinetic.logthing.module.impl.data.LogConsumerModule;
+import com.github.kinetic.logthing.module.impl.misc.RequestLoggerModule;
 import com.github.kinetic.logthing.module.impl.web.WebMonitorModule;
 import com.github.kinetic.logthing.utils.io.log.LogUtils;
+import com.github.kinetic.logthing.utils.misc.Signals;
 import com.github.kinetic.logthing.utils.misc.Terminal;
-import sun.misc.Signal;
-
-import java.io.IOException;
 
 @SuppressWarnings("unused")
 public class Main {
     private static final LogUtils log = new LogUtils();
     private static final Terminal terminal = new Terminal();
+    private static final Signals signals = new Signals();
+    private static final ModuleRepository moduleRepository = new ModuleRepository();
+    private static EventBus eventBus;
 
     private static void initializeModules() {
         ModuleBuilder.create().putAll(
-                new WebMonitorModule()
+                new RequestLoggerModule(),
+                new WebMonitorModule(),
+                new LogConsumerModule()
         );
+
+        getModuleRepository().getModule(RequestLoggerModule.class).setEnabled(true);
+        getModuleRepository().getModule(LogConsumerModule.class).setEnabled(true);
+        getModuleRepository().getModule(WebMonitorModule.class).setEnabled(true);
+    }
+
+    private static EventBus initializeEventBus() {
+        return new EventBus();
     }
 
     private static void destroyModules() {
         ModuleRepository.getInstance().getEnabledModules().forEach(module -> {
             log.info("Removing module: " + module.getName());
 
-            if (module.isEnabled())
+            if(module.isEnabled())
                 module.toggle();
         });
     }
 
-    private static void disableControlEcho() {
-        try {
-            String os = System.getProperty("os.name").toLowerCase();
-            if (!os.contains("win") && !terminal.isIntellijDebug()) {
-                new ProcessBuilder("stty", "-echoctl")
-                        .inheritIO()
-                        .start()
-                        .waitFor();
-            }
-        } catch (IOException | InterruptedException _) {
-        }
-    }
-
-    private static void enableControlEcho() {
-        try {
-            String os = System.getProperty("os.name").toLowerCase();
-
-            if (!os.contains("win") && !terminal.isIntellijDebug()) {
-                new ProcessBuilder("stty", "echoctl")
-                        .inheritIO()
-                        .start()
-                        .waitFor();
-            }
-        } catch (IOException | InterruptedException _) {
-        }
-    }
-
-    private static void setupSignalHandlers() {
-        try {
-            Signal.handle(new Signal("INT"), signal -> {
-                log.info("Received interrupt signal, shutting down gracefully...");
-                System.exit(0);
-            });
-
-            Signal.handle(new Signal("TERM"), signal -> {
-                log.info("Received termination signal, shutting down gracefully...");
-                System.exit(0);
-            });
-        } catch (IllegalArgumentException ex) {
-            log.warn("Signal handling not supported on this platform: " + ex.getMessage());
-        }
-    }
-
     private static void initialize() {
+        Thread.currentThread().setName("LM");
         log.info("Initializing LogThing...");
 
         log.info("Disabling control echo");
-        disableControlEcho();
+        terminal.disableControlEcho();
 
         log.info("Setting up signals...");
-        setupSignalHandlers();
+        signals.setupHandlers();
+
+        log.info("Initializing EventBus...");
+        eventBus = initializeEventBus();
 
         log.info("Initializing Modules...");
         initializeModules();
@@ -95,7 +70,7 @@ public class Main {
         destroyModules();
 
         log.info("Re-enabling control echo...");
-        enableControlEcho();
+        terminal.enableControlEcho();
 
         log.info("Shut down LogThing.");
     }
@@ -103,17 +78,23 @@ public class Main {
     static void main(String[] args) {
         Thread.currentThread().setName("Main");
 
-        if (terminal.isIntellijDebug()) log.debug("terminal.isDebug()");
-
         initialize();
 
         Runtime.getRuntime().addShutdownHook(new Thread(Main::destroy));
 
         try {
             Thread.currentThread().join();
-        } catch (InterruptedException e) {
+        } catch(InterruptedException interruptedException) {
             Thread.currentThread().interrupt();
             log.info("Main thread interrupted");
         }
+    }
+
+    public static ModuleRepository getModuleRepository() {
+        return ModuleRepository.getInstance();
+    }
+
+    public static EventBus getEventBus() {
+        return eventBus;
     }
 }

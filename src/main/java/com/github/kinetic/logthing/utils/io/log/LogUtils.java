@@ -1,10 +1,13 @@
 package com.github.kinetic.logthing.utils.io.log;
 
+import com.github.kinetic.logthing.utils.Utils;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 
-@SuppressWarnings({"CallToPrintStackTrace", "unused"})
-public class LogUtils {
+@SuppressWarnings({"unused"})
+public class LogUtils extends Utils {
 
     private static final String RESET = "\u001B[0m";
     private static final String PURPLE = "\u001B[35m";
@@ -13,10 +16,10 @@ public class LogUtils {
     private static final String BRIGHT_RED = "\u001B[91m";
     private static final String GREEN = "\u001B[32m";
     private static final String CYAN = "\u001B[36m";
-
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     public LogUtils() {
+        super("logutils");
     }
 
     public void info(String message) {
@@ -39,10 +42,10 @@ public class LogUtils {
         log(message, LogLevel.DEBUG);
     }
 
-    public void trace(String message, Exception ex) {
+    public void trace(String message, Exception exception) {
         log(message, LogLevel.TRACE);
-        log("Struck Trace: ", LogLevel.TRACE);
-        ex.printStackTrace();
+        log("Stack Trace: ", LogLevel.TRACE);
+        log(Arrays.toString(exception.getStackTrace()), LogLevel.TRACE);
     }
 
     private void log(String msg, LogLevel level) {
@@ -51,16 +54,16 @@ public class LogUtils {
         String colorCode = getColorForLevel(level);
         String levelName = level.name();
         String threadCol = String.format("[%s]", threadName);
-        String levelCol  = String.format("[%s]", levelName);
+        String levelCol = String.format("[%s]", levelName);
 
         System.out.printf(
-                "%s%s %-6s %-8s %s%s%n",
-                colorCode,
-                timestamp,
-                threadCol,
-                levelCol,
-                msg,
-                RESET
+            "%s%s %-6s %-8s %s%s%n",
+            colorCode,
+            timestamp,
+            threadCol,
+            levelCol,
+            msg,
+            RESET
         );
     }
 

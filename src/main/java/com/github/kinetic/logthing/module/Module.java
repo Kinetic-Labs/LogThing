@@ -1,5 +1,9 @@
 package com.github.kinetic.logthing.module;
 
+import com.github.kinetic.logthing.Main;
+import com.github.kinetic.logthing.utils.io.log.LogUtils;
+import com.github.kinetic.logthing.utils.misc.StringUtils;
+
 @SuppressWarnings("unused")
 public abstract class Module {
     private final String name;
@@ -7,6 +11,9 @@ public abstract class Module {
     private final String description;
     private final Category category;
     private boolean enabled;
+    protected final LogUtils log = new LogUtils();
+    protected final StringUtils stringUtils = new StringUtils();
+    private final String padding = stringUtils.indent(3);
 
     protected Module(String name, String displayName, String description, Category category) {
         this.name = name;
@@ -56,8 +63,14 @@ public abstract class Module {
     }
 
     protected void onEnable() {
+        Main.getEventBus().subscribe(this);
+
+        log.debug(padding + "> Started " + this.getName() + ".");
     }
 
     protected void onDisable() {
+        Main.getEventBus().unsubscribe(this);
+
+        log.debug(padding + "> Stopped " + this.getName() + ".");
     }
 }

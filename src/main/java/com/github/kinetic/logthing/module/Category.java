@@ -2,7 +2,9 @@ package com.github.kinetic.logthing.module;
 
 @SuppressWarnings("unused")
 public enum Category {
-    WEB("Web");
+    WEB("Web"),
+    MISC("Misc"),
+    DATA("Data");
 
     private final String displayName;
 

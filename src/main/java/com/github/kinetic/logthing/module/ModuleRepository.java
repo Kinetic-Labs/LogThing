@@ -2,7 +2,7 @@ package com.github.kinetic.logthing.module;
 
 import java.util.*;
 
-@SuppressWarnings({"unchecked", "unused"})
+@SuppressWarnings("unused")
 public class ModuleRepository {
     private static final ModuleRepository INSTANCE = new ModuleRepository();
     private final Map<String, Module> modules = new HashMap<>();
@@ -19,9 +19,10 @@ public class ModuleRepository {
     }
 
     public <T extends Module> T getModule(Class<T> moduleClass) {
-        return (T) modules.values()
+        return modules.values()
                 .stream()
-                .filter(module -> module.getClass().equals(moduleClass))
+                .filter(module -> moduleClass.equals(module.getClass()))
+                .map(moduleClass::cast)
                 .findFirst()
                 .orElse(null);
     }

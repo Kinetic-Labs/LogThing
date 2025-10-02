@@ -1,5 +1,8 @@
 package com.github.kinetic.logthing.web.impl;
 
+import com.github.kinetic.logthing.Main;
+import com.github.kinetic.logthing.event.impl.PreProcessLog;
+import com.github.kinetic.logthing.utils.types.Log;
 import com.github.kinetic.logthing.web.BaseHandler;
 import com.sun.net.httpserver.HttpExchange;
 
@@ -19,7 +22,9 @@ public class ProcessHandler extends BaseHandler {
                     .collect(Collectors.joining("\n"));
             String response = "File uploaded successfully.";
 
-            log.debug(body);
+            Log log = new Log(body);
+
+            Main.getEventBus().dispatch(new PreProcessLog(log));
 
             webUtils.sendResponse(exchange, 200, response);
         } else {

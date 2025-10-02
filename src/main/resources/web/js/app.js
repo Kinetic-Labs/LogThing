@@ -2,10 +2,8 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("DOMContentLoaded")
 
     const form = document.getElementById("form")
-    const upload = document.getElementById("upload")
-    const fileInput = document.getElementById("file")
 
-    if(!upload || !fileInput || !form) {
+    if(!form) {
         console.error("unable to find things")
         return
     }
@@ -29,6 +27,6 @@ document.addEventListener("DOMContentLoaded", () => {
             body: formData,
         });
 
-        console.log(await post.text());
+        alert(await post.text());
     }
 })

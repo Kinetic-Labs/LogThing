@@ -1,5 +1,9 @@
 package com.github.kinetic.logthing.module.impl.web;
 
+import com.github.kinetic.logthing.Main;
+import com.github.kinetic.logthing.event.IEventListener;
+import com.github.kinetic.logthing.event.impl.FinishedProcessingEvent;
+import com.github.kinetic.logthing.event.impl.PreProcessLog;
 import com.github.kinetic.logthing.module.Category;
 import com.github.kinetic.logthing.module.Module;
 import com.github.kinetic.logthing.web.Server;
@@ -11,17 +15,29 @@ public class WebMonitorModule extends Module {
 
     public WebMonitorModule() {
         super("WebMonitorModule", "Dashboard for alerts and data", Category.WEB);
-
-        setEnabled(true);
     }
+
+    @SuppressWarnings("unused")
+    private final IEventListener<PreProcessLog> eventListener = event -> {
+        String theLog = event.getLog().getRawLog();
+        log.debug(theLog);
+
+        String hash = event.getLog().getRawLog();
+
+        Main.getEventBus().dispatch(new FinishedProcessingEvent("raaah", event.getLog()));
+    };
 
     @Override
     public void onEnable() {
-        server.start();
+        new Thread(server::start).start();
+
+        super.onEnable();
     }
 
     @Override
     public void onDisable() {
         server.stop();
+
+        super.onDisable();
     }
 }

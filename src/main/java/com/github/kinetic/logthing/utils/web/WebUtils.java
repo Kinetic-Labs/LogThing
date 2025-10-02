@@ -1,13 +1,15 @@
 package com.github.kinetic.logthing.utils.web;
 
+import com.github.kinetic.logthing.utils.Utils;
 import com.github.kinetic.logthing.utils.io.fs.Resource;
 import com.sun.net.httpserver.HttpExchange;
 
 import java.io.IOException;
 import java.io.OutputStream;
 
-public class WebUtils {
+public class WebUtils extends Utils {
     public WebUtils() {
+        super("webutils");
     }
 
     public void send404(HttpExchange exchange) throws IOException {

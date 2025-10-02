@@ -20,6 +20,8 @@ public class Server {
     }
 
     public void start() {
+        Thread.currentThread().setName("WMM");
+
         log.info("Creating server on...");
 
         try {
