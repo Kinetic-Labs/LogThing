@@ -1,15 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
-    console.log("DOMContentLoaded")
-
     const form = document.getElementById("form")
 
     if(!form) {
-        console.error("unable to find things")
         return
     }
 
     form.addEventListener("submit", async event => {
         event.preventDefault()
+
         await submit()
     })
 
@@ -17,8 +15,12 @@ document.addEventListener("DOMContentLoaded", () => {
         const formData = new FormData(form);
         const file = formData.get('file');
 
-        if(!file || !file.name.includes(".log")) {
+        if(!file)
+            return;
+
+        if(!file.name.includes(".log")) {
             alert("file must be of type log")
+
             return;
         }
 
@@ -27,6 +29,8 @@ document.addEventListener("DOMContentLoaded", () => {
             body: formData,
         });
 
-        alert(await post.text());
+        alert(
+            await post.text()
+        );
     }
 })
