@@ -1,6 +1,6 @@
 package com.github.kinetic.logthing.web;
 
-import com.github.kinetic.logthing.Main;
+import com.github.kinetic.logthing.LogThing;
 import com.github.kinetic.logthing.event.impl.RequestReceivedEvent;
 import com.github.kinetic.logthing.utils.io.log.LogUtils;
 import com.github.kinetic.logthing.utils.web.WebUtils;
@@ -22,7 +22,7 @@ public abstract class BaseHandler implements HttpHandler {
     @Override
     public final void handle(HttpExchange exchange) throws IOException {
         Thread.currentThread().setName("WD");
-        Main.getEventBus().dispatch(new RequestReceivedEvent(exchange));
+        LogThing.getEventBus().dispatch(new RequestReceivedEvent(exchange));
         handleRequest(exchange);
     }
 

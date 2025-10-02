@@ -3,8 +3,8 @@ package com.github.kinetic.logthing.utils.misc;
 import com.github.kinetic.logthing.utils.Utils;
 import sun.misc.Signal;
 
-public class Signals extends Utils {
-    public Signals() {
+public class SignalUtils extends Utils {
+    public SignalUtils() {
         super("signals");
     }
 

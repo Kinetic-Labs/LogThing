@@ -7,14 +7,14 @@ import com.github.kinetic.logthing.module.impl.data.LogConsumerModule;
 import com.github.kinetic.logthing.module.impl.misc.RequestLoggerModule;
 import com.github.kinetic.logthing.module.impl.web.WebMonitorModule;
 import com.github.kinetic.logthing.utils.io.log.LogUtils;
-import com.github.kinetic.logthing.utils.misc.Signals;
-import com.github.kinetic.logthing.utils.misc.Terminal;
+import com.github.kinetic.logthing.utils.misc.SignalUtils;
+import com.github.kinetic.logthing.utils.misc.TerminalUtils;
 
 @SuppressWarnings("unused")
-public class Main {
+public class LogThing {
     private static final LogUtils log = new LogUtils();
-    private static final Terminal terminal = new Terminal();
-    private static final Signals signals = new Signals();
+    private static final TerminalUtils terminal = new TerminalUtils();
+    private static final SignalUtils signals = new SignalUtils();
     private static final ModuleRepository moduleRepository = new ModuleRepository();
     private static EventBus eventBus;
 
@@ -76,17 +76,17 @@ public class Main {
     }
 
     static void main(String[] args) {
-        Thread.currentThread().setName("Main");
+        Thread.currentThread().setName("LogThing");
 
         initialize();
 
-        Runtime.getRuntime().addShutdownHook(new Thread(Main::destroy));
+        Runtime.getRuntime().addShutdownHook(new Thread(LogThing::destroy));
 
         try {
             Thread.currentThread().join();
         } catch(InterruptedException interruptedException) {
             Thread.currentThread().interrupt();
-            log.info("Main thread interrupted");
+            log.info("LogThing thread interrupted");
         }
     }
 

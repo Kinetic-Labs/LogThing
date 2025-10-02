@@ -11,5 +11,15 @@ public class LogConsumerModule extends Module {
     }
 
     @SuppressWarnings("unused")
-    private final IEventListener<FinishedProcessingEvent> eventListener = event -> log.debug("Finished processing: " + event.getName());
+    private final IEventListener<FinishedProcessingEvent> eventListener = event -> {
+        if(event.getName() == null) {
+            log.warn("Could not get name for log!");
+
+            return;
+        }
+
+        String name = event.getName();
+
+        log.debug("Finished processing log: " + name);
+    };
 }

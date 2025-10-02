@@ -1,9 +1,13 @@
 :root {
-    --main-backgound-color: #212121;
+    --main-backgound-color: #000000;
     --panel-background-color: #111111;
     --foregound-color: #EEEEEE;
     --accent: #9e3ddc;
+    --element-dark: #252525;
+    --element-dim: #393939;
+    --element-hover: #303030;
     --border: #333333;
+    --border-hover: #555555;
 
     font-family: sans-serif;
 }
@@ -16,4 +20,105 @@ html {
 body {
     background-color: var(--main-backgound-color);
     color: var(--foregound-color);
+}
+
+button {
+    padding: 10px 20px;
+    border-radius: 10px;
+    outline: none;
+    cursor: pointer;
+}
+
+button[data-primary] {
+    background-color: var(--element-dim);
+    color: var(--foregound-color);
+    border: 1px solid var(--border-color);
+    transition: 100ms all ease-in;
+}
+
+button:hover[data-primary] {
+    background-color: var(--element-hover);
+    border-color: var(--accent);
+}
+
+button[data-secondary] {
+    background-color: transparent;
+    color: var(--foregound-color);
+    border: 1px solid var(--border);
+    transition: 100ms border-color ease-in;
+}
+
+button:hover[data-secondary] {
+    border-color: var(--border-hover);
+}
+
+input {
+    background-color: var(--element-dark);
+    color: var(--foregound-color);
+    border: 1px solid var(--border);
+    transition: 100ms all ease-in;
+    padding: 5px 10px;
+    border-radius: 10px;
+    pointer-events: none;
+}
+
+input::file-selector-button {
+    background-color: var(--element-dim);
+    color: var(--foregound-color);
+    border: 1px solid var(--border-color);
+    transition: 100ms all ease-in;
+    padding: 5px 10px;
+    border-radius: 10px;
+    outline: none;
+    cursor: pointer;
+    pointer-events: all;
+}
+
+input::file-selector-button:hover {
+    background-color: var(--element-hover);
+    border-color: var(--accent);
+}
+
+.header {
+    top: 0;
+    left: 0;
+    height: 10vh;
+    width: 100vw;
+    display: flex;
+    position: fixed;
+    padding: 0 0 0 15px;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    color: var(--foregound-color);
+    border-bottom: 1px solid var(--border);
+    background-color: var(--panel-background-color);
+}
+
+.content {
+    margin-top: 12vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.upload-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    padding: 15px 30px;
+    text-align: center;
+    width: 30vw;
+    height: 30vh;
+    gap: 1rem;
+}
+
+.upload-form-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
 }

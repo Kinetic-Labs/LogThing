@@ -25,4 +25,4 @@ COPY --from=build /home/gradle/.gradle/caches/modules-2/files-2.1/ ./dependencie
 EXPOSE 9595
 
 ENV CLASSPATH="/app/libs/*:/app/dependencies/*/*/*/*.jar"
-CMD ["java", "-cp", "/app/libs/*", "com.github.kinetic.logthing.Main"]
+CMD ["java", "-cp", "/app/libs/*", "com.github.kinetic.logthing.LogThing"]

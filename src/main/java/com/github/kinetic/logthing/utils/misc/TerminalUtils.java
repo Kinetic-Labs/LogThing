@@ -5,8 +5,8 @@ import com.github.kinetic.logthing.utils.Utils;
 import java.io.IOException;
 import java.util.Objects;
 
-public class Terminal extends Utils {
-    public Terminal() {
+public class TerminalUtils extends Utils {
+    public TerminalUtils() {
         super("terminal");
     }
 

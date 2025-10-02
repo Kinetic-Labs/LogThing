@@ -7,7 +7,7 @@ plugins {
 group = "com.github.kinetic.logthing"
 version = "1.0-SNAPSHOT"
 
-var logThingMainClass = "com.github.kinetic.logthing.Main"
+var logThingMainClass = "com.github.kinetic.logthing.Start"
 
 repositories {
     mavenCentral()

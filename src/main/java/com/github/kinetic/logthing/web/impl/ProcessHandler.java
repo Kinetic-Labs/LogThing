@@ -1,6 +1,6 @@
 package com.github.kinetic.logthing.web.impl;
 
-import com.github.kinetic.logthing.Main;
+import com.github.kinetic.logthing.LogThing;
 import com.github.kinetic.logthing.event.impl.PreProcessLog;
 import com.github.kinetic.logthing.utils.types.Log;
 import com.github.kinetic.logthing.web.BaseHandler;
@@ -24,7 +24,7 @@ public class ProcessHandler extends BaseHandler {
 
             Log log = new Log(body);
 
-            Main.getEventBus().dispatch(new PreProcessLog(log));
+            LogThing.getEventBus().dispatch(new PreProcessLog(log));
 
             webUtils.sendResponse(exchange, 200, response);
         } else {

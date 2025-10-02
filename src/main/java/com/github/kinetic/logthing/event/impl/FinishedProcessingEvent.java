@@ -3,7 +3,6 @@ package com.github.kinetic.logthing.event.impl;
 import com.github.kinetic.logthing.event.Event;
 import com.github.kinetic.logthing.utils.types.Log;
 
-@SuppressWarnings("unused")
 public class FinishedProcessingEvent extends Event {
     private final String name;
     private final Log log;

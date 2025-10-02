@@ -1,6 +1,6 @@
 package com.github.kinetic.logthing.module;
 
-import com.github.kinetic.logthing.Main;
+import com.github.kinetic.logthing.LogThing;
 import com.github.kinetic.logthing.utils.io.log.LogUtils;
 import com.github.kinetic.logthing.utils.misc.StringUtils;
 
@@ -63,13 +63,13 @@ public abstract class Module {
     }
 
     protected void onEnable() {
-        Main.getEventBus().subscribe(this);
+        LogThing.getEventBus().subscribe(this);
 
         log.debug(padding + "> Started " + this.getName() + ".");
     }
 
     protected void onDisable() {
-        Main.getEventBus().unsubscribe(this);
+        LogThing.getEventBus().unsubscribe(this);
 
         log.debug(padding + "> Stopped " + this.getName() + ".");
     }

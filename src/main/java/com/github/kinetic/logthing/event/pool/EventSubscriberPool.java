@@ -38,7 +38,7 @@ public final class EventSubscriberPool {
 
     public void unsubscribe(final Object subscriber) {
         subscriberCacheMap.values().forEach(eventSubscriberList -> eventSubscriberList.removeIf(eventSubscriber ->
-                eventSubscriber.getSubscriber().equals(subscriber)));
+                eventSubscriber.subscriber().equals(subscriber)));
     }
 
     public void dispatch(final Event event) {
@@ -48,7 +48,7 @@ public final class EventSubscriberPool {
             eventSubscriberList.forEach(eventSubscriber -> {
                 final EventSubscriber<Event> subscriber = (EventSubscriber<Event>) eventSubscriber;
 
-                subscriber.getEventListener().invoke(event);
+                subscriber.eventListener().invoke(event);
             });
         }
     }

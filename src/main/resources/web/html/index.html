@@ -6,14 +6,26 @@
     <title>LogThing</title>
 
     <script src="/web/js/app.js" type="module" defer></script>
-    <link href="/web/css/default.css" type="text/css">
+    <link href="/web/css/default.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <form id="form" method="POST" enctype="multipart/form-data">
+<header class="header">
+    <h1>LogThing</h1>
+</header>
+
+<div class="content">
+    <form id="form" class="upload-form" method="POST" enctype="multipart/form-data">
+
+        <h1>Upload a Log</h1>
+
         <input type="file" name="file">
 
-        <button type="submit">Upload</button>
+        <div class="upload-form-buttons">
+            <button data-primary type="submit">Upload</button>
+            <button data-secondary type="reset">Clear</button>
+        </div>
     </form>
+</div>
 </body>
 
 </html>
