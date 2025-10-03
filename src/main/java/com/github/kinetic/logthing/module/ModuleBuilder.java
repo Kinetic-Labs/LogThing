@@ -14,7 +14,7 @@ public class ModuleBuilder {
         return new ModuleBuilder();
     }
 
-    public void putAll(Module... modules) {
+    public final void putAll(final Module... modules) {
         for(Module module : modules) {
             log.info("      > Loading module: " + module.getClass().getSimpleName());
             repository.registerModule(module);

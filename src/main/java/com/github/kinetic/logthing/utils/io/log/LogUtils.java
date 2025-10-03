@@ -22,33 +22,33 @@ public class LogUtils extends Utils {
         super("logutils");
     }
 
-    public void info(String message) {
+    public final void info(final String message) {
         log(message, LogLevel.INFO);
     }
 
-    public void warn(String message) {
+    public final void warn(final String message) {
         log(message, LogLevel.WARN);
     }
 
-    public void error(String message) {
+    public final void error(final String message) {
         log(message, LogLevel.ERROR);
     }
 
-    public void fatal(String message) {
+    public final void fatal(final String message) {
         log(message, LogLevel.FATAL);
     }
 
-    public void debug(String message) {
+    public final void debug(final String message) {
         log(message, LogLevel.DEBUG);
     }
 
-    public void trace(String message, Exception exception) {
+    public final void trace(final String message, final Exception exception) {
         log(message, LogLevel.TRACE);
         log("Stack Trace: ", LogLevel.TRACE);
         log(Arrays.toString(exception.getStackTrace()), LogLevel.TRACE);
     }
 
-    private void log(String msg, LogLevel level) {
+    private void log(final String msg, final LogLevel level) {
         String timestamp = LocalDateTime.now().format(DATE_FORMATTER);
         String threadName = Thread.currentThread().getName();
         String colorCode = getColorForLevel(level);

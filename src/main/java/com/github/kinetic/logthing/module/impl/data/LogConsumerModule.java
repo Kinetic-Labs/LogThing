@@ -12,6 +12,7 @@ public class LogConsumerModule extends Module {
 
     @SuppressWarnings("unused")
     private final IEventListener<FinishedProcessingEvent> eventListener = event -> {
+        Thread.currentThread().setName("LCM");
         if(event.getName() == null) {
             log.warn("Could not get name for log!");
 

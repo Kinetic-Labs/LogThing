@@ -26,7 +26,7 @@ public class Server {
 
         try {
             server = HttpServer.create(new InetSocketAddress(port), 0);
-        } catch(IOException ex) {
+        } catch(final IOException ex) {
             log.trace("Error creating server", ex);
             System.exit(-1);
         }

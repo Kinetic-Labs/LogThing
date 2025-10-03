@@ -10,17 +10,18 @@ public class TerminalUtils extends Utils {
         super("terminal");
     }
 
-    public String getTerminal() {
+    public final String getTerminal() {
         return System.getenv("TERM");
     }
 
-    public boolean isIntellijDebug() {
+    public final boolean isIntellijDebug() {
         return Objects.equals(getTerminal(), "java");
     }
 
-    public void disableControlEcho() {
+    public final void disableControlEcho() {
         try {
-            String os = System.getProperty("os.name").toLowerCase();
+            final String os = System.getProperty("os.name").toLowerCase();
+
             if(!os.contains("win") && isIntellijDebug()) {
                 new ProcessBuilder("stty", "-echoctl")
                         .inheritIO()
@@ -31,9 +32,9 @@ public class TerminalUtils extends Utils {
         }
     }
 
-    public void enableControlEcho() {
+    public final void enableControlEcho() {
         try {
-            String os = System.getProperty("os.name").toLowerCase();
+            final String os = System.getProperty("os.name").toLowerCase();
 
             if(!os.contains("win") && isIntellijDebug()) {
                 new ProcessBuilder("stty", "echoctl")
@@ -41,7 +42,7 @@ public class TerminalUtils extends Utils {
                         .start()
                         .waitFor();
             }
-        } catch(IOException | InterruptedException _) {
+        } catch(final IOException | InterruptedException _) {
         }
     }
 }

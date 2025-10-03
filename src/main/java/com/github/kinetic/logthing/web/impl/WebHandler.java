@@ -10,8 +10,8 @@ import static com.github.kinetic.logthing.utils.web.Constants.WEB_ROOT;
 public class WebHandler extends BaseHandler {
 
     @Override
-    public void handleRequest(HttpExchange exchange) throws IOException {
-        String path = exchange.getRequestURI().getPath();
+    public final void handleRequest(final HttpExchange exchange) throws IOException {
+        final String path = exchange.getRequestURI().getPath();
         String relativePath = path.substring(4);
 
         if(!relativePath.startsWith("/"))

@@ -8,7 +8,7 @@ public class SignalUtils extends Utils {
         super("signals");
     }
 
-    public void setupHandlers() {
+    public final void setupHandlers() {
         try {
             Signal.handle(new Signal("INT"), _ -> {
                 log.info("Received interrupt signal, shutting down gracefully...");

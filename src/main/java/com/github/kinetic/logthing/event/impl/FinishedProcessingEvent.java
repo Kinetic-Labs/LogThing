@@ -12,11 +12,11 @@ public class FinishedProcessingEvent extends Event {
         this.log = log;
     }
 
-    public String getName() {
+    public final String getName() {
         return name;
     }
 
-    public Log getLog() {
+    public final Log getLog() {
         return log;
     }
 }

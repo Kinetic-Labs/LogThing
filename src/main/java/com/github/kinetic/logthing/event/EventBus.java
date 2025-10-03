@@ -25,12 +25,12 @@ import java.util.List;
 public final class EventBus {
     private final List<IEventListener<?>> listeners = new ArrayList<>();
 
-    public <T> void register(IEventListener<T> listener) {
+    public <T> void register(final IEventListener<T> listener) {
         listeners.add(listener);
     }
 
-    public <T> void dispatch(T event) {
-        for(IEventListener<?> listener : listeners) {
+    public <T> void dispatch(final T event) {
+        for(final IEventListener<?> listener : listeners) {
             if(listener != null) {
                 ((IEventListener<T>) listener).invoke(event);
             }

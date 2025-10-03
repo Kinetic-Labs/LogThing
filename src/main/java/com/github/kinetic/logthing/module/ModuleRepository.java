@@ -14,11 +14,11 @@ public class ModuleRepository {
         return INSTANCE;
     }
 
-    public void registerModule(Module module) {
+    public final void registerModule(final Module module) {
         modules.put(module.getName().toLowerCase(), module);
     }
 
-    public <T extends Module> T getModule(Class<T> moduleClass) {
+    public final <T extends Module> T getModule(final Class<T> moduleClass) {
         return modules.values()
                 .stream()
                 .filter(module -> moduleClass.equals(module.getClass()))
@@ -27,15 +27,15 @@ public class ModuleRepository {
                 .orElse(null);
     }
 
-    public Module getModuleByName(String name) {
+    public final Module getModuleByName(final String name) {
         return modules.get(name.toLowerCase());
     }
 
-    public Collection<Module> getModules() {
+    public final Collection<Module> getModules() {
         return Collections.unmodifiableCollection(modules.values());
     }
 
-    public List<Module> getEnabledModules() {
+    public final List<Module> getEnabledModules() {
         return modules.values().stream()
                 .filter(Module::isEnabled)
                 .toList();

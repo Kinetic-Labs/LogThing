@@ -22,7 +22,7 @@ public class Event {
     private boolean canceled;
     private boolean pre = true;
 
-    public boolean isCanceled() {
+    public final boolean isCanceled() {
         return canceled;
     }
 

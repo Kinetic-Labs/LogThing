@@ -1,7 +1,7 @@
 package com.github.kinetic.logthing.web.impl;
 
 import com.github.kinetic.logthing.LogThing;
-import com.github.kinetic.logthing.event.impl.PreProcessLog;
+import com.github.kinetic.logthing.event.impl.ProcessLogEvent;
 import com.github.kinetic.logthing.utils.types.Log;
 import com.github.kinetic.logthing.web.BaseHandler;
 import com.sun.net.httpserver.HttpExchange;
@@ -14,17 +14,17 @@ import java.util.stream.Collectors;
 public class ProcessHandler extends BaseHandler {
 
     @Override
-    public void handleRequest(HttpExchange exchange) throws IOException {
+    public final void handleRequest(final HttpExchange exchange) throws IOException {
         if("POST".equalsIgnoreCase(exchange.getRequestMethod())) {
-            String body = new BufferedReader(
+            final String body = new BufferedReader(
                     new InputStreamReader(exchange.getRequestBody()))
                     .lines()
                     .collect(Collectors.joining("\n"));
-            String response = "File uploaded successfully.";
+            final String response = "File uploaded successfully.";
 
-            Log log = new Log(body);
+            final Log log = new Log(body);
 
-            LogThing.getEventBus().dispatch(new PreProcessLog(log));
+            LogThing.getEventBus().dispatch(new ProcessLogEvent(log));
 
             webUtils.sendResponse(exchange, 200, response);
         } else {

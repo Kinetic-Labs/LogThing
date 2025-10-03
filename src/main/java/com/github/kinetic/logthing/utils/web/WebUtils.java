@@ -12,24 +12,25 @@ public class WebUtils extends Utils {
         super("webutils");
     }
 
-    public void send404(HttpExchange exchange) throws IOException {
+    public final void send404(HttpExchange exchange) throws IOException {
         sendResponse(exchange, 404, "404 Not Found");
     }
 
-    public void sendResponse(HttpExchange exchange, int statusCode, String response) throws IOException {
+    public final void sendResponse(final HttpExchange exchange, final int statusCode, final String response) throws IOException {
         exchange.sendResponseHeaders(statusCode, response.length());
-        try(OutputStream os = exchange.getResponseBody()) {
+
+        try(final OutputStream os = exchange.getResponseBody()) {
             os.write(response.getBytes());
         }
     }
 
-    public void send405(HttpExchange exchange) throws IOException {
+    public void send405(final HttpExchange exchange) throws IOException {
         sendResponse(exchange, 405, "405 Method Not Allowed");
     }
 
-    private String getContentType(String fileName) {
+    private String getContentType(final String fileName) {
+        final int lastDotIndex = fileName.lastIndexOf('.');
         String extension = "";
-        int lastDotIndex = fileName.lastIndexOf('.');
 
         if(lastDotIndex > 0)
             extension = fileName.substring(lastDotIndex);
@@ -50,7 +51,7 @@ public class WebUtils extends Utils {
         };
     }
 
-    public void serveResource(HttpExchange exchange, String resourcePath) throws IOException {
+    public final void serveResource(HttpExchange exchange, String resourcePath) throws IOException {
         Resource resource = new Resource("", resourcePath);
         byte[] content = resource.readBytes();
 

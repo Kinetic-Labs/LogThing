@@ -20,11 +20,11 @@ public abstract class BaseHandler implements HttpHandler {
     }
 
     @Override
-    public final void handle(HttpExchange exchange) throws IOException {
+    public final void handle(final HttpExchange exchange) throws IOException {
         Thread.currentThread().setName("WD");
         LogThing.getEventBus().dispatch(new RequestReceivedEvent(exchange));
         handleRequest(exchange);
     }
 
-    public abstract void handleRequest(HttpExchange exchange) throws IOException;
+    public abstract void handleRequest(final HttpExchange exchange) throws IOException;
 }

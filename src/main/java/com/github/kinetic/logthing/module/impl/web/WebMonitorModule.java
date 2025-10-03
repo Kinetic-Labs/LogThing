@@ -3,7 +3,7 @@ package com.github.kinetic.logthing.module.impl.web;
 import com.github.kinetic.logthing.LogThing;
 import com.github.kinetic.logthing.event.IEventListener;
 import com.github.kinetic.logthing.event.impl.FinishedProcessingEvent;
-import com.github.kinetic.logthing.event.impl.PreProcessLog;
+import com.github.kinetic.logthing.event.impl.ProcessLogEvent;
 import com.github.kinetic.logthing.module.Category;
 import com.github.kinetic.logthing.module.Module;
 import com.github.kinetic.logthing.utils.misc.HashUtils;
@@ -23,18 +23,18 @@ public class WebMonitorModule extends Module {
     }
 
     @SuppressWarnings("unused")
-    private final IEventListener<PreProcessLog> eventListener = event -> {
-        String theLog = event.getLog().getRawLog();
+    private final IEventListener<ProcessLogEvent> eventListener = event -> {
+        final String theLog = event.getLog().rawLog();
         log.debug(theLog);
 
         try {
-            MessageDigest md = MessageDigest.getInstance("MD5");
+            final MessageDigest md = MessageDigest.getInstance("MD5");
 
-            byte[] messageDigest = md.digest(theLog.getBytes());
-            String hashText = hashUtils.convertToHex(messageDigest);
+            final byte[] messageDigest = md.digest(theLog.getBytes());
+            final String hashText = hashUtils.convertToHex(messageDigest);
 
             LogThing.getEventBus().dispatch(new FinishedProcessingEvent(hashText, event.getLog()));
-        } catch(NoSuchAlgorithmException noSuchAlgorithmException) {
+        } catch(final NoSuchAlgorithmException noSuchAlgorithmException) {
             LogThing.getEventBus().dispatch(new FinishedProcessingEvent(null, event.getLog()));
 
             log.trace("Failed to hash MD5", noSuchAlgorithmException);

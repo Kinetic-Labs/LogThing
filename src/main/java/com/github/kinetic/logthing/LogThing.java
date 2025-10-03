@@ -7,6 +7,7 @@ import com.github.kinetic.logthing.module.impl.data.LogConsumerModule;
 import com.github.kinetic.logthing.module.impl.misc.RequestLoggerModule;
 import com.github.kinetic.logthing.module.impl.web.WebMonitorModule;
 import com.github.kinetic.logthing.utils.io.log.LogUtils;
+import com.github.kinetic.logthing.utils.misc.ModuleUtils;
 import com.github.kinetic.logthing.utils.misc.SignalUtils;
 import com.github.kinetic.logthing.utils.misc.TerminalUtils;
 
@@ -16,6 +17,7 @@ public class LogThing {
     private static final TerminalUtils terminal = new TerminalUtils();
     private static final SignalUtils signals = new SignalUtils();
     private static final ModuleRepository moduleRepository = new ModuleRepository();
+    private static final ModuleUtils moduleUtils = new ModuleUtils();
     private static EventBus eventBus;
 
     private static void initializeModules() {
@@ -25,9 +27,9 @@ public class LogThing {
                 new LogConsumerModule()
         );
 
-        getModuleRepository().getModule(RequestLoggerModule.class).setEnabled(true);
-        getModuleRepository().getModule(LogConsumerModule.class).setEnabled(true);
-        getModuleRepository().getModule(WebMonitorModule.class).setEnabled(true);
+        moduleUtils.enableModule(RequestLoggerModule.class);
+        moduleUtils.enableModule(LogConsumerModule.class);
+        moduleUtils.enableModule(WebMonitorModule.class);
     }
 
     private static EventBus initializeEventBus() {
@@ -44,7 +46,6 @@ public class LogThing {
     }
 
     private static void initialize() {
-        Thread.currentThread().setName("LM");
         log.info("Initializing LogThing...");
 
         log.info("Disabling control echo");
@@ -63,7 +64,7 @@ public class LogThing {
     }
 
     private static void destroy() {
-        Thread.currentThread().setName("MainShutdownHook");
+        Thread.currentThread().setName("MSH");
         log.info("Shutting down LogThing...");
 
         log.info("Unloading Modules...");
@@ -76,7 +77,7 @@ public class LogThing {
     }
 
     static void main(String[] args) {
-        Thread.currentThread().setName("LogThing");
+        Thread.currentThread().setName("LM");
 
         initialize();
 
@@ -84,9 +85,9 @@ public class LogThing {
 
         try {
             Thread.currentThread().join();
-        } catch(InterruptedException interruptedException) {
+        } catch(final InterruptedException interruptedException) {
             Thread.currentThread().interrupt();
-            log.info("LogThing thread interrupted");
+            log.info("Interrupted thread: " + Thread.currentThread().getName());
         }
     }
 

@@ -1,7 +1,6 @@
 package com.github.kinetic.logthing.utils.io.fs;
 
 import com.github.kinetic.logthing.utils.Utils;
-import com.github.kinetic.logthing.utils.io.log.LogUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,20 +10,18 @@ import java.nio.charset.StandardCharsets;
 public class Resource extends Utils {
     private final String domain;
     private final String path;
-    private final LogUtils log;
 
-    public Resource(String domain, String path) {
+    public Resource(final String domain, final String path) {
         this.domain = domain;
         this.path = path;
-        this.log = new LogUtils();
 
         super("resource");
     }
 
     public String read() {
-        String resourcePath = domain + path;
-        InputStream in = getClass().getClassLoader().getResourceAsStream(resourcePath);
-        byte[] content;
+        final String resourcePath = domain + path;
+        final InputStream in = getClass().getClassLoader().getResourceAsStream(resourcePath);
+        final byte[] content;
 
         try(in) {
             if(in != null) {
@@ -33,7 +30,7 @@ public class Resource extends Utils {
                 log.error("Resource not found: " + resourcePath);
                 return null;
             }
-        } catch(IOException ioException) {
+        } catch(final IOException ioException) {
             log.trace("Failed to read resource: " + resourcePath, ioException);
             return null;
         }
@@ -42,8 +39,8 @@ public class Resource extends Utils {
     }
 
     public boolean exists() {
-        String resourcePath = domain + path;
-        InputStream in = getClass().getClassLoader().getResourceAsStream(resourcePath);
+        final String resourcePath = domain + path;
+        final InputStream in = getClass().getClassLoader().getResourceAsStream(resourcePath);
 
         if(in != null) {
             try {
@@ -59,8 +56,8 @@ public class Resource extends Utils {
     }
 
     public byte[] readBytes() {
-        String resourcePath = domain + path;
-        InputStream in = getClass().getClassLoader().getResourceAsStream(resourcePath);
+        final String resourcePath = domain + path;
+        final InputStream in = getClass().getClassLoader().getResourceAsStream(resourcePath);
 
         try(in) {
             if(in != null) {
@@ -75,15 +72,15 @@ public class Resource extends Utils {
         }
     }
 
-    public String getDomain() {
+    public final String getDomain() {
         return domain;
     }
 
-    public String getPath() {
+    public final String getPath() {
         return path;
     }
 
-    public String getFullPath() {
+    public final String getFullPath() {
         return domain + path;
     }
 }

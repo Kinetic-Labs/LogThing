@@ -8,8 +8,8 @@ public class StringUtils extends Utils {
         super("stringutils");
     }
 
-    public String indent(String message, int indent) {
-        StringBuilder stringBuilder = new StringBuilder();
+    public final String indent(String message, int indent) {
+        final StringBuilder stringBuilder = new StringBuilder();
 
         if(message == null)
             return stringBuilder.toString();
@@ -19,7 +19,7 @@ public class StringUtils extends Utils {
         return stringBuilder.toString();
     }
 
-    public String indent(int indent) {
+    public final String indent(int indent) {
         return "  ".repeat(Math.max(0, indent));
     }
 }

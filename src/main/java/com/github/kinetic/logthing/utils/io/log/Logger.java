@@ -1,7 +1,7 @@
 package com.github.kinetic.logthing.utils.io.log;
 
 public class Logger {
-    private static class LoggerHolder {
+    private static final class LoggerHolder {
         private static final LogUtils INSTANCE = new LogUtils();
     }
 

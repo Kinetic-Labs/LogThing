@@ -15,41 +15,41 @@ public abstract class Module {
     protected final StringUtils stringUtils = new StringUtils();
     private final String padding = stringUtils.indent(3);
 
-    protected Module(String name, String displayName, String description, Category category) {
+    protected Module(final String name, final String displayName, final String description, final Category category) {
         this.name = name;
         this.displayName = displayName;
         this.description = description;
         this.category = category;
     }
 
-    protected Module(String name, String description, Category category) {
+    protected Module(final String name, final String description, final Category category) {
         this.name = name;
         this.displayName = name;
         this.description = description;
         this.category = category;
     }
 
-    public String getName() {
+    public final String getName() {
         return name;
     }
 
-    public String getDisplayName() {
+    public final String getDisplayName() {
         return displayName;
     }
 
-    public String getDescription() {
+    public final String getDescription() {
         return description;
     }
 
-    public Category getCategory() {
+    public final Category getCategory() {
         return category;
     }
 
-    public boolean isEnabled() {
+    public final boolean isEnabled() {
         return enabled;
     }
 
-    public void setEnabled(boolean enabled) {
+    public final void setEnabled(final boolean enabled) {
         this.enabled = enabled;
         if(enabled) {
             onEnable();
@@ -58,7 +58,7 @@ public abstract class Module {
         }
     }
 
-    public void toggle() {
+    public final void toggle() {
         setEnabled(!enabled);
     }
 

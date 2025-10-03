@@ -10,7 +10,7 @@ public class RequestReceivedEvent extends Event {
         this.exchange = exchange;
     }
 
-    public HttpExchange getExchange() {
+    public final HttpExchange getExchange() {
         return exchange;
     }
 }
