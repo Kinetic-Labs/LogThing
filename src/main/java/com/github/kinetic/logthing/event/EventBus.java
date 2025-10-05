@@ -31,9 +31,8 @@ public final class EventBus {
 
     public <T> void dispatch(final T event) {
         for(final IEventListener<?> listener : listeners) {
-            if(listener != null) {
+            if(listener != null)
                 ((IEventListener<T>) listener).invoke(event);
-            }
         }
     }
 

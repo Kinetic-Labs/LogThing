@@ -7,10 +7,10 @@ import java.io.IOException;
 
 import static com.github.kinetic.logthing.utils.web.Constants.WEB_ROOT;
 
-public class RootHandler extends BaseHandler {
+public final class RootHandler extends BaseHandler {
 
     @Override
-    public final void handleRequest(final HttpExchange exchange) throws IOException {
+    public void handleRequest(final HttpExchange exchange) throws IOException {
         final String path = exchange.getRequestURI().getPath();
 
         if(path.equals("/")) {

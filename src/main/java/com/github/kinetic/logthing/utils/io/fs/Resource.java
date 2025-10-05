@@ -7,16 +7,7 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
 @SuppressWarnings("unused")
-public class Resource extends Utils {
-    private final String domain;
-    private final String path;
-
-    public Resource(final String domain, final String path) {
-        this.domain = domain;
-        this.path = path;
-
-        super("resource");
-    }
+public record Resource(String domain, String path) implements Utils {
 
     public String read() {
         final String resourcePath = domain + path;
@@ -72,15 +63,7 @@ public class Resource extends Utils {
         }
     }
 
-    public final String getDomain() {
-        return domain;
-    }
-
-    public final String getPath() {
-        return path;
-    }
-
-    public final String getFullPath() {
+    public String getFullPath() {
         return domain + path;
     }
 }

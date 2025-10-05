@@ -12,7 +12,7 @@ public class Start {
 
         log.info("Booting...");
 
-        LogThing.main(concat(new String[] {"--debug"}, args));
+        LogThing.getInstance().main(concat(new String[] {"--debug"}, args));
     }
 
     public static <T> T[] concat(T[] first, T[] second) {

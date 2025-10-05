@@ -4,12 +4,9 @@ import com.github.kinetic.logthing.utils.Utils;
 
 import java.math.BigInteger;
 
-public class HashUtils extends Utils {
-    public HashUtils() {
-        super("hash_utils");
-    }
+public final class HashUtils implements Utils {
 
-    public final String convertToHex(final byte[] messageDigest) {
+    public String convertToHex(final byte[] messageDigest) {
         final BigInteger bigint = new BigInteger(1, messageDigest);
         String hexText = bigint.toString(16);
 

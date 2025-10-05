@@ -22,7 +22,7 @@ public abstract class BaseHandler implements HttpHandler {
     @Override
     public final void handle(final HttpExchange exchange) throws IOException {
         Thread.currentThread().setName("WD");
-        LogThing.getEventBus().dispatch(new RequestReceivedEvent(exchange));
+        LogThing.getInstance().getEventBus().dispatch(new RequestReceivedEvent(exchange));
         handleRequest(exchange);
     }
 

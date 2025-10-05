@@ -11,10 +11,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.stream.Collectors;
 
-public class ProcessHandler extends BaseHandler {
+public final class ProcessHandler extends BaseHandler {
 
     @Override
-    public final void handleRequest(final HttpExchange exchange) throws IOException {
+    public void handleRequest(final HttpExchange exchange) throws IOException {
         if("POST".equalsIgnoreCase(exchange.getRequestMethod())) {
             final String body = new BufferedReader(
                     new InputStreamReader(exchange.getRequestBody()))
@@ -24,7 +24,7 @@ public class ProcessHandler extends BaseHandler {
 
             final Log log = new Log(body);
 
-            LogThing.getEventBus().dispatch(new ProcessLogEvent(log));
+            LogThing.getInstance().getEventBus().dispatch(new ProcessLogEvent(log));
 
             webUtils.sendResponse(exchange, 200, response);
         } else {

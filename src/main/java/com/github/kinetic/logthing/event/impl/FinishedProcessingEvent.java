@@ -3,20 +3,20 @@ package com.github.kinetic.logthing.event.impl;
 import com.github.kinetic.logthing.event.Event;
 import com.github.kinetic.logthing.utils.types.Log;
 
-public class FinishedProcessingEvent extends Event {
+public final class FinishedProcessingEvent extends Event {
     private final String name;
     private final Log log;
 
-    public FinishedProcessingEvent(String name, Log log) {
+    public FinishedProcessingEvent(final String name, final Log log) {
         this.name = name;
         this.log = log;
     }
 
-    public final String getName() {
+    public String getName() {
         return name;
     }
 
-    public final Log getLog() {
+    public Log getLog() {
         return log;
     }
 }

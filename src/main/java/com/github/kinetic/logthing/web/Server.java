@@ -9,7 +9,7 @@ import com.sun.net.httpserver.HttpServer;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 
-public class Server {
+public final class Server {
     private HttpServer server;
     private final LogUtils log;
     private final short port;

@@ -7,16 +7,13 @@ import com.sun.net.httpserver.HttpExchange;
 import java.io.IOException;
 import java.io.OutputStream;
 
-public class WebUtils extends Utils {
-    public WebUtils() {
-        super("webutils");
-    }
+public final class WebUtils implements Utils {
 
-    public final void send404(HttpExchange exchange) throws IOException {
+    public void send404(HttpExchange exchange) throws IOException {
         sendResponse(exchange, 404, "404 Not Found");
     }
 
-    public final void sendResponse(final HttpExchange exchange, final int statusCode, final String response) throws IOException {
+    public void sendResponse(final HttpExchange exchange, final int statusCode, final String response) throws IOException {
         exchange.sendResponseHeaders(statusCode, response.length());
 
         try(final OutputStream os = exchange.getResponseBody()) {
@@ -30,6 +27,7 @@ public class WebUtils extends Utils {
 
     private String getContentType(final String fileName) {
         final int lastDotIndex = fileName.lastIndexOf('.');
+
         String extension = "";
 
         if(lastDotIndex > 0)
@@ -51,7 +49,7 @@ public class WebUtils extends Utils {
         };
     }
 
-    public final void serveResource(HttpExchange exchange, String resourcePath) throws IOException {
+    public void serveResource(HttpExchange exchange, String resourcePath) throws IOException {
         Resource resource = new Resource("", resourcePath);
         byte[] content = resource.readBytes();
 

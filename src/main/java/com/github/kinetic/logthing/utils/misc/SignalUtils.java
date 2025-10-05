@@ -3,12 +3,9 @@ package com.github.kinetic.logthing.utils.misc;
 import com.github.kinetic.logthing.utils.Utils;
 import sun.misc.Signal;
 
-public class SignalUtils extends Utils {
-    public SignalUtils() {
-        super("signals");
-    }
+public final class SignalUtils implements Utils {
 
-    public final void setupHandlers() {
+    public void setupHandlers() {
         try {
             Signal.handle(new Signal("INT"), _ -> {
                 log.info("Received interrupt signal, shutting down gracefully...");

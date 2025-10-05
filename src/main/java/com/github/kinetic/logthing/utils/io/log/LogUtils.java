@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 
 @SuppressWarnings({"unused"})
-public class LogUtils extends Utils {
+public final class LogUtils implements Utils {
 
     private static final String RESET = "\u001B[0m";
     private static final String PURPLE = "\u001B[35m";
@@ -18,31 +18,27 @@ public class LogUtils extends Utils {
     private static final String CYAN = "\u001B[36m";
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-    public LogUtils() {
-        super("logutils");
-    }
-
-    public final void info(final String message) {
+    public void info(final String message) {
         log(message, LogLevel.INFO);
     }
 
-    public final void warn(final String message) {
+    public void warn(final String message) {
         log(message, LogLevel.WARN);
     }
 
-    public final void error(final String message) {
+    public void error(final String message) {
         log(message, LogLevel.ERROR);
     }
 
-    public final void fatal(final String message) {
+    public void fatal(final String message) {
         log(message, LogLevel.FATAL);
     }
 
-    public final void debug(final String message) {
+    public void debug(final String message) {
         log(message, LogLevel.DEBUG);
     }
 
-    public final void trace(final String message, final Exception exception) {
+    public void trace(final String message, final Exception exception) {
         log(message, LogLevel.TRACE);
         log("Stack Trace: ", LogLevel.TRACE);
         log(Arrays.toString(exception.getStackTrace()), LogLevel.TRACE);

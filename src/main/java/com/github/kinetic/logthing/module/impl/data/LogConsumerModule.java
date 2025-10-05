@@ -5,7 +5,7 @@ import com.github.kinetic.logthing.event.impl.FinishedProcessingEvent;
 import com.github.kinetic.logthing.module.Category;
 import com.github.kinetic.logthing.module.Module;
 
-public class LogConsumerModule extends Module {
+public final class LogConsumerModule extends Module {
     public LogConsumerModule() {
         super("LogConsumerModule", "Handles automated database actions", Category.DATA);
     }

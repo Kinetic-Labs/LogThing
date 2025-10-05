@@ -14,7 +14,7 @@ import java.security.NoSuchAlgorithmException;
 
 import static com.github.kinetic.logthing.utils.web.Constants.PORT;
 
-public class WebMonitorModule extends Module {
+public final class WebMonitorModule extends Module {
     private final Server server = new Server(PORT);
     private final HashUtils hashUtils = new HashUtils();
 
@@ -33,9 +33,9 @@ public class WebMonitorModule extends Module {
             final byte[] messageDigest = md.digest(theLog.getBytes());
             final String hashText = hashUtils.convertToHex(messageDigest);
 
-            LogThing.getEventBus().dispatch(new FinishedProcessingEvent(hashText, event.getLog()));
+            LogThing.getInstance().getEventBus().dispatch(new FinishedProcessingEvent(hashText, event.getLog()));
         } catch(final NoSuchAlgorithmException noSuchAlgorithmException) {
-            LogThing.getEventBus().dispatch(new FinishedProcessingEvent(null, event.getLog()));
+            LogThing.getInstance().getEventBus().dispatch(new FinishedProcessingEvent(null, event.getLog()));
 
             log.trace("Failed to hash MD5", noSuchAlgorithmException);
         }

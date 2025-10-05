@@ -12,15 +12,16 @@ import com.github.kinetic.logthing.utils.misc.SignalUtils;
 import com.github.kinetic.logthing.utils.misc.TerminalUtils;
 
 @SuppressWarnings("unused")
-public class LogThing {
-    private static final LogUtils log = new LogUtils();
-    private static final TerminalUtils terminal = new TerminalUtils();
-    private static final SignalUtils signals = new SignalUtils();
-    private static final ModuleRepository moduleRepository = new ModuleRepository();
-    private static final ModuleUtils moduleUtils = new ModuleUtils();
-    private static EventBus eventBus;
+public final class LogThing {
+    private final LogUtils log = new LogUtils();
+    private final TerminalUtils terminal = new TerminalUtils();
+    private final SignalUtils signals = new SignalUtils();
+    private final ModuleRepository moduleRepository = new ModuleRepository();
+    private final ModuleUtils moduleUtils = new ModuleUtils();
+    private static final LogThing instance = new LogThing();
+    private EventBus eventBus;
 
-    private static void initializeModules() {
+    private void initializeModules() {
         ModuleBuilder.create().putAll(
                 new RequestLoggerModule(),
                 new WebMonitorModule(),
@@ -32,11 +33,11 @@ public class LogThing {
         moduleUtils.enableModule(WebMonitorModule.class);
     }
 
-    private static EventBus initializeEventBus() {
+    private EventBus initializeEventBus() {
         return new EventBus();
     }
 
-    private static void destroyModules() {
+    private void destroyModules() {
         ModuleRepository.getInstance().getEnabledModules().forEach(module -> {
             log.info("Removing module: " + module.getName());
 
@@ -45,7 +46,7 @@ public class LogThing {
         });
     }
 
-    private static void initialize() {
+    private void initialize() {
         log.info("Initializing LogThing...");
 
         log.info("Disabling control echo");
@@ -63,7 +64,7 @@ public class LogThing {
         log.info("Initialized LogThing.");
     }
 
-    private static void destroy() {
+    private void destroy() {
         Thread.currentThread().setName("MSH");
         log.info("Shutting down LogThing...");
 
@@ -76,12 +77,12 @@ public class LogThing {
         log.info("Shut down LogThing.");
     }
 
-    static void main(String[] args) {
+    void main(String[] args) {
         Thread.currentThread().setName("LM");
 
         initialize();
 
-        Runtime.getRuntime().addShutdownHook(new Thread(LogThing::destroy));
+        Runtime.getRuntime().addShutdownHook(new Thread(this::destroy));
 
         try {
             Thread.currentThread().join();
@@ -91,11 +92,15 @@ public class LogThing {
         }
     }
 
-    public static ModuleRepository getModuleRepository() {
+    public ModuleRepository getModuleRepository() {
         return ModuleRepository.getInstance();
     }
 
-    public static EventBus getEventBus() {
+    public EventBus getEventBus() {
         return eventBus;
+    }
+
+    public static LogThing getInstance() {
+        return instance;
     }
 }

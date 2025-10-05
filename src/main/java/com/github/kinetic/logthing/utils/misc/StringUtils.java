@@ -3,12 +3,9 @@ package com.github.kinetic.logthing.utils.misc;
 import com.github.kinetic.logthing.utils.Utils;
 
 @SuppressWarnings("unused")
-public class StringUtils extends Utils {
-    public StringUtils() {
-        super("stringutils");
-    }
+public final class StringUtils implements Utils {
 
-    public final String indent(String message, int indent) {
+    public String indent(String message, int indent) {
         final StringBuilder stringBuilder = new StringBuilder();
 
         if(message == null)
@@ -19,7 +16,7 @@ public class StringUtils extends Utils {
         return stringBuilder.toString();
     }
 
-    public final String indent(int indent) {
+    public String indent(int indent) {
         return "  ".repeat(Math.max(0, indent));
     }
 }

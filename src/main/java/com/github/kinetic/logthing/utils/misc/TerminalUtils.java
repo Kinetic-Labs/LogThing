@@ -5,20 +5,17 @@ import com.github.kinetic.logthing.utils.Utils;
 import java.io.IOException;
 import java.util.Objects;
 
-public class TerminalUtils extends Utils {
-    public TerminalUtils() {
-        super("terminal");
-    }
+public final class TerminalUtils implements Utils {
 
-    public final String getTerminal() {
+    public String getTerminal() {
         return System.getenv("TERM");
     }
 
-    public final boolean isIntellijDebug() {
+    public boolean isIntellijDebug() {
         return Objects.equals(getTerminal(), "java");
     }
 
-    public final void disableControlEcho() {
+    public void disableControlEcho() {
         try {
             final String os = System.getProperty("os.name").toLowerCase();
 
@@ -32,7 +29,7 @@ public class TerminalUtils extends Utils {
         }
     }
 
-    public final void enableControlEcho() {
+    public void enableControlEcho() {
         try {
             final String os = System.getProperty("os.name").toLowerCase();
 

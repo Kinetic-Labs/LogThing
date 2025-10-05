@@ -63,13 +63,13 @@ public abstract class Module {
     }
 
     protected void onEnable() {
-        LogThing.getEventBus().subscribe(this);
+        LogThing.getInstance().getEventBus().subscribe(this);
 
         log.debug(padding + "> Started " + this.getName() + ".");
     }
 
     protected void onDisable() {
-        LogThing.getEventBus().unsubscribe(this);
+        LogThing.getInstance().getEventBus().unsubscribe(this);
 
         log.debug(padding + "> Stopped " + this.getName() + ".");
     }
