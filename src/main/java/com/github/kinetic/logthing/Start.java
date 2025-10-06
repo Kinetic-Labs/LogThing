@@ -12,12 +12,13 @@ public class Start {
 
         log.info("Booting...");
 
-        LogThing.getInstance().main(concat(new String[] {"--debug"}, args));
+        LogThing.getInstance().launch(concat(new String[] {"--debug"}, args));
     }
 
     public static <T> T[] concat(T[] first, T[] second) {
         T[] result = Arrays.copyOf(first, first.length + second.length);
         System.arraycopy(second, 0, result, first.length, second.length);
+
         return result;
     }
 }

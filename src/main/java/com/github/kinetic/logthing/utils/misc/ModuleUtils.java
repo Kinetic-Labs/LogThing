@@ -7,6 +7,12 @@ import com.github.kinetic.logthing.utils.Utils;
 @SuppressWarnings("unused")
 public final class ModuleUtils implements Utils {
 
+    /**
+     * Enable a module
+     *
+     * @param moduleClass module to be enabled
+     * @param <T>         any class extending Module
+     */
     public <T extends Module> void enableModule(final Class<T> moduleClass) {
         LogThing.getInstance().getModuleRepository().getModule(moduleClass).setEnabled(true);
     }

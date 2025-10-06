@@ -7,14 +7,13 @@ import com.github.kinetic.logthing.utils.web.WebUtils;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
-
 import java.io.IOException;
 
-public abstract class BaseHandler implements HttpHandler {
+public abstract class AbstractHandler implements HttpHandler {
     protected final WebUtils webUtils;
     protected final LogUtils log;
 
-    public BaseHandler() {
+    public AbstractHandler() {
         this.webUtils = new WebUtils();
         this.log = new LogUtils();
     }
@@ -26,5 +25,10 @@ public abstract class BaseHandler implements HttpHandler {
         handleRequest(exchange);
     }
 
+    /**
+     * Handle a network request
+     * @param exchange {@link HttpExchange}
+     * @throws IOException on error whilst handling request, method will throw {@link IOException}
+     */
     public abstract void handleRequest(final HttpExchange exchange) throws IOException;
 }

@@ -1,22 +1,22 @@
 package com.github.kinetic.logthing.event.impl;
 
 import com.github.kinetic.logthing.event.Event;
-import com.github.kinetic.logthing.utils.types.Log;
+import com.github.kinetic.logthing.utils.types.ParsedLog;
 
 public final class FinishedProcessingEvent extends Event {
     private final String name;
-    private final Log log;
+    private final ParsedLog parsedLog;
 
-    public FinishedProcessingEvent(final String name, final Log log) {
+    public FinishedProcessingEvent(final String name, final ParsedLog parsedLog) {
         this.name = name;
-        this.log = log;
+        this.parsedLog = parsedLog;
     }
 
     public String getName() {
         return name;
     }
 
-    public Log getLog() {
-        return log;
+    public ParsedLog getParsedLog() {
+        return parsedLog;
     }
 }

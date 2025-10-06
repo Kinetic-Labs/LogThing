@@ -1,6 +1,7 @@
 package com.github.kinetic.logthing.web;
 
 import com.github.kinetic.logthing.utils.io.log.LogUtils;
+import com.github.kinetic.logthing.web.impl.LogsHandler;
 import com.github.kinetic.logthing.web.impl.ProcessHandler;
 import com.github.kinetic.logthing.web.impl.RootHandler;
 import com.github.kinetic.logthing.web.impl.WebHandler;
@@ -10,9 +11,9 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 
 public final class Server {
-    private HttpServer server;
-    private final LogUtils log;
     private final short port;
+    private final LogUtils log;
+    private HttpServer server;
 
     public Server(short port) {
         this.log = new LogUtils();
@@ -20,20 +21,19 @@ public final class Server {
     }
 
     public void start() {
-        Thread.currentThread().setName("WMM");
-
         log.info("Creating server on...");
 
         try {
             server = HttpServer.create(new InetSocketAddress(port), 0);
-        } catch(final IOException ex) {
-            log.trace("Error creating server", ex);
+        } catch(final IOException ioException) {
+            log.trace("Error creating server", ioException);
             System.exit(-1);
         }
 
         server.createContext("/", new RootHandler());
         server.createContext("/web", new WebHandler());
         server.createContext("/api/process", new ProcessHandler());
+        server.createContext("/api/load", new LogsHandler());
         server.setExecutor(null);
 
         log.info("Server started on :" + port);

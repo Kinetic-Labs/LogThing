@@ -3,7 +3,7 @@ package com.github.kinetic.logthing.web.impl;
 import com.github.kinetic.logthing.LogThing;
 import com.github.kinetic.logthing.event.impl.ProcessLogEvent;
 import com.github.kinetic.logthing.utils.types.Log;
-import com.github.kinetic.logthing.web.BaseHandler;
+import com.github.kinetic.logthing.web.AbstractHandler;
 import com.sun.net.httpserver.HttpExchange;
 
 import java.io.BufferedReader;
@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.stream.Collectors;
 
-public final class ProcessHandler extends BaseHandler {
+public final class ProcessHandler extends AbstractHandler {
 
     @Override
     public void handleRequest(final HttpExchange exchange) throws IOException {

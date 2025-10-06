@@ -7,7 +7,7 @@ import com.github.kinetic.logthing.utils.misc.StringUtils;
 @SuppressWarnings("unused")
 public abstract class Module {
     private final String name;
-    private final String displayName;
+    private final String threadName;
     private final String description;
     private final Category category;
     private boolean enabled;
@@ -15,16 +15,9 @@ public abstract class Module {
     protected final StringUtils stringUtils = new StringUtils();
     private final String padding = stringUtils.indent(3);
 
-    protected Module(final String name, final String displayName, final String description, final Category category) {
+    protected Module(final String name, final String threadName, final String description, final Category category) {
         this.name = name;
-        this.displayName = displayName;
-        this.description = description;
-        this.category = category;
-    }
-
-    protected Module(final String name, final String description, final Category category) {
-        this.name = name;
-        this.displayName = name;
+        this.threadName = threadName;
         this.description = description;
         this.category = category;
     }
@@ -33,8 +26,8 @@ public abstract class Module {
         return name;
     }
 
-    public final String getDisplayName() {
-        return displayName;
+    public final String getThreadName() {
+        return threadName;
     }
 
     public final String getDescription() {

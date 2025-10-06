@@ -3,23 +3,17 @@ package com.github.kinetic.logthing.utils.misc;
 import com.github.kinetic.logthing.utils.Utils;
 
 import java.io.IOException;
-import java.util.Objects;
 
 public final class TerminalUtils implements Utils {
 
-    public String getTerminal() {
-        return System.getenv("TERM");
-    }
-
-    public boolean isIntellijDebug() {
-        return Objects.equals(getTerminal(), "java");
-    }
-
+    /**
+     * Disables control echo (e.g. CTRL+C)
+     */
     public void disableControlEcho() {
         try {
             final String os = System.getProperty("os.name").toLowerCase();
 
-            if(!os.contains("win") && isIntellijDebug()) {
+            if(!os.contains("win")) {
                 new ProcessBuilder("stty", "-echoctl")
                         .inheritIO()
                         .start()
@@ -29,11 +23,14 @@ public final class TerminalUtils implements Utils {
         }
     }
 
+    /**
+     * Re-enables control echo (e.g. CTRL + C)
+     */
     public void enableControlEcho() {
         try {
             final String os = System.getProperty("os.name").toLowerCase();
 
-            if(!os.contains("win") && isIntellijDebug()) {
+            if(!os.contains("win")) {
                 new ProcessBuilder("stty", "echoctl")
                         .inheritIO()
                         .start()

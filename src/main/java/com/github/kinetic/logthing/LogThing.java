@@ -8,14 +8,12 @@ import com.github.kinetic.logthing.module.impl.misc.RequestLoggerModule;
 import com.github.kinetic.logthing.module.impl.web.WebMonitorModule;
 import com.github.kinetic.logthing.utils.io.log.LogUtils;
 import com.github.kinetic.logthing.utils.misc.ModuleUtils;
-import com.github.kinetic.logthing.utils.misc.SignalUtils;
 import com.github.kinetic.logthing.utils.misc.TerminalUtils;
 
 @SuppressWarnings("unused")
 public final class LogThing {
     private final LogUtils log = new LogUtils();
     private final TerminalUtils terminal = new TerminalUtils();
-    private final SignalUtils signals = new SignalUtils();
     private final ModuleRepository moduleRepository = new ModuleRepository();
     private final ModuleUtils moduleUtils = new ModuleUtils();
     private static final LogThing instance = new LogThing();
@@ -52,9 +50,6 @@ public final class LogThing {
         log.info("Disabling control echo");
         terminal.disableControlEcho();
 
-        log.info("Setting up signals...");
-        signals.setupHandlers();
-
         log.info("Initializing EventBus...");
         eventBus = initializeEventBus();
 
@@ -74,10 +69,10 @@ public final class LogThing {
         log.info("Re-enabling control echo...");
         terminal.enableControlEcho();
 
-        log.info("Shut down LogThing.");
+        log.info("LogThing shut down.");
     }
 
-    void main(String[] args) {
+    void launch(String[] args) {
         Thread.currentThread().setName("LM");
 
         initialize();

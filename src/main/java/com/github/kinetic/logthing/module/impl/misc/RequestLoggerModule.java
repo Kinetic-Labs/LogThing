@@ -7,11 +7,13 @@ import com.github.kinetic.logthing.module.Module;
 
 public final class RequestLoggerModule extends Module {
     public RequestLoggerModule() {
-        super("RequestLoggerModule", "Logs all incoming requests", Category.MISC);
+        super("RequestLoggerModule", "RLM", "Logs all incoming requests", Category.MISC);
     }
 
     @SuppressWarnings("unused")
     private final IEventListener<RequestReceivedEvent> requestReceivedEvent = event -> {
+        Thread.currentThread().setName(getThreadName());
+
         String message = String.format(
                 "[%s] Request received from %s: %s",
                 event.getExchange().getRequestMethod(),

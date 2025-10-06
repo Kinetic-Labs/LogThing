@@ -1,9 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("form")
 
-    if(!form) {
+    if(!form)
         return
-    }
 
     form.addEventListener("submit", async event => {
         event.preventDefault()
@@ -12,25 +11,29 @@ document.addEventListener("DOMContentLoaded", () => {
     })
 
     async function submit() {
-        const formData = new FormData(form);
-        const file = formData.get('file');
+        const fileInput = document.getElementById('file-input');
+        const selectedFile = fileInput.files[0];
+        const reader = new FileReader();
 
-        if(!file)
-            return;
-
-        if(!file.name.includes(".log")) {
+        if(!selectedFile.name.includes(".log")) {
             alert("file must be of type log")
 
             return;
         }
 
-        const post = await fetch('/api/process', {
-            method: "POST",
-            body: formData,
-        });
+        reader.onload = async event => {
+            const fileContent = event.target.result;
 
-        alert(
-            await post.text()
-        );
+            const post = await fetch('/api/process', {
+                method: "POST",
+                body: fileContent,
+            });
+
+            alert(
+                await post.text()
+            );
+        };
+
+        reader.readAsText(selectedFile);
     }
 })

@@ -9,10 +9,24 @@ import java.io.OutputStream;
 
 public final class WebUtils implements Utils {
 
+    /**
+     * Sends a 404 response
+     *
+     * @param exchange the {@link HttpExchange}
+     * @throws IOException on error, throws {@link IOException}
+     */
     public void send404(HttpExchange exchange) throws IOException {
         sendResponse(exchange, 404, "404 Not Found");
     }
 
+    /**
+     * Send a response
+     *
+     * @param exchange   the {@link HttpExchange}
+     * @param statusCode the status to send
+     * @param response   the response to send
+     * @throws IOException on error, throws {@link IOException}
+     */
     public void sendResponse(final HttpExchange exchange, final int statusCode, final String response) throws IOException {
         exchange.sendResponseHeaders(statusCode, response.length());
 
@@ -21,6 +35,12 @@ public final class WebUtils implements Utils {
         }
     }
 
+    /**
+     * Send a method not allowed (405) error
+     *
+     * @param exchange the {@link HttpExchange}
+     * @throws IOException on error, throws {@link IOException}
+     */
     public void send405(final HttpExchange exchange) throws IOException {
         sendResponse(exchange, 405, "405 Method Not Allowed");
     }
@@ -49,6 +69,13 @@ public final class WebUtils implements Utils {
         };
     }
 
+    /**
+     * Serve a resource from resources
+     *
+     * @param exchange     the {@link HttpExchange}
+     * @param resourcePath path to resource
+     * @throws IOException on error, throws {@link IOException}
+     */
     public void serveResource(HttpExchange exchange, String resourcePath) throws IOException {
         Resource resource = new Resource("", resourcePath);
         byte[] content = resource.readBytes();
