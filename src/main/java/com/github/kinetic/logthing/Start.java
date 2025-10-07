@@ -1,11 +1,11 @@
 package com.github.kinetic.logthing;
 
-import com.github.kinetic.logthing.utils.io.log.LogUtils;
+import com.github.kinetic.logthing.util.io.log.LogUtil;
 
 import java.util.Arrays;
 
 public class Start {
-    private static final LogUtils log = new LogUtils();
+    private static final LogUtil log = new LogUtil();
 
     static void main(String[] args) {
         Thread.currentThread().setName("B");

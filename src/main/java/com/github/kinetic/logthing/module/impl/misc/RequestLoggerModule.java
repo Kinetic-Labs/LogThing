@@ -5,6 +5,9 @@ import com.github.kinetic.logthing.event.impl.RequestReceivedEvent;
 import com.github.kinetic.logthing.module.Category;
 import com.github.kinetic.logthing.module.Module;
 
+/**
+ * Logs incomming network requests
+ */
 public final class RequestLoggerModule extends Module {
     public RequestLoggerModule() {
         super("RequestLoggerModule", "RLM", "Logs all incoming requests", Category.MISC);

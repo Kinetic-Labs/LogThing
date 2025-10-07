@@ -1,14 +1,19 @@
-package com.github.kinetic.logthing.utils.io.fs;
+package com.github.kinetic.logthing.util.io.fs;
 
-import com.github.kinetic.logthing.utils.Utils;
+import com.github.kinetic.logthing.util.Util;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
 @SuppressWarnings("unused")
-public record Resource(String domain, String path) implements Utils {
+public record ResourceUtil(String domain, String path) implements Util {
 
+    /**
+     * Read a resource to string
+     *
+     * @return the contents of resource as string
+     */
     public String read() {
         final String resourcePath = domain + path;
         final InputStream in = getClass().getClassLoader().getResourceAsStream(resourcePath);
@@ -18,7 +23,7 @@ public record Resource(String domain, String path) implements Utils {
             if(in != null) {
                 content = in.readAllBytes();
             } else {
-                log.error("Resource not found: " + resourcePath);
+                log.error("ResourceUtil not found: " + resourcePath);
                 return null;
             }
         } catch(final IOException ioException) {
@@ -29,16 +34,21 @@ public record Resource(String domain, String path) implements Utils {
         return new String(content, StandardCharsets.UTF_8);
     }
 
+    /**
+     * Check if a resource exists
+     *
+     * @return true if resource exists, false if it does not
+     */
     public boolean exists() {
         final String resourcePath = domain + path;
-        final InputStream in = getClass().getClassLoader().getResourceAsStream(resourcePath);
+        final InputStream inputStream = getClass().getClassLoader().getResourceAsStream(resourcePath);
 
-        if(in != null) {
+        if(inputStream != null) {
             try {
-                in.close();
+                inputStream.close();
                 return true;
-            } catch(IOException ex) {
-                log.trace("Error closing stream while checking existence", ex);
+            } catch(IOException ioException) {
+                log.trace("Error closing stream while checking existence", ioException);
                 return false;
             }
         }
@@ -46,6 +56,11 @@ public record Resource(String domain, String path) implements Utils {
         return false;
     }
 
+    /**
+     * Read the resource to bytes
+     *
+     * @return reads resource to bytes
+     */
     public byte[] readBytes() {
         final String resourcePath = domain + path;
         final InputStream in = getClass().getClassLoader().getResourceAsStream(resourcePath);
@@ -54,15 +69,20 @@ public record Resource(String domain, String path) implements Utils {
             if(in != null) {
                 return in.readAllBytes();
             } else {
-                log.error("Resource not found: " + resourcePath);
+                log.error("ResourceUtil not found: " + resourcePath);
                 return null;
             }
-        } catch(IOException ex) {
-            log.trace("Failed to read resource bytes: " + resourcePath, ex);
+        } catch(IOException ioException) {
+            log.trace("Failed to read resource bytes: " + resourcePath, ioException);
             return null;
         }
     }
 
+    /**
+     * Get full path to resource
+     *
+     * @return domain and path combined (full path)
+     */
     public String getFullPath() {
         return domain + path;
     }

@@ -1,7 +1,7 @@
 package com.github.kinetic.logthing.processor.impl;
 
 import com.github.kinetic.logthing.processor.AbstractProcessor;
-import com.github.kinetic.logthing.utils.types.ParsedLog;
+import com.github.kinetic.logthing.util.types.ParsedLog;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

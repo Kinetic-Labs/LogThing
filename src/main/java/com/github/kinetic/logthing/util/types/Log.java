@@ -1,4 +1,4 @@
-package com.github.kinetic.logthing.utils.types;
+package com.github.kinetic.logthing.util.types;
 
 /**
  * Log type

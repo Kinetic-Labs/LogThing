@@ -5,18 +5,15 @@ import com.sun.net.httpserver.HttpExchange;
 
 import java.io.IOException;
 
-import static com.github.kinetic.logthing.utils.web.WebConstants.WEB_ROOT;
+import static com.github.kinetic.logthing.util.web.WebConstants.WEB_ROOT;
 
 public final class WebHandler extends AbstractHandler {
 
     @Override
     public void handleRequest(final HttpExchange exchange) throws IOException {
         final String path = exchange.getRequestURI().getPath();
-        String relativePath = path.substring(4);
+        final String relativePath = path.substring(4);
 
-        if(!relativePath.startsWith("/"))
-            relativePath = "/html/index.html";
-
-        webUtils.serveResource(exchange, WEB_ROOT + relativePath);
+        webUtil.serveResource(exchange, WEB_ROOT + relativePath);
     }
 }

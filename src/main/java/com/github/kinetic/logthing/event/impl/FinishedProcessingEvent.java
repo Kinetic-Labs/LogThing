@@ -1,8 +1,11 @@
 package com.github.kinetic.logthing.event.impl;
 
 import com.github.kinetic.logthing.event.Event;
-import com.github.kinetic.logthing.utils.types.ParsedLog;
+import com.github.kinetic.logthing.util.types.ParsedLog;
 
+/**
+ * Dispatched when the log is finished being processed
+ */
 public final class FinishedProcessingEvent extends Event {
     private final String name;
     private final ParsedLog parsedLog;

@@ -2,7 +2,7 @@ package com.github.kinetic.logthing.web.impl;
 
 import com.github.kinetic.logthing.LogThing;
 import com.github.kinetic.logthing.event.impl.ProcessLogEvent;
-import com.github.kinetic.logthing.utils.types.Log;
+import com.github.kinetic.logthing.util.types.Log;
 import com.github.kinetic.logthing.web.AbstractHandler;
 import com.sun.net.httpserver.HttpExchange;
 
@@ -15,20 +15,21 @@ public final class ProcessHandler extends AbstractHandler {
 
     @Override
     public void handleRequest(final HttpExchange exchange) throws IOException {
-        if("POST".equalsIgnoreCase(exchange.getRequestMethod())) {
-            final String body = new BufferedReader(
-                    new InputStreamReader(exchange.getRequestBody()))
-                    .lines()
-                    .collect(Collectors.joining("\n"));
-            final String response = "File uploaded successfully.";
+        if(!"POST".equalsIgnoreCase(exchange.getRequestMethod())) {
+            webUtil.send405(exchange);
 
-            final Log log = new Log(body);
-
-            LogThing.getInstance().getEventBus().dispatch(new ProcessLogEvent(log));
-
-            webUtils.sendResponse(exchange, 200, response);
-        } else {
-            webUtils.send405(exchange);
+            return;
         }
+
+        final String body = new BufferedReader(
+                new InputStreamReader(exchange.getRequestBody()))
+                .lines()
+                .collect(Collectors.joining("\n"));
+        final String response = "File uploaded successfully.";
+        final Log log = new Log(body);
+
+        LogThing.getInstance().getEventBus().dispatch(new ProcessLogEvent(log));
+
+        webUtil.sendResponse(exchange, 200, response);
     }
 }

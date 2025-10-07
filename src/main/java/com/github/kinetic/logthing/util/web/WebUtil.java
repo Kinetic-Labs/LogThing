@@ -1,13 +1,13 @@
-package com.github.kinetic.logthing.utils.web;
+package com.github.kinetic.logthing.util.web;
 
-import com.github.kinetic.logthing.utils.Utils;
-import com.github.kinetic.logthing.utils.io.fs.Resource;
+import com.github.kinetic.logthing.util.Util;
+import com.github.kinetic.logthing.util.io.fs.ResourceUtil;
 import com.sun.net.httpserver.HttpExchange;
 
 import java.io.IOException;
 import java.io.OutputStream;
 
-public final class WebUtils implements Utils {
+public final class WebUtil implements Util {
 
     /**
      * Sends a 404 response
@@ -45,6 +45,12 @@ public final class WebUtils implements Utils {
         sendResponse(exchange, 405, "405 Method Not Allowed");
     }
 
+    /**
+     * Get the content type of file
+     *
+     * @param fileName the name of file
+     * @return the content type of file
+     */
     private String getContentType(final String fileName) {
         final int lastDotIndex = fileName.lastIndexOf('.');
 
@@ -77,8 +83,8 @@ public final class WebUtils implements Utils {
      * @throws IOException on error, throws {@link IOException}
      */
     public void serveResource(HttpExchange exchange, String resourcePath) throws IOException {
-        Resource resource = new Resource("", resourcePath);
-        byte[] content = resource.readBytes();
+        ResourceUtil resourceUtil = new ResourceUtil("", resourcePath);
+        byte[] content = resourceUtil.readBytes();
 
         if(content != null) {
             String contentType = getContentType(resourcePath);

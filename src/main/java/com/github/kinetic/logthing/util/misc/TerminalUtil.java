@@ -1,10 +1,10 @@
-package com.github.kinetic.logthing.utils.misc;
+package com.github.kinetic.logthing.util.misc;
 
-import com.github.kinetic.logthing.utils.Utils;
+import com.github.kinetic.logthing.util.Util;
 
 import java.io.IOException;
 
-public final class TerminalUtils implements Utils {
+public final class TerminalUtil implements Util {
 
     /**
      * Disables control echo (e.g. CTRL+C)

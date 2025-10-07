@@ -1,5 +1,8 @@
-package com.github.kinetic.logthing.utils.io.log;
+package com.github.kinetic.logthing.util.io.log;
 
+/**
+ * Log level enum for loggers
+ */
 public enum LogLevel {
     INFO,
     WARN,

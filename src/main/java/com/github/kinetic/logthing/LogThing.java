@@ -6,16 +6,16 @@ import com.github.kinetic.logthing.module.ModuleRepository;
 import com.github.kinetic.logthing.module.impl.data.LogConsumerModule;
 import com.github.kinetic.logthing.module.impl.misc.RequestLoggerModule;
 import com.github.kinetic.logthing.module.impl.web.WebMonitorModule;
-import com.github.kinetic.logthing.utils.io.log.LogUtils;
-import com.github.kinetic.logthing.utils.misc.ModuleUtils;
-import com.github.kinetic.logthing.utils.misc.TerminalUtils;
+import com.github.kinetic.logthing.util.io.log.LogUtil;
+import com.github.kinetic.logthing.util.misc.ModuleUtil;
+import com.github.kinetic.logthing.util.misc.TerminalUtil;
 
 @SuppressWarnings("unused")
 public final class LogThing {
-    private final LogUtils log = new LogUtils();
-    private final TerminalUtils terminal = new TerminalUtils();
+    private final LogUtil log = new LogUtil();
+    private final TerminalUtil terminal = new TerminalUtil();
     private final ModuleRepository moduleRepository = new ModuleRepository();
-    private final ModuleUtils moduleUtils = new ModuleUtils();
+    private final ModuleUtil moduleUtil = new ModuleUtil();
     private static final LogThing instance = new LogThing();
     private EventBus eventBus;
 
@@ -26,9 +26,9 @@ public final class LogThing {
                 new LogConsumerModule()
         );
 
-        moduleUtils.enableModule(RequestLoggerModule.class);
-        moduleUtils.enableModule(LogConsumerModule.class);
-        moduleUtils.enableModule(WebMonitorModule.class);
+        moduleUtil.enableModule(RequestLoggerModule.class);
+        moduleUtil.enableModule(LogConsumerModule.class);
+        moduleUtil.enableModule(WebMonitorModule.class);
     }
 
     private EventBus initializeEventBus() {
@@ -44,6 +44,9 @@ public final class LogThing {
         });
     }
 
+    /**
+     * Initialize LogThing
+     */
     private void initialize() {
         log.info("Initializing LogThing...");
 
@@ -59,6 +62,9 @@ public final class LogThing {
         log.info("Initialized LogThing.");
     }
 
+    /**
+     * Deinitialize LogThing
+     */
     private void destroy() {
         Thread.currentThread().setName("MSH");
         log.info("Shutting down LogThing...");
@@ -72,6 +78,11 @@ public final class LogThing {
         log.info("LogThing shut down.");
     }
 
+    /**
+     * LogThing entrypoint
+     *
+     * @param args LogThing program flags
+     */
     void launch(String[] args) {
         Thread.currentThread().setName("LM");
 

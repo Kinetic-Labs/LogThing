@@ -1,10 +1,10 @@
 package com.github.kinetic.logthing.module;
 
-import com.github.kinetic.logthing.utils.io.log.LogUtils;
+import com.github.kinetic.logthing.util.io.log.LogUtil;
 
 public final class ModuleBuilder {
     private final ModuleRepository repository;
-    private final LogUtils log = new LogUtils();
+    private final LogUtil log = new LogUtil();
 
     private ModuleBuilder() {
         this.repository = ModuleRepository.getInstance();
@@ -14,6 +14,11 @@ public final class ModuleBuilder {
         return new ModuleBuilder();
     }
 
+    /**
+     * Put modules into repository
+     *
+     * @param modules modules to be put into repository
+     */
     public void putAll(final Module... modules) {
         for(Module module : modules) {
             log.info("      > Loading module: " + module.getClass().getSimpleName());

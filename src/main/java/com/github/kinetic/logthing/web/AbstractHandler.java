@@ -2,20 +2,23 @@ package com.github.kinetic.logthing.web;
 
 import com.github.kinetic.logthing.LogThing;
 import com.github.kinetic.logthing.event.impl.RequestReceivedEvent;
-import com.github.kinetic.logthing.utils.io.log.LogUtils;
-import com.github.kinetic.logthing.utils.web.WebUtils;
+import com.github.kinetic.logthing.util.io.log.LogUtil;
+import com.github.kinetic.logthing.util.web.WebUtil;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
 import java.io.IOException;
 
 public abstract class AbstractHandler implements HttpHandler {
-    protected final WebUtils webUtils;
-    protected final LogUtils log;
+    protected final WebUtil webUtil;
+    protected final LogUtil log;
 
+    /**
+     * Create an instance of {@link AbstractHandler}
+     */
     public AbstractHandler() {
-        this.webUtils = new WebUtils();
-        this.log = new LogUtils();
+        this.webUtil = new WebUtil();
+        this.log = new LogUtil();
     }
 
     @Override

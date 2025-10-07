@@ -1,11 +1,11 @@
-package com.github.kinetic.logthing.utils.misc;
+package com.github.kinetic.logthing.util.misc;
 
 import com.github.kinetic.logthing.LogThing;
 import com.github.kinetic.logthing.module.Module;
-import com.github.kinetic.logthing.utils.Utils;
+import com.github.kinetic.logthing.util.Util;
 
 @SuppressWarnings("unused")
-public final class ModuleUtils implements Utils {
+public final class ModuleUtil implements Util {
 
     /**
      * Enable a module

@@ -1,13 +1,18 @@
 package com.github.kinetic.logthing.processor;
 
-import com.github.kinetic.logthing.utils.io.log.LogUtils;
-import com.github.kinetic.logthing.utils.types.ParsedLog;
+import com.github.kinetic.logthing.util.io.log.LogUtil;
+import com.github.kinetic.logthing.util.types.ParsedLog;
 
 public abstract class AbstractProcessor {
 
     protected final String rawLog;
-    protected final LogUtils log = new LogUtils();
+    protected final LogUtil log = new LogUtil();
 
+    /**
+     * Create a new instance of {@link AbstractProcessor}
+     *
+     * @param rawLog raw contents of log
+     */
     public AbstractProcessor(final String rawLog) {
         this.rawLog = rawLog;
     }

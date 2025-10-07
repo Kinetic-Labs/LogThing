@@ -7,10 +7,10 @@ import java.io.IOException;
 
 import static com.github.kinetic.logthing.util.web.WebConstants.WEB_ROOT;
 
-public final class RootHandler extends AbstractHandler {
+public final class DashboardHandler extends AbstractHandler {
 
     @Override
     public void handleRequest(final HttpExchange exchange) throws IOException {
-        webUtil.serveResource(exchange, WEB_ROOT + "/html/upload.html");
+        webUtil.serveResource(exchange, WEB_ROOT + "/html/dashboard.html");
     }
 }

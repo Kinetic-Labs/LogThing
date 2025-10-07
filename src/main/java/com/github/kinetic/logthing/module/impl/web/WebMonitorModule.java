@@ -7,18 +7,18 @@ import com.github.kinetic.logthing.event.impl.ProcessLogEvent;
 import com.github.kinetic.logthing.module.Category;
 import com.github.kinetic.logthing.module.Module;
 import com.github.kinetic.logthing.processor.impl.LogProcessor;
-import com.github.kinetic.logthing.utils.misc.HashUtils;
-import com.github.kinetic.logthing.utils.types.ParsedLog;
+import com.github.kinetic.logthing.util.misc.HashUtil;
+import com.github.kinetic.logthing.util.types.ParsedLog;
 import com.github.kinetic.logthing.web.Server;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import static com.github.kinetic.logthing.util.web.WebConstants.PORT;
 
-import static com.github.kinetic.logthing.utils.web.WebConstants.PORT;
-
+/**
+ * Handles web dashboard and receiving logs
+ */
 public final class WebMonitorModule extends Module {
     private final Server server = new Server(PORT);
-    private final HashUtils hashUtils = new HashUtils();
+    private final HashUtil hashUtil = new HashUtil();
 
     public WebMonitorModule() {
         super("WebMonitorModule", "WMM", "Dashboard for alerts and data", Category.WEB);
@@ -31,28 +31,19 @@ public final class WebMonitorModule extends Module {
         final String theLog = event.getLog().rawLog();
         final LogProcessor logProcessor = new LogProcessor(theLog);
         final ParsedLog parsedLog = logProcessor.process();
+        final String hashText = hashUtil.toMD5(theLog);
 
-        try {
-            final MessageDigest md = MessageDigest.getInstance("MD5");
-            final byte[] messageDigest = md.digest(theLog.getBytes());
-            final String hashText = hashUtils.convertToHex(messageDigest);
-
-            LogThing.getInstance().getEventBus().dispatch(new FinishedProcessingEvent(hashText, parsedLog));
-        } catch(final NoSuchAlgorithmException noSuchAlgorithmException) {
-            LogThing.getInstance().getEventBus().dispatch(new FinishedProcessingEvent(null, parsedLog));
-
-            log.trace("Failed to hash MD5", noSuchAlgorithmException);
-        }
+        LogThing.getInstance().getEventBus().dispatch(new FinishedProcessingEvent(hashText, parsedLog));
     };
 
     @Override
     public void onEnable() {
+        super.onEnable();
+
         final Thread thread = new Thread(server::start);
 
         thread.setName(getThreadName());
         thread.start();
-
-        super.onEnable();
     }
 
     @Override

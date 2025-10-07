@@ -5,8 +5,11 @@ import com.github.kinetic.logthing.event.impl.FinishedProcessingEvent;
 import com.github.kinetic.logthing.module.Category;
 import com.github.kinetic.logthing.module.Module;
 import com.github.kinetic.logthing.storage.LogStorage;
-import com.github.kinetic.logthing.utils.types.ParsedLog;
+import com.github.kinetic.logthing.util.types.ParsedLog;
 
+/**
+ * Handles the final, processed log (e.g. store it in a database)
+ */
 public final class LogConsumerModule extends Module {
     public LogConsumerModule() {
         super("LogConsumerModule", "LCM", "Handles automated database actions", Category.DATA);

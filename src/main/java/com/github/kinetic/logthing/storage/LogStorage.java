@@ -1,6 +1,6 @@
 package com.github.kinetic.logthing.storage;
 
-import com.github.kinetic.logthing.utils.types.ParsedLog;
+import com.github.kinetic.logthing.util.types.ParsedLog;
 
 import java.util.ArrayList;
 import java.util.Collections;

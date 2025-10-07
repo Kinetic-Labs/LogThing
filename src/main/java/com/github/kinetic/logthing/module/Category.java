@@ -1,5 +1,8 @@
 package com.github.kinetic.logthing.module;
 
+/**
+ * Category of the module
+ */
 @SuppressWarnings("unused")
 public enum Category {
     WEB("Web"),

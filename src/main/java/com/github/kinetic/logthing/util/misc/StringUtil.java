@@ -1,9 +1,9 @@
-package com.github.kinetic.logthing.utils.misc;
+package com.github.kinetic.logthing.util.misc;
 
-import com.github.kinetic.logthing.utils.Utils;
+import com.github.kinetic.logthing.util.Util;
 
 @SuppressWarnings("unused")
-public final class StringUtils implements Utils {
+public final class StringUtil implements Util {
 
     /**
      * Indent a string by x tabs
