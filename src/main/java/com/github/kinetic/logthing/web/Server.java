@@ -35,6 +35,7 @@ public final class Server {
         server.createContext("/web", new WebHandler());
         server.createContext("/api/process", new ProcessHandler());
         server.createContext("/api/load", new LogsHandler());
+        server.createContext("/api/logkinds", new LogKindHandler());
         server.setExecutor(null);
 
         server.start();

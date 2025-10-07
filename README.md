@@ -9,3 +9,6 @@
 - LM = [Class: LogThing | Purpose: Main thread](src/main/java/com/github/kinetic/logthing/LogThing.java) (class)
 - RLM = [Class: RequestLoggerModule | Purpose: Log network requests](src/main/java/com/github/kinetic/logthing/module/impl/misc/RequestLoggerModule.java) (class)
 - LCM = [Class: LogConsumerModule | Purpose: Handle processed logs (e.g. save to database)](src/main/java/com/github/kinetic/logthing/module/impl/data/LogConsumerModule.java) (class)
+- LSM = [Class: LogServiceModule | Purpose: Watch for the creation of new logs)](src/main/java/com/github/kinetic/logthing/module/impl/io/LogServiceModule.java) (class)
+- WUW = [Class: WatchUtil | Purpose: Provides a high-level (WatchUtil Watcher) api to watch directories for logs)](src/main/java/com/github/kinetic/logthing/util/io/fs/WatchUtil.java) (class)
+- FWD = [Class: WatchUtil | Purpose: File watcher daemon)](src/main/java/com/github/kinetic/logthing/util/io/fs/WatchUtil.java) (class)

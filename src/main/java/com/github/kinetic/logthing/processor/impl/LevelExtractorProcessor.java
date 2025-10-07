@@ -1,5 +1,6 @@
 package com.github.kinetic.logthing.processor.impl;
 
+import com.github.kinetic.logthing.LogThing;
 import com.github.kinetic.logthing.processor.AbstractProcessor;
 import com.github.kinetic.logthing.util.types.ParsedLog;
 
@@ -14,7 +15,8 @@ public final class LevelExtractorProcessor extends AbstractProcessor {
 
     @Override
     public ParsedLog process() {
-        final Pattern pattern = Pattern.compile("^(INFO|WARNING|ERROR|DEBUG|TRACE|FATAL)\\s*(.*)$");
+        final String processorPattern = LogThing.getInstance().getLogThingConfig().processorPattern();
+        final Pattern pattern = Pattern.compile(String.format("^(%s)\\s+(.*)$", processorPattern));
         final Matcher matcher = pattern.matcher(rawLog);
         final String level, message;
 

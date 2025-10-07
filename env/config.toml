@@ -1,0 +1,12 @@
+[inputs.file]
+path = "logs/"
+log_kinds = ["INFO", "WARNING", "ERROR", "DEBUG", "TRACE", "FATAL"]
+
+[processor]
+pattern = "INFO|WARNING|ERROR|DEBUG|TRACE|FATAL"
+
+# TODO: implement alerts
+#[alerts.error_spike]
+#condition = "error_rate > 100/min"
+#window = "5m"
+#notify = ["email:ops@example.com"]

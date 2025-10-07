@@ -4,7 +4,6 @@ import com.github.kinetic.logthing.util.Util;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
 
 @SuppressWarnings({"unused"})
 public final class LogUtil implements Util {
@@ -68,9 +67,13 @@ public final class LogUtil implements Util {
      * @param exception the exception caught
      */
     public void trace(final String message, final Exception exception) {
+        final String padding = stringUtil.indent(2);
+
         log(message, LogLevel.TRACE);
         log("Stack Trace: ", LogLevel.TRACE);
-        log(Arrays.toString(exception.getStackTrace()), LogLevel.TRACE);
+
+        for(StackTraceElement element : exception.getStackTrace())
+            log(padding + element.toString(), LogLevel.TRACE);
     }
 
     private void log(final String msg, final LogLevel level) {

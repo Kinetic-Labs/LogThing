@@ -1,9 +1,12 @@
 package com.github.kinetic.logthing;
 
+import com.github.kinetic.logthing.config.LogThingConfig;
+import com.github.kinetic.logthing.config.impl.ConfigParser;
 import com.github.kinetic.logthing.event.EventBus;
 import com.github.kinetic.logthing.module.ModuleBuilder;
 import com.github.kinetic.logthing.module.ModuleRepository;
 import com.github.kinetic.logthing.module.impl.data.LogConsumerModule;
+import com.github.kinetic.logthing.module.impl.io.LogServiceModule;
 import com.github.kinetic.logthing.module.impl.misc.RequestLoggerModule;
 import com.github.kinetic.logthing.module.impl.web.WebMonitorModule;
 import com.github.kinetic.logthing.storage.impl.memory.LogStorage;
@@ -19,21 +22,30 @@ public final class LogThing {
     private final ModuleUtil moduleUtil = new ModuleUtil();
     private static final LogThing instance = new LogThing();
     private EventBus eventBus;
+    private LogThingConfig logThingConfig;
 
     private void initializeModules() {
         ModuleBuilder.create().putAll(
                 new RequestLoggerModule(),
                 new WebMonitorModule(),
-                new LogConsumerModule()
+                new LogConsumerModule(),
+                new LogServiceModule()
         );
 
         moduleUtil.enableModule(RequestLoggerModule.class);
         moduleUtil.enableModule(LogConsumerModule.class);
         moduleUtil.enableModule(WebMonitorModule.class);
+        moduleUtil.enableModule(LogServiceModule.class);
     }
 
     private EventBus initializeEventBus() {
         return new EventBus();
+    }
+
+    private LogThingConfig loadConfig() {
+        ConfigParser configParser = new ConfigParser("config.toml");
+
+        return configParser.parse();
     }
 
     private void destroyModules() {
@@ -54,8 +66,11 @@ public final class LogThing {
         log.info("Disabling control echo");
         terminal.disableControlEcho();
 
+        log.info("Loading config...");
+        this.logThingConfig = loadConfig();
+
         log.info("Initializing EventBus...");
-        eventBus = initializeEventBus();
+        this.eventBus = initializeEventBus();
 
         log.info("Initializing Modules...");
         initializeModules();
@@ -108,6 +123,10 @@ public final class LogThing {
 
     public EventBus getEventBus() {
         return eventBus;
+    }
+
+    public LogThingConfig getLogThingConfig() {
+        return logThingConfig;
     }
 
     public static LogThing getInstance() {

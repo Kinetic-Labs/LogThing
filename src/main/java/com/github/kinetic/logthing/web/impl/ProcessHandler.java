@@ -9,7 +9,6 @@ import com.sun.net.httpserver.HttpExchange;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.stream.Collectors;
 
 public final class ProcessHandler extends AbstractHandler {
 
@@ -25,14 +24,19 @@ public final class ProcessHandler extends AbstractHandler {
             return;
         }
 
-        final String body = new BufferedReader(
-                new InputStreamReader(exchange.getRequestBody()))
-                .lines()
-                .collect(Collectors.joining("\n"));
-        final String response = "File uploaded successfully.";
-        final Log log = new Log(body);
+        final BufferedReader reader = new BufferedReader(
+                new InputStreamReader(exchange.getRequestBody()));
 
-        LogThing.getInstance().getEventBus().dispatch(new ProcessLogEvent(log));
+        String line;
+        while((line = reader.readLine()) != null) {
+            if(!line.trim().isEmpty()) {
+                final Log log = new Log(line);
+
+                LogThing.getInstance().getEventBus().dispatch(new ProcessLogEvent(log));
+            }
+        }
+
+        final String response = "File uploaded successfully.";
 
         webUtil.sendResponse(exchange, 200, response);
     }

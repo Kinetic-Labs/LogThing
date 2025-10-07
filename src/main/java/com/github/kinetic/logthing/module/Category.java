@@ -7,6 +7,7 @@ package com.github.kinetic.logthing.module;
 public enum Category {
     WEB("Web"),
     MISC("Misc"),
+    IO("IO"),
     DATA("Data");
 
     private final String displayName;

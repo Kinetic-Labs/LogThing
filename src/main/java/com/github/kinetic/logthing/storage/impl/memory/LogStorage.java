@@ -3,14 +3,12 @@ package com.github.kinetic.logthing.storage.impl.memory;
 import com.github.kinetic.logthing.storage.Storage;
 import com.github.kinetic.logthing.util.types.ParsedLog;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public final class LogStorage implements Storage {
 
     private static final LogStorage INSTANCE = new LogStorage();
-    private final List<ParsedLog> logs = new ArrayList<>();
+    private final Set<ParsedLog> logs = new HashSet<>();
 
     private LogStorage() {
         init();
@@ -36,8 +34,8 @@ public final class LogStorage implements Storage {
      *
      * @return a {@link List} of logs from storage
      */
-    public List<ParsedLog> getLogs() {
-        return Collections.unmodifiableList(logs);
+    public Set<ParsedLog> getLogs() {
+        return logs;
     }
 
     /**

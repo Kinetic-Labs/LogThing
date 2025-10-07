@@ -3,18 +3,13 @@ package com.github.kinetic.logthing.web.impl;
 import com.github.kinetic.logthing.storage.impl.memory.LogStorage;
 import com.github.kinetic.logthing.util.types.ParsedLog;
 import com.github.kinetic.logthing.web.AbstractHandler;
-import com.google.gson.Gson;
 import com.sun.net.httpserver.HttpExchange;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.Set;
 
 public class LogsHandler extends AbstractHandler {
-    private final Gson gson;
-
     public LogsHandler() {
-        this.gson = new Gson();
-
         super("LogsHandler");
     }
 
@@ -25,7 +20,7 @@ public class LogsHandler extends AbstractHandler {
             return;
         }
 
-        final List<ParsedLog> logs = LogStorage.getInstance().getLogs();
+        final Set<ParsedLog> logs = LogStorage.getInstance().getLogs();
         final String json = gson.toJson(logs);
 
         webUtil.sendResponse(exchange, 200, json);
