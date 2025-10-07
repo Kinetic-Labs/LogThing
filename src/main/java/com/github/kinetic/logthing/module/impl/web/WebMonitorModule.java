@@ -6,7 +6,7 @@ import com.github.kinetic.logthing.event.impl.FinishedProcessingEvent;
 import com.github.kinetic.logthing.event.impl.ProcessLogEvent;
 import com.github.kinetic.logthing.module.Category;
 import com.github.kinetic.logthing.module.Module;
-import com.github.kinetic.logthing.processor.impl.LogProcessor;
+import com.github.kinetic.logthing.processor.impl.LevelExtractorProcessor;
 import com.github.kinetic.logthing.util.misc.HashUtil;
 import com.github.kinetic.logthing.util.types.ParsedLog;
 import com.github.kinetic.logthing.web.Server;
@@ -29,8 +29,8 @@ public final class WebMonitorModule extends Module {
         Thread.currentThread().setName(getThreadName());
 
         final String theLog = event.getLog().rawLog();
-        final LogProcessor logProcessor = new LogProcessor(theLog);
-        final ParsedLog parsedLog = logProcessor.process();
+        final LevelExtractorProcessor levelExtractorProcessor = new LevelExtractorProcessor(theLog);
+        final ParsedLog parsedLog = levelExtractorProcessor.process();
         final String hashText = hashUtil.toMD5(theLog);
 
         LogThing.getInstance().getEventBus().dispatch(new FinishedProcessingEvent(hashText, parsedLog));

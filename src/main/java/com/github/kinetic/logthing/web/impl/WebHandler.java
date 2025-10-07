@@ -9,6 +9,10 @@ import static com.github.kinetic.logthing.util.web.WebConstants.WEB_ROOT;
 
 public final class WebHandler extends AbstractHandler {
 
+    public WebHandler() {
+        super("WebHandler");
+    }
+
     @Override
     public void handleRequest(final HttpExchange exchange) throws IOException {
         final String path = exchange.getRequestURI().getPath();

@@ -13,7 +13,7 @@ public abstract class AbstractProcessor {
      *
      * @param rawLog raw contents of log
      */
-    public AbstractProcessor(final String rawLog) {
+    protected AbstractProcessor(final String rawLog) {
         this.rawLog = rawLog;
     }
 

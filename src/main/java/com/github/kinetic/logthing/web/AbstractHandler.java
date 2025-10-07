@@ -12,13 +12,16 @@ import java.io.IOException;
 public abstract class AbstractHandler implements HttpHandler {
     protected final WebUtil webUtil;
     protected final LogUtil log;
+    private final String name;
 
     /**
      * Create an instance of {@link AbstractHandler}
      */
-    public AbstractHandler() {
+    protected AbstractHandler(final String name) {
         this.webUtil = new WebUtil();
         this.log = new LogUtil();
+
+        this.name = name;
     }
 
     @Override
@@ -34,4 +37,11 @@ public abstract class AbstractHandler implements HttpHandler {
      * @throws IOException on error whilst handling request, method will throw {@link IOException}
      */
     public abstract void handleRequest(final HttpExchange exchange) throws IOException;
+
+    /**
+     * @return the name of {@link AbstractHandler}
+     */
+    public final String getName() {
+        return name;
+    }
 }

@@ -13,6 +13,10 @@ import java.util.stream.Collectors;
 
 public final class ProcessHandler extends AbstractHandler {
 
+    public ProcessHandler() {
+        super("ProcessHandler");
+    }
+
     @Override
     public void handleRequest(final HttpExchange exchange) throws IOException {
         if(!"POST".equalsIgnoreCase(exchange.getRequestMethod())) {

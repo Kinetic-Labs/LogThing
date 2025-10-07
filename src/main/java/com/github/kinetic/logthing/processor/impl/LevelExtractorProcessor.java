@@ -6,9 +6,9 @@ import com.github.kinetic.logthing.util.types.ParsedLog;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public final class LogProcessor extends AbstractProcessor {
+public final class LevelExtractorProcessor extends AbstractProcessor {
 
-    public LogProcessor(final String rawLog) {
+    public LevelExtractorProcessor(final String rawLog) {
         super(rawLog);
     }
 

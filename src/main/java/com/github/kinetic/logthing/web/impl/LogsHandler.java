@@ -10,7 +10,13 @@ import java.io.IOException;
 import java.util.List;
 
 public class LogsHandler extends AbstractHandler {
-    private final Gson gson = new Gson();
+    private final Gson gson;
+
+    public LogsHandler() {
+        this.gson = new Gson();
+
+        super("LogsHandler");
+    }
 
     @Override
     public void handleRequest(HttpExchange exchange) throws IOException {

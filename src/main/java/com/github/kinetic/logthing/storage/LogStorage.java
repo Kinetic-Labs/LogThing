@@ -22,7 +22,7 @@ public final class LogStorage {
     }
 
     /**
-     * Insert a log to data
+     * Insert a log to storage
      *
      * @param log the log to store
      */
@@ -32,7 +32,7 @@ public final class LogStorage {
 
     /**
      *
-     * @return a {@link List} of logs
+     * @return a {@link List} of logs from storage
      */
     public List<ParsedLog> getLogs() {
         return Collections.unmodifiableList(logs);
