@@ -1,6 +1,6 @@
 package com.github.kinetic.logthing.web.impl;
 
-import com.github.kinetic.logthing.storage.LogStorage;
+import com.github.kinetic.logthing.storage.impl.memory.LogStorage;
 import com.github.kinetic.logthing.util.types.ParsedLog;
 import com.github.kinetic.logthing.web.AbstractHandler;
 import com.google.gson.Gson;

@@ -10,6 +10,7 @@ import com.sun.net.httpserver.HttpHandler;
 import java.io.IOException;
 
 public abstract class AbstractHandler implements HttpHandler {
+
     protected final WebUtil webUtil;
     protected final LogUtil log;
     private final String name;

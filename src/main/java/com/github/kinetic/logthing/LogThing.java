@@ -6,6 +6,7 @@ import com.github.kinetic.logthing.module.ModuleRepository;
 import com.github.kinetic.logthing.module.impl.data.LogConsumerModule;
 import com.github.kinetic.logthing.module.impl.misc.RequestLoggerModule;
 import com.github.kinetic.logthing.module.impl.web.WebMonitorModule;
+import com.github.kinetic.logthing.storage.impl.memory.LogStorage;
 import com.github.kinetic.logthing.util.io.log.LogUtil;
 import com.github.kinetic.logthing.util.misc.ModuleUtil;
 import com.github.kinetic.logthing.util.misc.TerminalUtil;
@@ -68,6 +69,9 @@ public final class LogThing {
     private void destroy() {
         Thread.currentThread().setName("MSH");
         log.info("Shutting down LogThing...");
+
+        log.info("Closing log storage...");
+        LogStorage.getInstance().destroy();
 
         log.info("Unloading Modules...");
         destroyModules();

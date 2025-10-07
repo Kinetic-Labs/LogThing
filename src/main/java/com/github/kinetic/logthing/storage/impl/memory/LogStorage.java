@@ -1,17 +1,19 @@
-package com.github.kinetic.logthing.storage;
+package com.github.kinetic.logthing.storage.impl.memory;
 
+import com.github.kinetic.logthing.storage.Storage;
 import com.github.kinetic.logthing.util.types.ParsedLog;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public final class LogStorage {
+public final class LogStorage implements Storage {
 
     private static final LogStorage INSTANCE = new LogStorage();
     private final List<ParsedLog> logs = new ArrayList<>();
 
     private LogStorage() {
+        init();
     }
 
     /**
@@ -24,10 +26,10 @@ public final class LogStorage {
     /**
      * Insert a log to storage
      *
-     * @param log the log to store
+     * @param theLog the log to store
      */
-    public void addLog(final ParsedLog log) {
-        logs.add(log);
+    public void insert(final ParsedLog theLog) {
+        logs.add(theLog);
     }
 
     /**
@@ -36,5 +38,21 @@ public final class LogStorage {
      */
     public List<ParsedLog> getLogs() {
         return Collections.unmodifiableList(logs);
+    }
+
+    /**
+     * Initialize the {@link LogStorage}
+     */
+    public void init() {
+        log.debug("Initializing LogStorage...");
+
+        this.logs.clear();
+    }
+
+    /**
+     * De-initialize the {@link LogStorage}
+     */
+    public void destroy() {
+        this.logs.clear();
     }
 }
