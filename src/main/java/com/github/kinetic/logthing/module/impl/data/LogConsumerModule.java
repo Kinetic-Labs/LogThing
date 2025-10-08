@@ -4,7 +4,7 @@ import com.github.kinetic.logthing.event.IEventListener;
 import com.github.kinetic.logthing.event.impl.FinishedProcessingEvent;
 import com.github.kinetic.logthing.module.Category;
 import com.github.kinetic.logthing.module.Module;
-import com.github.kinetic.logthing.storage.impl.memory.LogStorage;
+import com.github.kinetic.logthing.features.storage.impl.memory.LogStorage;
 import com.github.kinetic.logthing.util.types.ParsedLog;
 
 /**
