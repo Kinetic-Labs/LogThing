@@ -32,7 +32,7 @@ public final class LogServiceModule extends Module {
     private final IEventListener<LogCreatedEvent> eventListener = event -> {
         final Path path = event.getPath();
         final FileUtil fileUtil = new FileUtil(path);
-        final String contents = fileUtil.readToString();
+        final String contents = fileUtil.read();
         final String[] lines = contents.split("\\r?\\n");
 
         for(final String line : lines) {

@@ -144,7 +144,7 @@ html, body {
 
 .log-entry {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     padding: 1rem;
     border-radius: 8px;
     margin-bottom: 0.5rem;
@@ -162,11 +162,40 @@ html, body {
     margin-right: 1rem;
     min-width: 80px;
     text-align: left;
+    margin-top: 2px;
+}
+
+.log-meta {
+    display: flex;
+    flex-direction: column;
+    margin-right: 1rem;
+    min-width: 160px;
+}
+
+.log-timestamp {
+    font-family: 'Courier New', Courier, monospace;
+    color: var(--text-muted-color);
+    font-size: 0.85rem;
+    margin-bottom: 0.25rem;
+}
+
+.log-tag {
+    font-weight: 500;
+    color: var(--text-color);
+    font-size: 0.8rem;
+    background-color: var(--hover-color);
+    padding: 2px 6px;
+    border-radius: 4px;
+    display: inline-block;
+    text-transform: uppercase;
 }
 
 .log-message {
     font-family: 'Courier New', Courier, monospace;
     color: var(--text-muted-color);
+    white-space: pre-wrap;
+    word-break: break-all;
+    margin-top: 2px;
 }
 
 .upload-container {

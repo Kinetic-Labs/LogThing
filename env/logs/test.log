@@ -1,114 +1,62 @@
-2025-10-08 08:58:24 [B]    [INFO]   Booting...
-2025-10-08 08:58:24 [LM]   [INFO]   Initializing LogThing...
-2025-10-08 08:58:24 [LM]   [INFO]   Disabling control echo
-2025-10-08 08:58:24 [LM]   [INFO]   Loading config...
-2025-10-08 08:58:24 [LM]   [INFO]   Initializing EventBus...
-2025-10-08 08:58:24 [LM]   [INFO]   Initializing Modules...
-2025-10-08 08:58:24 [LM]   [INFO]         > Loading module: RequestLoggerModule
-2025-10-08 08:58:24 [LM]   [INFO]         > Loading module: WebMonitorModule
-2025-10-08 08:58:24 [LM]   [INFO]         > Loading module: LogConsumerModule
-2025-10-08 08:58:24 [LM]   [INFO]         > Loading module: LogServiceModule
-2025-10-08 08:58:24 [LM]   [DEBUG]        > Started RequestLoggerModule.
-2025-10-08 08:58:24 [LM]   [DEBUG]        > Started LogConsumerModule.
-2025-10-08 08:58:24 [LM]   [DEBUG]        > Started WebMonitorModule.
-2025-10-08 08:58:24 [LSM]  [DEBUG]        > Started LogServiceModule.
-2025-10-08 08:58:24 [LSM]  [INFO]   Initialized LogThing.
-2025-10-08 08:58:24 [LCM]  [DEBUG]  Finished processing log: c24b7558ec8051941ea1e52c7fa39807
-2025-10-08 08:58:24 [LCM]  [DEBUG]  Initializing LogStorage...
-2025-10-08 08:58:24 [LCM]  [DEBUG]  Stored log.
-2025-10-08 08:58:24 [LCM]  [DEBUG]  Finished processing log: 369e22b28173c4e8b9934ef8eb3e43d1
-2025-10-08 08:58:24 [LCM]  [DEBUG]  Stored log.
-2025-10-08 08:58:24 [LCM]  [DEBUG]  Finished processing log: b4053cab4019bb4a4848bc13d9f472b4
-2025-10-08 08:58:24 [LCM]  [DEBUG]  Stored log.
-2025-10-08 08:58:24 [LCM]  [DEBUG]  Finished processing log: 111b13c205f3ae4a19aa1cb42dc8a53a
-2025-10-08 08:58:24 [LCM]  [DEBUG]  Stored log.
-2025-10-08 08:58:24 [LCM]  [DEBUG]  Finished processing log: b2badbdbe1e8681910dbcf2fc12873c1
-2025-10-08 08:58:24 [LCM]  [DEBUG]  Stored log.
-2025-10-08 08:58:24 [LCM]  [DEBUG]  Finished processing log: 98d23145bba7e1f2a822d01e1c2c38ee
-2025-10-08 08:58:24 [LCM]  [DEBUG]  Stored log.
-2025-10-08 08:58:24 [LCM]  [DEBUG]  Finished processing log: 0c1c7f2583d69804dd2df274c6325471
-2025-10-08 08:58:24 [LCM]  [DEBUG]  Stored log.
-2025-10-08 08:58:24 [LCM]  [INFO]   File watcher daemon started for directory: logs
-2025-10-08 08:58:24 [WMM]  [INFO]   Server started on :9595
+2025-10-08_08:58:24 [B]    [INFO]   Booting...
+2025-10-08_08:58:24 [LM]   [INFO]   Initializing LogThing...
+2025-10-08_08:58:24 [LM]   [INFO]   Disabling control echo
+2025-10-08_08:58:24 [LM]   [INFO]   Loading config...
+2025-10-08_08:58:24 [LM]   [INFO]   Initializing EventBus...
+2025-10-08_08:58:24 [LM]   [INFO]   Initializing Modules...
+2025-10-08_08:58:24 [LM]   [INFO]         > Loading module: RequestLoggerModule
+2025-10-08_08:58:24 [LM]   [INFO]         > Loading module: WebMonitorModule
+2025-10-08_08:58:24 [LM]   [INFO]         > Loading module: LogConsumerModule
+2025-10-08_08:58:24 [LM]   [INFO]         > Loading module: LogServiceModule
+2025-10-08_08:58:24 [LM]   [DEBUG]        > Started RequestLoggerModule.
+2025-10-08_08:58:24 [LM]   [DEBUG]        > Started LogConsumerModule.
+2025-10-08_08:58:24 [LM]   [DEBUG]        > Started WebMonitorModule.
+2025-10-08_08:58:24 [LSM]  [DEBUG]        > Started LogServiceModule.
+2025-10-08_08:58:24 [LSM]  [INFO]   Initialized LogThing.
+2025-10-08_08:58:24 [LCM]  [DEBUG]  Finished processing log: c24b7558ec8051941ea1e52c7fa39807
+2025-10-08_08:58:24 [LCM]  [DEBUG]  Initializing LogStorage...
+2025-10-08_08:58:24 [LCM]  [DEBUG]  Stored log.
+2025-10-08_08:58:24 [LCM]  [DEBUG]  Finished processing log: 369e22b28173c4e8b9934ef8eb3e43d1
+2025-10-08_08:58:24 [LCM]  [DEBUG]  Stored log.
+2025-10-08_08:58:24 [LCM]  [DEBUG]  Finished processing log: b4053cab4019bb4a4848bc13d9f472b4
+2025-10-08_08:58:24 [LCM]  [DEBUG]  Stored log.
+2025-10-08_08:58:24 [LCM]  [DEBUG]  Finished processing log: 111b13c205f3ae4a19aa1cb42dc8a53a
+2025-10-08_08:58:24 [LCM]  [DEBUG]  Stored log.
+2025-10-08_08:58:24 [LCM]  [DEBUG]  Finished processing log: b2badbdbe1e8681910dbcf2fc12873c1
+2025-10-08_08:58:24 [LCM]  [DEBUG]  Stored log.
+2025-10-08_08:58:24 [LCM]  [DEBUG]  Finished processing log: 98d23145bba7e1f2a822d01e1c2c38ee
+2025-10-08_08:58:24 [LCM]  [DEBUG]  Stored log.
+2025-10-08_08:58:24 [LCM]  [DEBUG]  Finished processing log: 0c1c7f2583d69804dd2df274c6325471
+2025-10-08_08:58:24 [LCM]  [DEBUG]  Stored log.
+2025-10-08_08:58:24 [LCM]  [INFO]   File watcher daemon started for directory: logs
+2025-10-08_08:58:24 [WMM]  [INFO]   Server started on :9595
 stty: stdin isn't a terminal
-2025-10-08 08:58:29 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51886: /
-2025-10-08 08:58:29 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51886: /web/css/default.css
-2025-10-08 08:58:29 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51887: /web/js/app.js
-2025-10-08 08:58:29 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51886: /web/assets/upload.svg
-2025-10-08 08:58:33 [RLM]  [INFO]   [POST] Request received from /127.0.0.1:51886: /api/upload
-2025-10-08 08:58:34 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51886: /dashboard
-2025-10-08 08:58:34 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51886: /web/css/default.css
-2025-10-08 08:58:34 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51886: /web/js/dash.js
-2025-10-08 08:58:34 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51886: /api/load
-2025-10-08 08:58:34 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51886: /api/logkinds
-2025-10-08 08:59:12 [LCM]  [DEBUG]  Finished processing log: c24b7558ec8051941ea1e52c7fa39807
-2025-10-08 08:59:12 [LCM]  [DEBUG]  Stored log.
-2025-10-08 08:59:12 [LCM]  [DEBUG]  Finished processing log: c24b7558ec8051941ea1e52c7fa39807
-2025-10-08 08:59:12 [LCM]  [DEBUG]  Stored log.
-2025-10-08 08:59:12 [LCM]  [DEBUG]  Finished processing log: c24b7558ec8051941ea1e52c7fa39807
-2025-10-08 08:59:12 [LCM]  [DEBUG]  Stored log.
-2025-10-08 08:59:12 [LCM]  [DEBUG]  Finished processing log: c24b7558ec8051941ea1e52c7fa39807
-2025-10-08 08:59:12 [LCM]  [DEBUG]  Stored log.
-2025-10-08 08:59:12 [LCM]  [DEBUG]  Finished processing log: c24b7558ec8051941ea1e52c7fa39807
-2025-10-08 08:59:12 [LCM]  [DEBUG]  Stored log.
-2025-10-08 08:59:12 [LCM]  [DEBUG]  Finished processing log: c24b7558ec8051941ea1e52c7fa39807
-2025-10-08 08:59:12 [LCM]  [DEBUG]  Stored log.
-2025-10-08 08:59:12 [LCM]  [DEBUG]  Finished processing log: c24b7558ec8051941ea1e52c7fa39807
-2025-10-08 08:59:12 [LCM]  [DEBUG]  Stored log.
-2025-10-08 08:59:12 [LCM]  [DEBUG]  Finished processing log: c24b7558ec8051941ea1e52c7fa39807
-2025-10-08 08:59:12 [LCM]  [DEBUG]  Stored log.
-2025-10-08 08:59:12 [LCM]  [DEBUG]  Finished processing log: 369e22b28173c4e8b9934ef8eb3e43d1
-2025-10-08 08:59:12 [LCM]  [DEBUG]  Stored log.
-2025-10-08 08:59:12 [LCM]  [DEBUG]  Finished processing log: b4053cab4019bb4a4848bc13d9f472b4
-2025-10-08 08:59:12 [LCM]  [DEBUG]  Stored log.
-2025-10-08 08:59:12 [LCM]  [DEBUG]  Finished processing log: b4053cab4019bb4a4848bc13d9f472b4
-2025-10-08 08:59:12 [LCM]  [DEBUG]  Stored log.
-2025-10-08 08:59:12 [LCM]  [DEBUG]  Finished processing log: c24b7558ec8051941ea1e52c7fa39807
-2025-10-08 08:59:12 [LCM]  [DEBUG]  Stored log.
-2025-10-08 08:59:12 [LCM]  [DEBUG]  Finished processing log: c24b7558ec8051941ea1e52c7fa39807
-2025-10-08 08:59:12 [LCM]  [DEBUG]  Stored log.
-2025-10-08 08:59:12 [LCM]  [DEBUG]  Finished processing log: c24b7558ec8051941ea1e52c7fa39807
-2025-10-08 08:59:12 [LCM]  [DEBUG]  Stored log.
-2025-10-08 08:59:12 [LCM]  [DEBUG]  Finished processing log: 111b13c205f3ae4a19aa1cb42dc8a53a
-2025-10-08 08:59:12 [LCM]  [DEBUG]  Stored log.
-2025-10-08 08:59:12 [LCM]  [DEBUG]  Finished processing log: b2badbdbe1e8681910dbcf2fc12873c1
-2025-10-08 08:59:12 [LCM]  [DEBUG]  Stored log.
-2025-10-08 08:59:12 [LCM]  [DEBUG]  Finished processing log: 98d23145bba7e1f2a822d01e1c2c38ee
-2025-10-08 08:59:12 [LCM]  [DEBUG]  Stored log.
-2025-10-08 08:59:12 [LCM]  [DEBUG]  Finished processing log: 98d23145bba7e1f2a822d01e1c2c38ee
-2025-10-08 08:59:12 [LCM]  [DEBUG]  Stored log.
-2025-10-08 08:59:12 [LCM]  [DEBUG]  Finished processing log: 98d23145bba7e1f2a822d01e1c2c38ee
-2025-10-08 08:59:12 [LCM]  [DEBUG]  Stored log.
-2025-10-08 08:59:12 [LCM]  [DEBUG]  Finished processing log: 0c1c7f2583d69804dd2df274c6325471
-2025-10-08 08:59:12 [LCM]  [DEBUG]  Stored log.
-2025-10-08 08:59:12 [LCM]  [DEBUG]  Finished processing log: c24b7558ec8051941ea1e52c7fa39807
-2025-10-08 08:59:12 [LCM]  [DEBUG]  Stored log.
-2025-10-08 08:59:12 [LCM]  [DEBUG]  Finished processing log: c24b7558ec8051941ea1e52c7fa39807
-2025-10-08 08:59:12 [LCM]  [DEBUG]  Stored log.
-2025-10-08 08:59:12 [LCM]  [DEBUG]  Finished processing log: c24b7558ec8051941ea1e52c7fa39807
-2025-10-08 08:59:12 [LCM]  [DEBUG]  Stored log.
-2025-10-08 08:59:12 [LCM]  [DEBUG]  Finished processing log: 0c1c7f2583d69804dd2df274c6325471
-2025-10-08 08:59:12 [LCM]  [DEBUG]  Stored log.
-2025-10-08 08:59:12 [LCM]  [DEBUG]  Finished processing log: 98d23145bba7e1f2a822d01e1c2c38ee
-2025-10-08 08:59:12 [LCM]  [DEBUG]  Stored log.
-2025-10-08 08:59:12 [LCM]  [DEBUG]  Finished processing log: 98d23145bba7e1f2a822d01e1c2c38ee
-2025-10-08 08:59:12 [LCM]  [DEBUG]  Stored log.
-2025-10-08 08:59:12 [LCM]  [DEBUG]  Finished processing log: c24b7558ec8051941ea1e52c7fa39807
-2025-10-08 08:59:12 [LCM]  [DEBUG]  Stored log.
-2025-10-08 08:59:12 [LCM]  [DEBUG]  Finished processing log: b1e7195ed6fa0c4b0c6016dada1f8449
-2025-10-08 08:59:12 [LCM]  [DEBUG]  Stored log.
-2025-10-08 08:59:15 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51929: /dashboard
-2025-10-08 08:59:15 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51929: /web/css/default.css
-2025-10-08 08:59:15 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51930: /web/js/dash.js
-2025-10-08 08:59:28 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51929: /api/load
-2025-10-08 08:59:28 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51929: /api/logkinds
-2025-10-08 08:59:34 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51929: /
-2025-10-08 08:59:34 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51930: /web/js/app.js
-2025-10-08 08:59:34 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51929: /web/css/default.css
-2025-10-08 08:59:34 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51930: /web/assets/upload.svg
-2025-10-08 08:59:37 [RLM]  [INFO]   [POST] Request received from /127.0.0.1:51929: /api/upload
-2025-10-08 08:59:38 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51929: /dashboard
-2025-10-08 08:59:38 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51929: /web/css/default.css
-2025-10-08 08:59:38 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51929: /web/js/dash.js
-2025-10-08 08:59:38 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51929: /api/load
-2025-10-08 08:59:38 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51929: /api/logkinds
+2025-10-08_08:58:29 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51886: /
+2025-10-08_08:58:29 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51886: /web/css/default.css
+2025-10-08_08:58:29 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51887: /web/js/app.js
+2025-10-08_08:58:29 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51886: /web/assets/upload.svg
+2025-10-08_08:58:33 [RLM]  [INFO]   [POST] Request received from /127.0.0.1:51886: /api/upload
+2025-10-08_08:58:34 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51886: /dashboard
+2025-10-08_08:58:34 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51886: /web/css/default.css
+2025-10-08_08:58:34 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51886: /web/js/dash.js
+2025-10-08_08:58:34 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51886: /api/load
+2025-10-08_08:58:34 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51886: /api/logkinds
+2025-10-08_08:59:12 [LCM]  [DEBUG]  Finished processing log: c24b7558ec8051941ea1e52c7fa39807
+2025-10-08_08:59:12 [LCM]  [DEBUG]  Stored log.
+2025-10-08_08:59:12 [LCM]  [DEBUG]  Finished processing log: c24b7558ec8051941ea1e52c7fa39807
+2025-10-08_08:59:12 [LCM]  [DEBUG]  Stored log.
+2025-10-08_08:59:15 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51929: /dashboard
+2025-10-08_08:59:15 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51929: /web/css/default.css
+2025-10-08_08:59:15 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51930: /web/js/dash.js
+2025-10-08_08:59:28 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51929: /api/load
+2025-10-08_08:59:28 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51929: /api/logkinds
+2025-10-08_08:59:34 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51929: /
+2025-10-08_08:59:34 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51930: /web/js/app.js
+2025-10-08_08:59:34 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51929: /web/css/default.css
+2025-10-08_08:59:34 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51930: /web/assets/upload.svg
+2025-10-08_08:59:37 [RLM]  [INFO]   [POST] Request received from /127.0.0.1:51929: /api/upload
+2025-10-08_08:59:38 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51929: /dashboard
+2025-10-08_08:59:38 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51929: /web/css/default.css
+2025-10-08_08:59:38 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51929: /web/js/dash.js
+2025-10-08_08:59:38 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51929: /api/load
+2025-10-08_08:59:38 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51929: /api/logkinds_

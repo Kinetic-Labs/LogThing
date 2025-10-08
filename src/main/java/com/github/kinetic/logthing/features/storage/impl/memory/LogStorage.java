@@ -51,6 +51,8 @@ public final class LogStorage implements Storage {
      * De-initialize the {@link LogStorage}
      */
     public void destroy() {
+        log.debug("De-initializing LogStorage...");
+
         this.logs.clear();
     }
 }

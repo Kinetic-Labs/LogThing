@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', async() => {
+document.addEventListener('DOMContentLoaded', async _event => {
     const logList = document.getElementById('logList');
     const logLevelFilters = document.getElementById('log-level-filters');
     const logs = await fetch('/api/load').then(response => response.json());
@@ -21,10 +21,15 @@ document.addEventListener('DOMContentLoaded', async() => {
 
     logList.innerHTML = logs.map(log => `
         <li class="log-entry" data-level="${log.level || 'UNKNOWN'}" style="border-left-color: ${getLevelColor(log.level || 'UNKNOWN')}">
+            ${(log.timestamp || log.tag) ? `
+            <span class="log-meta">
+                ${log.timestamp ? `<span class="log-timestamp">${log.timestamp}</span>` : ''}
+                ${log.tag ? `<span class="log-tag">${log.tag}</span>` : ''}
+            </span>
+            ` : ''}
             <span class="log-level" style="color: ${getLevelColor(log.level || 'UNKNOWN')}">
                 [${log.level || 'UNKNOWN'}]
             </span>
-
             <span class="log-message">${log.message}</span>
         </li>
     `).join('');
@@ -88,7 +93,7 @@ function getLevelColor(level) {
     return colors[level] || '#9e3ddc';
 }
 
-window.filterLogs = function(level) {
+window.filterLogs = (level) => {
     const logEntries = document.querySelectorAll('.log-entry');
     const filterButtons = document.querySelectorAll('.filter-button');
 

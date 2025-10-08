@@ -154,7 +154,7 @@ if ! "$cygwin" && ! "$darwin" && ! "$nonstop" ; then
     esac
 fi
 
-# Collect all arguments for the java command, stacking in reverse order:
+# Collect all flags for the java command, stacking in reverse order:
 #   * args from the command line
 #   * the main class name
 #   * -classpath
@@ -169,7 +169,7 @@ if "$cygwin" || "$msys" ; then
 
     JAVACMD=$( cygpath --unix "$JAVACMD" )
 
-    # Now convert the arguments - kludge to limit ourselves to /bin/sh
+    # Now convert the flags - kludge to limit ourselves to /bin/sh
     for arg do
         if
             case $arg in                                #(
@@ -193,7 +193,7 @@ if "$cygwin" || "$msys" ; then
     done
 fi
 
-# Collect all arguments for the java command;
+# Collect all flags for the java command;
 #   * $DEFAULT_JVM_OPTS, $JAVA_OPTS, and $GRADLE_OPTS can contain fragments of
 #     shell script including quotes and variable substitutions, so put them in
 #     double quotes to make sure that they get re-expanded; and
@@ -217,7 +217,7 @@ set -- \
 # but POSIX shell has neither arrays nor command substitution, so instead we
 # post-process each arg (as a line of input to sed) to backslash-escape any
 # character that might be a shell metacharacter, then use eval to reverse
-# that process (while maintaining the separation between arguments), and wrap
+# that process (while maintaining the separation between flags), and wrap
 # the whole thing up as a single "set" statement.
 #
 # This will of course break if any of these variables contains a newline or

@@ -1,11 +1,14 @@
 package com.github.kinetic.logthing.module;
 
+import com.github.kinetic.logthing.util.io.log.LogUtil;
+
 import java.util.*;
 
 @SuppressWarnings("unused")
 public final class ModuleRepository {
     private static final ModuleRepository INSTANCE = new ModuleRepository();
     private final Map<String, Module> modules = new HashMap<>();
+    private final LogUtil log = new LogUtil();
 
     public ModuleRepository() {
     }
@@ -23,6 +26,8 @@ public final class ModuleRepository {
      * @param module the {@link Module} to register
      */
     public void registerModule(final Module module) {
+        log.debug("ModuleRepository: Registering module: " + module.getName());
+
         modules.put(module.getName().toLowerCase(), module);
     }
 

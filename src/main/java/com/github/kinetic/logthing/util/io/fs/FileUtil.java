@@ -11,6 +11,7 @@ import java.nio.file.Path;
  *
  * @param path the path to work with
  */
+@SuppressWarnings("unused")
 public record FileUtil(Path path) implements Util {
 
     /**
@@ -18,7 +19,7 @@ public record FileUtil(Path path) implements Util {
      *
      * @return contents if exists, null if it does not
      */
-    public String readToString() {
+    public String read() {
         String content;
 
         try {
@@ -26,9 +27,26 @@ public record FileUtil(Path path) implements Util {
         } catch(IOException ioException) {
             content = null;
 
-            log.trace("Error reading file: " + this.path, ioException);
+            log.trace("Failed to read content", ioException);
         }
 
         return content;
+    }
+
+    /**
+     * Write a string to file
+     *
+     * @param content the content to write
+     */
+    public boolean write(String content) {
+        try {
+            Files.writeString(this.path.toAbsolutePath(), content);
+
+            return true;
+        } catch(IOException ioException) {
+            log.trace("Error writing to file", ioException);
+
+            return false;
+        }
     }
 }

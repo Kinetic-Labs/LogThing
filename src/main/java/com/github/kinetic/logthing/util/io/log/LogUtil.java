@@ -1,6 +1,8 @@
 package com.github.kinetic.logthing.util.io.log;
 
+import com.github.kinetic.logthing.LogThing;
 import com.github.kinetic.logthing.util.Util;
+import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -18,7 +20,7 @@ public final class LogUtil implements Util {
     private static final DateTimeFormatter DATE_FORMATTER;
 
     static {
-        DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss");
     }
 
     /**
@@ -63,7 +65,10 @@ public final class LogUtil implements Util {
      * @param message the debug message
      */
     public void debug(final String message) {
-        log(message, LogLevel.DEBUG);
+        final boolean debug = LogThing.getInstance().isDebugMode();
+
+        if(debug)
+            log(message, LogLevel.DEBUG);
     }
 
     /**
@@ -84,13 +89,20 @@ public final class LogUtil implements Util {
 
     private void log(final String msg, final LogLevel level) {
         final String timestamp = LocalDateTime.now().format(DATE_FORMATTER);
+        final String finalMessage = getFinalMessage(msg, level, timestamp);
+
+        System.out.print(finalMessage);
+    }
+
+    @NotNull
+    private String getFinalMessage(String msg, LogLevel level, String timestamp) {
         final String threadName = Thread.currentThread().getName();
         final String colorCode = getColorForLevel(level);
         final String levelName = level.name();
         final String threadCol = String.format("[%s]", threadName);
         final String levelCol = String.format("[%s]", levelName);
 
-        System.out.printf(
+        return String.format(
                 "%s%s %-6s %-8s %s%s%n",
                 colorCode,
                 timestamp,
@@ -101,6 +113,7 @@ public final class LogUtil implements Util {
         );
     }
 
+    @NotNull
     private String getColorForLevel(LogLevel level) {
         return switch(level) {
             case INFO -> PURPLE;

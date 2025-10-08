@@ -1,8 +1,11 @@
 package com.github.kinetic.logthing;
 
-import com.github.kinetic.logthing.config.type.LogThingConfig;
+import com.github.kinetic.logthing.config.flags.ArgParse;
+import com.github.kinetic.logthing.config.flags.LogThingFlags;
 import com.github.kinetic.logthing.config.impl.ConfigParser;
+import com.github.kinetic.logthing.config.type.LogThingConfig;
 import com.github.kinetic.logthing.event.EventBus;
+import com.github.kinetic.logthing.features.storage.impl.memory.LogStorage;
 import com.github.kinetic.logthing.module.ModuleBuilder;
 import com.github.kinetic.logthing.module.ModuleRepository;
 import com.github.kinetic.logthing.module.impl.data.LogConsumerModule;
@@ -10,17 +13,18 @@ import com.github.kinetic.logthing.module.impl.io.LogServiceModule;
 import com.github.kinetic.logthing.module.impl.misc.RequestLoggerModule;
 import com.github.kinetic.logthing.module.impl.web.AlertModule;
 import com.github.kinetic.logthing.module.impl.web.WebMonitorModule;
-import com.github.kinetic.logthing.features.storage.impl.memory.LogStorage;
 import com.github.kinetic.logthing.util.io.log.LogUtil;
 import com.github.kinetic.logthing.util.misc.ModuleUtil;
 import com.github.kinetic.logthing.util.misc.TerminalUtil;
 
 @SuppressWarnings("unused")
 public final class LogThing {
+
     private final LogUtil log = new LogUtil();
     private final TerminalUtil terminal = new TerminalUtil();
     private final ModuleRepository moduleRepository = new ModuleRepository();
     private final ModuleUtil moduleUtil = new ModuleUtil();
+    private final LogThingFlags flag = new LogThingFlags();
     private static final LogThing instance = new LogThing();
     private EventBus eventBus;
     private LogThingConfig logThingConfig;
@@ -34,7 +38,7 @@ public final class LogThing {
                 new AlertModule()
         );
 
-        // by default we enable all modules, in future
+        // by default, we enable all modules, in future
         // implement settings panel for choosing what modules to use
         moduleUtil.enableModule(RequestLoggerModule.class);
         moduleUtil.enableModule(LogConsumerModule.class);
@@ -110,6 +114,9 @@ public final class LogThing {
     void launch(String[] args) {
         Thread.currentThread().setName("LM");
 
+        ArgParse argParse = new ArgParse();
+        argParse.parseArgs(args);
+
         initialize();
 
         Runtime.getRuntime().addShutdownHook(new Thread(this::destroy));
@@ -136,5 +143,9 @@ public final class LogThing {
 
     public static LogThing getInstance() {
         return instance;
+    }
+
+    public boolean isDebugMode() {
+        return flag.isDebug();
     }
 }
