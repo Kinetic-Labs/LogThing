@@ -1,9 +1,11 @@
+# this is an example config file
+
 [inputs.file]
 path = "logs/"
 log_kinds = ["INFO", "WARNING", "ERROR", "DEBUG", "TRACE", "FATAL"]
 
 [processor]
-pattern = "INFO|WARNING|ERROR|DEBUG|TRACE|FATAL"
+level_pattern = "INFO|WARNING|ERROR|DEBUG|TRACE|FATAL"
 
 # TODO: implement alerts
 #[alerts.error_spike]

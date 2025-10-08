@@ -14,7 +14,7 @@ public final class LogKindHandler extends AbstractHandler {
 
     @Override
     public void handleRequest(final HttpExchange exchange) throws IOException {
-        final String json = gson.toJson(LogThing.getInstance().getLogThingConfig().inputsFileLogKinds());
+        final String json = gson.toJson(LogThing.getInstance().getLogThingConfig().inputKey().inputFileKey().inputsFileLogKinds());
 
         webUtil.sendResponse(exchange, 200, json);
     }

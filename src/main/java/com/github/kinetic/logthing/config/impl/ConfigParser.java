@@ -1,7 +1,10 @@
 package com.github.kinetic.logthing.config.impl;
 
+import com.github.kinetic.logthing.config.keys.InputKey;
 import com.github.kinetic.logthing.config.LogThingConfig;
 import com.github.kinetic.logthing.config.AbstractConfigParser;
+import com.github.kinetic.logthing.config.keys.InputFileKey;
+import com.github.kinetic.logthing.config.keys.ProcessorKey;
 import com.github.kinetic.logthing.exception.InvalidConfigException;
 import org.tomlj.Toml;
 import org.tomlj.TomlParseResult;
@@ -35,8 +38,11 @@ public final class ConfigParser extends AbstractConfigParser {
 
         final String logInput = result.getString("inputs.file.path");
         final List<Object> logKinds = Objects.requireNonNull(result.getArray("inputs.file.log_kinds")).toList();
-        final String processorPattern = result.getString("processor.pattern");
+        final String processorLevelPattern = result.getString("processor.level_pattern");
+        final InputFileKey inputFileKey = new InputFileKey(logInput, logKinds);
+        final InputKey inputKey = new InputKey(inputFileKey);
+        final ProcessorKey processorKey = new ProcessorKey(processorLevelPattern);
 
-        return new LogThingConfig(logInput, logKinds, processorPattern);
+        return new LogThingConfig(inputKey, processorKey);
     }
 }

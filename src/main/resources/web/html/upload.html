@@ -3,31 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>LogThing</title>
+    <title>LogThing - Upload</title>
 
-    <script src="/web/js/app.js" type="module" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="/web/css/default.css" rel="stylesheet" type="text/css">
+    <script src="/web/js/app.js" type="module" defer></script>
 </head>
 <body>
-<header class="header">
-    <h1 class="header__title">LogThing</h1>
-
-    <a href="/dashboard">Dashboard</a>
-</header>
-
-<div class="content">
-    <form id="form" class="upload-form" method="POST" enctype="multipart/form-data">
-
-        <h1>Upload a Log</h1>
-
-        <input type="file" id="file-input" name="file">
-
-        <div class="upload-form-buttons">
-            <button data-primary type="submit">Upload</button>
-            <button data-secondary type="reset">Clear</button>
-        </div>
-    </form>
-</div>
+    <div class="container">
+        <aside class="sidebar">
+            <header class="sidebar-header">
+                <h1 class="sidebar-title">LogThing</h1>
+            </header>
+            <nav class="sidebar-nav">
+                <a href="/" class="sidebar-link active">Upload</a>
+                <a href="/dashboard" class="sidebar-link">Dashboard</a>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <header class="main-header">
+                <h2>Upload Logs</h2>
+            </header>
+            <div class="upload-container">
+                <form class="upload-form" id="upload-form" action="/api/upload" method="POST" enctype="multipart/form-data">
+                    <div class="file-input-wrapper">
+                        <label for="file" class="file-label">
+                            <svg class="upload-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="fill: white">
+                                <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/>
+                            </svg>
+                            <span class="file-name">Choose a file or drag it here</span>
+                        </label>
+                        <input type="file" name="file" id="file" class="file-input" multiple>
+                    </div>
+                    <button type="submit" class="upload-button">Upload and Process</button>
+                </form>
+                <div class="upload-progress" id="upload-progress" style="display: none;">
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" id="progress-bar"></div>
+                    </div>
+                    <span class="progress-text" id="progress-text">0%</span>
+                </div>
+            </div>
+        </main>
+    </div>
 </body>
-
 </html>

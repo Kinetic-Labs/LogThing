@@ -15,7 +15,12 @@ import java.nio.file.Path;
 
 public final class LogServiceModule extends Module {
 
-    private final String logPath = LogThing.getInstance().getLogThingConfig().inputsFileLogPath();
+    private final String logPath = LogThing
+            .getInstance()
+            .getLogThingConfig()
+            .inputKey()
+            .inputFileKey()
+            .inputsFileLogPath();
     private final WatchUtil watchUtil = new WatchUtil(Path.of(logPath));
 
     public LogServiceModule() {

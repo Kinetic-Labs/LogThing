@@ -15,7 +15,7 @@ public final class LevelExtractorProcessor extends AbstractProcessor {
 
     @Override
     public ParsedLog process() {
-        final String processorPattern = LogThing.getInstance().getLogThingConfig().processorPattern();
+        final String processorPattern = LogThing.getInstance().getLogThingConfig().processorKey().processorLevelPattern();
         final Pattern pattern = Pattern.compile(String.format("^(%s)\\s+(.*)$", processorPattern));
         final Matcher matcher = pattern.matcher(rawLog);
         final String level, message;

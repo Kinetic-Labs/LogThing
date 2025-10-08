@@ -1,53 +1,33 @@
 document.addEventListener('DOMContentLoaded', async() => {
-    const content = document.getElementById('content');
-
-    const logs = await fetch('/api/load', {
-        method: 'GET',
-    }).then(response => response.json());
-
-    const logKinds = await fetch('/api/logkinds', {
-        method: 'GET',
-    }).then(response => response.json());
-
+    const logList = document.getElementById('logList');
+    const logLevelFilters = document.getElementById('log-level-filters');
+    const logs = await fetch('/api/load').then(response => response.json());
+    const logKinds = await fetch('/api/logkinds').then(response => response.json());
     const logCounts = {};
-    logKinds.forEach(kind => {
-        logCounts[kind] = 0;
-    });
+
+    logKinds.forEach(kind => logCounts[kind] = 0);
 
     logs.forEach(log => {
         const level = log.level || 'UNKNOWN';
-        if(!logCounts[level]) {
-            logCounts[level] = 0;
-        }
-        logCounts[level]++;
+
+        logCounts[level] = (logCounts[level] || 0) + 1;
     });
 
-    content.innerHTML = `
-        <div style="width: 80%; max-width: 1200px;">
-            <div style="margin-bottom: 2rem;">
-                <h2>Filter by Log Level</h2>
-                <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 1rem;">
-                    <button data-secondary onclick="filterLogs('ALL')">All</button>
-                    ${Object.keys(logCounts).map(level =>
-        `<button data-secondary onclick="filterLogs('${level}')">${level}</button>`
-    ).join('')}
-                </div>
-            </div>
+    logLevelFilters.innerHTML += Object.keys(logCounts).map(level =>
+        `<button data-secondary class="filter-button" onclick="filterLogs('${level}')">
+            ${level} (${logCounts[level]})
+        </button>`
+    ).join('');
 
-            <div id="logList" style="background-color: var(--panel-background-color); padding: 20px; border-radius: 10px;">
-                ${logs.map((log, _idx) => `
-                    <div class="log-entry" data-level="${log.level || 'UNKNOWN'}" style="padding: 10px; margin-bottom: 10px; background-color: var(--element-dark); border-radius: 5px; border-left: 3px solid ${getLevelColor(log.level || 'UNKNOWN')};">
-                        <strong style="color: ${getLevelColor(log.level || 'UNKNOWN')};">[${log.level || 'UNKNOWN'}]</strong> 
-                        <span>${log.message}</span>
-                    </div>
-                `).join('')}
-            </div>
-            
-            <div style="background-color: var(--panel-background-color); padding: 20px; border-radius: 10px; margin-top: 2rem;">
-                <canvas id="logChart"></canvas>
-            </div>
-        </div>
-    `;
+    logList.innerHTML = logs.map(log => `
+        <li class="log-entry" data-level="${log.level || 'UNKNOWN'}" style="border-left-color: ${getLevelColor(log.level || 'UNKNOWN')}">
+            <span class="log-level" style="color: ${getLevelColor(log.level || 'UNKNOWN')}">
+                [${log.level || 'UNKNOWN'}]
+            </span>
+
+            <span class="log-message">${log.message}</span>
+        </li>
+    `).join('');
 
     const ctx = document.getElementById('logChart').getContext('2d');
     new Chart(ctx, {
@@ -59,23 +39,23 @@ document.addEventListener('DOMContentLoaded', async() => {
                 data: Object.values(logCounts),
                 backgroundColor: Object.keys(logCounts).map(level => getLevelColor(level)),
                 borderColor: Object.keys(logCounts).map(level => getLevelColor(level)),
-                borderWidth: 1
+                borderWidth: 1,
+                borderRadius: 4,
             }]
         },
         options: {
             responsive: true,
+            maintainAspectRatio: false,
             plugins: {
                 legend: {
-                    labels: {
-                        color: '#EEEEEE'
-                    }
+                    display: false,
                 }
             },
             scales: {
                 y: {
                     beginAtZero: true,
                     ticks: {
-                        color: '#EEEEEE',
+                        color: '#a0a0a0',
                         stepSize: 1
                     },
                     grid: {
@@ -84,10 +64,10 @@ document.addEventListener('DOMContentLoaded', async() => {
                 },
                 x: {
                     ticks: {
-                        color: '#EEEEEE'
+                        color: '#a0a0a0'
                     },
                     grid: {
-                        color: '#333333'
+                        display: false
                     }
                 }
             }
@@ -110,11 +90,17 @@ function getLevelColor(level) {
 
 window.filterLogs = function(level) {
     const logEntries = document.querySelectorAll('.log-entry');
-    logEntries.forEach(entry => {
-        if(level === 'ALL' || entry.dataset.level === level) {
-            entry.style.display = 'block';
+    const filterButtons = document.querySelectorAll('.filter-button');
+
+    logEntries.forEach(entry =>
+        entry.style.display = (level === 'ALL' || entry.dataset.level === level) ? 'flex' : 'none'
+    );
+
+    filterButtons.forEach(button => {
+        if(button.textContent.startsWith(level) || (level === 'ALL' && button.textContent === 'All')) {
+            button.classList.add('active');
         } else {
-            entry.style.display = 'none';
+            button.classList.remove('active');
         }
     });
 }
