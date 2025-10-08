@@ -6,7 +6,7 @@ import com.github.kinetic.logthing.module.Category;
 import com.github.kinetic.logthing.module.Module;
 
 /**
- * Logs incomming network requests
+ * Logs incoming network requests
  */
 public final class RequestLoggerModule extends Module {
     public RequestLoggerModule() {

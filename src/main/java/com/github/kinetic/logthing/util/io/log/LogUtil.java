@@ -83,12 +83,12 @@ public final class LogUtil implements Util {
     }
 
     private void log(final String msg, final LogLevel level) {
-        String timestamp = LocalDateTime.now().format(DATE_FORMATTER);
-        String threadName = Thread.currentThread().getName();
-        String colorCode = getColorForLevel(level);
-        String levelName = level.name();
-        String threadCol = String.format("[%s]", threadName);
-        String levelCol = String.format("[%s]", levelName);
+        final String timestamp = LocalDateTime.now().format(DATE_FORMATTER);
+        final String threadName = Thread.currentThread().getName();
+        final String colorCode = getColorForLevel(level);
+        final String levelName = level.name();
+        final String threadCol = String.format("[%s]", threadName);
+        final String levelCol = String.format("[%s]", levelName);
 
         System.out.printf(
                 "%s%s %-6s %-8s %s%s%n",

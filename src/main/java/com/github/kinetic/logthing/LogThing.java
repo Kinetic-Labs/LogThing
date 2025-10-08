@@ -34,6 +34,8 @@ public final class LogThing {
                 new AlertModule()
         );
 
+        // by default we enable all modules, in future
+        // implement settings panel for choosing what modules to use
         moduleUtil.enableModule(RequestLoggerModule.class);
         moduleUtil.enableModule(LogConsumerModule.class);
         moduleUtil.enableModule(WebMonitorModule.class);
@@ -56,7 +58,7 @@ public final class LogThing {
             log.info("Removing module: " + module.getName());
 
             if(module.isEnabled())
-                module.toggle();
+                module.setEnabled(false);
         });
     }
 

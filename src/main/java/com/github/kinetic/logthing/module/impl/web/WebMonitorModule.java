@@ -38,12 +38,12 @@ public final class WebMonitorModule extends Module {
 
     @Override
     protected void onEnable() {
-        super.onEnable();
-
         final Thread thread = new Thread(server::start);
 
         thread.setName(getThreadName());
         thread.start();
+
+        super.onEnable();
     }
 
     @Override

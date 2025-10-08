@@ -7,7 +7,7 @@ import com.github.kinetic.logthing.config.type.RuleCondition;
 import com.github.kinetic.logthing.module.Category;
 import com.github.kinetic.logthing.module.Module;
 
-public class AlertModule extends Module {
+public final class AlertModule extends Module {
 
     private final RuleEngine ruleEngine;
     private Thread thread;
@@ -21,10 +21,14 @@ public class AlertModule extends Module {
     }
 
     private void alertDaemon() {
-
         ruleEngine.parse();
 
         final RuleCondition ruleCondition = ruleEngine.getParsedCondition();
+
+        if(ruleCondition == null) {
+            log.warn("ruleCondition is null");
+            return;
+        }
 
         log.debug(ruleCondition.toString());
     }

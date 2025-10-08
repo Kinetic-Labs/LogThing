@@ -7,7 +7,7 @@ import java.util.Arrays;
 public class Start {
     private static final LogUtil log = new LogUtil();
 
-    static void main(String[] args) {
+    public static void main(String[] args) {
         Thread.currentThread().setName("B");
 
         log.info("Booting...");

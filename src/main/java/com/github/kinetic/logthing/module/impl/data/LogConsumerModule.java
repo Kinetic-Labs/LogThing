@@ -11,6 +11,7 @@ import com.github.kinetic.logthing.util.types.ParsedLog;
  * Handles the final, processed log (e.g. store it in a database)
  */
 public final class LogConsumerModule extends Module {
+
     public LogConsumerModule() {
         super("LogConsumerModule", "LCM", "Handles automated database actions", Category.DATA);
     }

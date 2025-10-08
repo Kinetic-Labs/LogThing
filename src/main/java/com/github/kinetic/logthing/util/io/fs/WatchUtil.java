@@ -14,7 +14,7 @@ import static java.nio.file.StandardWatchEventKinds.*;
 public final class WatchUtil implements Util {
 
     private final Path directory;
-    private final AtomicBoolean running = new AtomicBoolean(false);
+    private final AtomicBoolean running;
     private WatchService watcher;
     private Thread watcherThread;
 
@@ -25,11 +25,15 @@ public final class WatchUtil implements Util {
         if(!Files.isDirectory(directory))
             throw new IllegalArgumentException("Path must be a directory: " + directory);
 
+        this.running = new AtomicBoolean(false);
         this.directory = directory;
     }
 
     /**
      * Starts the file watcher and dispatches events for existing files in the directory.
+     * <p>
+     * Will spawn a new daemon thread
+     * </p>
      *
      * @throws IOException           if the watcher cannot be started or directory cannot be read
      * @throws IllegalStateException if the watcher is already running
@@ -41,6 +45,7 @@ public final class WatchUtil implements Util {
             throw new IllegalStateException("Watcher is already running");
 
         watcher = FileSystems.getDefault().newWatchService();
+        // register events
         directory.register(watcher, ENTRY_CREATE, ENTRY_DELETE, ENTRY_MODIFY);
 
         dispatchExistingFiles();
@@ -56,7 +61,7 @@ public final class WatchUtil implements Util {
      * Dispatches LogCreatedEvent for each existing file in the directory.
      */
     private void dispatchExistingFiles() {
-        try(Stream<Path> files = Files.list(directory)) {
+        try(final Stream<Path> files = Files.list(directory)) {
             files.filter(Files::isRegularFile)
                     .forEach(file -> {
                         try {
@@ -66,7 +71,7 @@ public final class WatchUtil implements Util {
                             log.trace("Failed to dispatch event for file: " + file, exception);
                         }
                     });
-        } catch(IOException ioException) {
+        } catch(final IOException ioException) {
             log.trace("Failed to list existing files in directory: " + directory, ioException);
         }
     }
@@ -78,15 +83,17 @@ public final class WatchUtil implements Util {
         try {
             while(running.get() && !Thread.currentThread().isInterrupted()) {
                 WatchKey key;
+
                 try {
                     key = watcher.take();
-                } catch(InterruptedException e) {
+                } catch(final InterruptedException interruptedException) {
                     Thread.currentThread().interrupt();
+
                     break;
                 }
 
-                for(WatchEvent<?> event : key.pollEvents()) {
-                    WatchEvent.Kind<?> kind = event.kind();
+                for(final WatchEvent<?> event : key.pollEvents()) {
+                    final WatchEvent.Kind<?> kind = event.kind();
 
                     if(kind == OVERFLOW) {
                         log.warn("Watch service overflow - some events may have been lost");
@@ -94,16 +101,16 @@ public final class WatchUtil implements Util {
                     }
 
                     @SuppressWarnings("unchecked")
-                    WatchEvent<Path> pathEvent = (WatchEvent<Path>) event;
-                    Path fileName = pathEvent.context();
-                    Path fullPath = directory.resolve(fileName);
+                    final WatchEvent<Path> pathEvent = (WatchEvent<Path>) event;
+                    final Path fileName = pathEvent.context();
+                    final Path fullPath = directory.resolve(fileName);
 
                     if(kind == ENTRY_CREATE || kind == ENTRY_MODIFY) {
                         if(Files.isRegularFile(fullPath)) {
                             try {
                                 LogThing.getInstance().getEventBus()
                                         .dispatch(new LogCreatedEvent(fullPath));
-                            } catch(Exception exception) {
+                            } catch(final Exception exception) {
                                 log.trace("Failed to dispatch event for: " + fullPath, exception);
                             }
                         }
@@ -111,6 +118,7 @@ public final class WatchUtil implements Util {
                 }
 
                 boolean valid = key.reset();
+
                 if(!valid) {
                     log.warn("Watch key no longer valid - directory may have been deleted");
                     break;
@@ -130,9 +138,11 @@ public final class WatchUtil implements Util {
                 return;
 
             watcherThread.interrupt();
+
             try {
+                // join threads
                 watcherThread.join(5000);
-            } catch(InterruptedException interruptedException) {
+            } catch(final InterruptedException interruptedException) {
                 Thread.currentThread().interrupt();
                 log.warn("Interrupted while waiting for watcher thread to stop");
             }
@@ -151,7 +161,7 @@ public final class WatchUtil implements Util {
 
         try {
             watcher.close();
-        } catch(IOException ioException) {
+        } catch(final IOException ioException) {
             log.trace("Error closing watch service", ioException);
         }
     }

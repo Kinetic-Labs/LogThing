@@ -7,6 +7,7 @@ import com.sun.net.httpserver.HttpExchange;
  * Dispatched when a network request comes in
  */
 public final class RequestReceivedEvent extends Event {
+
     private final HttpExchange exchange;
 
     public RequestReceivedEvent(final HttpExchange exchange) {

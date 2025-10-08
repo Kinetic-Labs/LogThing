@@ -20,14 +20,15 @@ public record ResourceUtil(String domain, String path) implements Util {
         final byte[] content;
 
         try(in) {
-            if(in != null) {
-                content = in.readAllBytes();
-            } else {
-                log.error("ResourceUtil not found: " + resourcePath);
+            if(in == null) {
+                log.error("Resource not found: " + resourcePath);
                 return null;
             }
+
+            content = in.readAllBytes();
         } catch(final IOException ioException) {
             log.trace("Failed to read resource: " + resourcePath, ioException);
+
             return null;
         }
 
@@ -43,17 +44,18 @@ public record ResourceUtil(String domain, String path) implements Util {
         final String resourcePath = domain + path;
         final InputStream inputStream = getClass().getClassLoader().getResourceAsStream(resourcePath);
 
-        if(inputStream != null) {
-            try {
-                inputStream.close();
-                return true;
-            } catch(IOException ioException) {
-                log.trace("Error closing stream while checking existence", ioException);
-                return false;
-            }
-        }
+        if(inputStream == null)
+            return false;
 
-        return false;
+        try {
+            inputStream.close();
+
+            return true;
+        } catch(IOException ioException) {
+            log.trace("Error closing stream while checking existence", ioException);
+
+            return false;
+        }
     }
 
     /**
@@ -66,14 +68,16 @@ public record ResourceUtil(String domain, String path) implements Util {
         final InputStream in = getClass().getClassLoader().getResourceAsStream(resourcePath);
 
         try(in) {
-            if(in != null) {
-                return in.readAllBytes();
-            } else {
-                log.error("ResourceUtil not found: " + resourcePath);
+            if(in == null) {
+                log.error("Resource not found: " + resourcePath);
+
                 return null;
             }
+
+            return in.readAllBytes();
         } catch(IOException ioException) {
             log.trace("Failed to read resource bytes: " + resourcePath, ioException);
+
             return null;
         }
     }

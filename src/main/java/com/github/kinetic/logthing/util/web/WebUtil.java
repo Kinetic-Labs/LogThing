@@ -56,6 +56,7 @@ public final class WebUtil implements Util {
 
         String extension = "";
 
+        // get the extension
         if(lastDotIndex > 0)
             extension = fileName.substring(lastDotIndex);
 
@@ -83,19 +84,21 @@ public final class WebUtil implements Util {
      * @throws IOException on error, throws {@link IOException}
      */
     public void serveResource(HttpExchange exchange, String resourcePath) throws IOException {
-        ResourceUtil resourceUtil = new ResourceUtil("", resourcePath);
-        byte[] content = resourceUtil.readBytes();
+        final ResourceUtil resourceUtil = new ResourceUtil("", resourcePath);
+        final byte[] content = resourceUtil.readBytes();
+        final String contentType = getContentType(resourcePath);
 
-        if(content != null) {
-            String contentType = getContentType(resourcePath);
-            exchange.getResponseHeaders().set("Content-Type", contentType);
-            exchange.sendResponseHeaders(200, content.length);
-
-            try(OutputStream os = exchange.getResponseBody()) {
-                os.write(content);
-            }
-        } else {
+        if(content == null) {
             send404(exchange);
+
+            return;
+        }
+
+        exchange.getResponseHeaders().set("Content-Type", contentType);
+        exchange.sendResponseHeaders(200, content.length);
+
+        try(final OutputStream os = exchange.getResponseBody()) {
+            os.write(content);
         }
     }
 }

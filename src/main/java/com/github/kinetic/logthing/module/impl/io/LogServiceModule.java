@@ -22,6 +22,7 @@ public final class LogServiceModule extends Module {
             .inputFileKey()
             .inputsFileLogPath();
     private final WatchUtil watchUtil = new WatchUtil(Path.of(logPath));
+    private Thread thread;
 
     public LogServiceModule() {
         super("LogServiceModule", "LSM", "Watches a given directory and dispatches events when logs are created.", Category.IO);
@@ -34,7 +35,7 @@ public final class LogServiceModule extends Module {
         final String contents = fileUtil.readToString();
         final String[] lines = contents.split("\\r?\\n");
 
-        for(String line : lines) {
+        for(final String line : lines) {
             if(line.trim().isEmpty())
                 continue;
 
@@ -54,8 +55,8 @@ public final class LogServiceModule extends Module {
 
     @Override
     protected void onEnable() {
-        Thread thread = new Thread(this::startWatcher);
-        Thread.currentThread().setName(getThreadName());
+        thread = new Thread(this::startWatcher);
+        thread.setName(getThreadName());
         thread.start();
 
         super.onEnable();
@@ -64,6 +65,7 @@ public final class LogServiceModule extends Module {
     @Override
     protected void onDisable() {
         watchUtil.stopWatcher();
+        thread.interrupt();
 
         super.onDisable();
     }

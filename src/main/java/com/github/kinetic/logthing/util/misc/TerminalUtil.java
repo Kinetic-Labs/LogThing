@@ -19,7 +19,7 @@ public final class TerminalUtil implements Util {
                         .start()
                         .waitFor();
             }
-        } catch(IOException | InterruptedException _) {
+        } catch(final IOException | InterruptedException ignored) {
         }
     }
 
@@ -36,7 +36,7 @@ public final class TerminalUtil implements Util {
                         .start()
                         .waitFor();
             }
-        } catch(final IOException | InterruptedException _) {
+        } catch(final IOException | InterruptedException ignored) {
         }
     }
 }
