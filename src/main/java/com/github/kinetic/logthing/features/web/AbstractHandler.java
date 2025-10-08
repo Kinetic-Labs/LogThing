@@ -1,4 +1,4 @@
-package com.github.kinetic.logthing.web;
+package com.github.kinetic.logthing.features.web;
 
 import com.github.kinetic.logthing.LogThing;
 import com.github.kinetic.logthing.event.impl.RequestReceivedEvent;

@@ -3,7 +3,7 @@
 ## Threads
 ### Names
 - WMM = [Class: WebMonitorModule | Purpose: Powers the web dashboard](src/main/java/com/github/kinetic/logthing/module/impl/web/WebMonitorModule.java) (class)
-- WD = [Package: Web | Purpose: Web dispatch, handle core web operations](src/main/java/com/github/kinetic/logthing/web) (package)
+- WD = [Package: Web | Purpose: Web dispatch, handle core web operations](src/main/java/com/github/kinetic/logthing/features/web) (package)
 - B = [Class: Bootstrap | Purpose: handles launching LogThing](src/main/java/com/github/kinetic/logthing/Start.java) (class)
 - MSH = [Class: LogThing | Purpose: Main Shutdown Hook](src/main/java/com/github/kinetic/logthing/LogThing.java) (class)
 - LM = [Class: LogThing | Purpose: Main thread](src/main/java/com/github/kinetic/logthing/LogThing.java) (class)
@@ -12,3 +12,4 @@
 - LSM = [Class: LogServiceModule | Purpose: Watch for the creation of new logs)](src/main/java/com/github/kinetic/logthing/module/impl/io/LogServiceModule.java) (class)
 - WUW = [Class: WatchUtil | Purpose: Provides a high-level (WatchUtil Watcher) api to watch directories for logs)](src/main/java/com/github/kinetic/logthing/util/io/fs/WatchUtil.java) (class)
 - FWD = [Class: WatchUtil | Purpose: File watcher daemon)](src/main/java/com/github/kinetic/logthing/util/io/fs/WatchUtil.java) (class)
+- AM = [Class: AlertModule | Purpose: Alert manager daemon)](src/main/java/com/github/kinetic/logthing/module/impl/web/AlertModule.java) (class)

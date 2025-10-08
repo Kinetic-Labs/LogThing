@@ -1,9 +1,9 @@
-package com.github.kinetic.logthing.web.impl;
+package com.github.kinetic.logthing.features.web.impl;
 
 import com.github.kinetic.logthing.LogThing;
 import com.github.kinetic.logthing.event.impl.ProcessLogEvent;
 import com.github.kinetic.logthing.util.types.Log;
-import com.github.kinetic.logthing.web.AbstractHandler;
+import com.github.kinetic.logthing.features.web.AbstractHandler;
 import com.sun.net.httpserver.HttpExchange;
 
 import java.io.BufferedReader;

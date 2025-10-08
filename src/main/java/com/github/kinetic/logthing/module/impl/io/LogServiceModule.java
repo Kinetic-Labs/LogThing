@@ -53,7 +53,7 @@ public final class LogServiceModule extends Module {
     }
 
     @Override
-    public void onEnable() {
+    protected void onEnable() {
         Thread thread = new Thread(this::startWatcher);
         Thread.currentThread().setName(getThreadName());
         thread.start();
@@ -62,7 +62,7 @@ public final class LogServiceModule extends Module {
     }
 
     @Override
-    public void onDisable() {
+    protected void onDisable() {
         watchUtil.stopWatcher();
 
         super.onDisable();

@@ -1,10 +1,11 @@
 package com.github.kinetic.logthing.util.web;
 
+import com.github.kinetic.logthing.LogThing;
 import com.github.kinetic.logthing.util.Util;
 
 public final class WebConstants implements Util {
 
     public static final String WEB_ROOT = "web";
-    public static final short PORT = 9595;
+    public static final long PORT = LogThing.getInstance().getLogThingConfig().webKey().port();
 
 }

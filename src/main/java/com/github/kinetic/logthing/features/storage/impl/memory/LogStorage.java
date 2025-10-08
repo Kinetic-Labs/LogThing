@@ -1,6 +1,6 @@
-package com.github.kinetic.logthing.storage.impl.memory;
+package com.github.kinetic.logthing.features.storage.impl.memory;
 
-import com.github.kinetic.logthing.storage.Storage;
+import com.github.kinetic.logthing.features.storage.Storage;
 import com.github.kinetic.logthing.util.types.ParsedLog;
 
 import java.util.*;

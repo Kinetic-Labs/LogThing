@@ -1,4 +1,4 @@
-package com.github.kinetic.logthing.processor;
+package com.github.kinetic.logthing.features.processor;
 
 import com.github.kinetic.logthing.util.io.log.LogUtil;
 import com.github.kinetic.logthing.util.types.ParsedLog;

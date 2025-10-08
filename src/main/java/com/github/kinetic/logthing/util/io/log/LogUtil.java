@@ -23,6 +23,7 @@ public final class LogUtil implements Util {
 
     /**
      * Log information
+     *
      * @param message information being logged
      */
     public void info(final String message) {
@@ -31,6 +32,7 @@ public final class LogUtil implements Util {
 
     /**
      * Log a warning
+     *
      * @param message the warning message
      */
     public void warn(final String message) {
@@ -39,6 +41,7 @@ public final class LogUtil implements Util {
 
     /**
      * Log an error
+     *
      * @param message the error message
      */
     public void error(final String message) {
@@ -47,6 +50,7 @@ public final class LogUtil implements Util {
 
     /**
      * Log a fatal message
+     *
      * @param message the fatal message
      */
     public void fatal(final String message) {
@@ -55,6 +59,7 @@ public final class LogUtil implements Util {
 
     /**
      * Print a debug log
+     *
      * @param message the debug message
      */
     public void debug(final String message) {
@@ -63,6 +68,7 @@ public final class LogUtil implements Util {
 
     /**
      * Prints a stacktrace and message
+     *
      * @param message   the message to accompany the stacktrace
      * @param exception the exception caught
      */

@@ -1,6 +1,6 @@
 package com.github.kinetic.logthing;
 
-import com.github.kinetic.logthing.config.LogThingConfig;
+import com.github.kinetic.logthing.config.type.LogThingConfig;
 import com.github.kinetic.logthing.config.impl.ConfigParser;
 import com.github.kinetic.logthing.event.EventBus;
 import com.github.kinetic.logthing.module.ModuleBuilder;
@@ -8,8 +8,9 @@ import com.github.kinetic.logthing.module.ModuleRepository;
 import com.github.kinetic.logthing.module.impl.data.LogConsumerModule;
 import com.github.kinetic.logthing.module.impl.io.LogServiceModule;
 import com.github.kinetic.logthing.module.impl.misc.RequestLoggerModule;
+import com.github.kinetic.logthing.module.impl.web.AlertModule;
 import com.github.kinetic.logthing.module.impl.web.WebMonitorModule;
-import com.github.kinetic.logthing.storage.impl.memory.LogStorage;
+import com.github.kinetic.logthing.features.storage.impl.memory.LogStorage;
 import com.github.kinetic.logthing.util.io.log.LogUtil;
 import com.github.kinetic.logthing.util.misc.ModuleUtil;
 import com.github.kinetic.logthing.util.misc.TerminalUtil;
@@ -29,13 +30,15 @@ public final class LogThing {
                 new RequestLoggerModule(),
                 new WebMonitorModule(),
                 new LogConsumerModule(),
-                new LogServiceModule()
+                new LogServiceModule(),
+                new AlertModule()
         );
 
         moduleUtil.enableModule(RequestLoggerModule.class);
         moduleUtil.enableModule(LogConsumerModule.class);
         moduleUtil.enableModule(WebMonitorModule.class);
         moduleUtil.enableModule(LogServiceModule.class);
+        moduleUtil.enableModule(AlertModule.class);
     }
 
     private EventBus initializeEventBus() {

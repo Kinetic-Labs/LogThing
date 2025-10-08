@@ -1,14 +1,13 @@
 package com.github.kinetic.logthing.config;
 
-import com.github.kinetic.logthing.util.io.log.LogUtil;
+import com.github.kinetic.logthing.config.type.LogThingConfig;
 
 /**
  * Abstract class to create a config parser
  */
-public abstract class AbstractConfigParser {
+public abstract class AbstractConfigParser implements Config {
 
     private final String path;
-    protected LogUtil log;
 
     /**
      * Create a new {@link AbstractConfigParser}
@@ -17,7 +16,6 @@ public abstract class AbstractConfigParser {
      */
     public AbstractConfigParser(final String path) {
         this.path = path;
-        this.log = new LogUtil();
     }
 
     /**

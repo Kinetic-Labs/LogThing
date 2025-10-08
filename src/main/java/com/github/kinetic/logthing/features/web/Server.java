@@ -1,7 +1,7 @@
-package com.github.kinetic.logthing.web;
+package com.github.kinetic.logthing.features.web;
 
 import com.github.kinetic.logthing.util.io.log.LogUtil;
-import com.github.kinetic.logthing.web.impl.*;
+import com.github.kinetic.logthing.features.web.impl.*;
 import com.sun.net.httpserver.HttpServer;
 
 import java.io.IOException;
@@ -17,9 +17,9 @@ public final class Server {
      *
      * @param port the port to serve on
      */
-    public Server(short port) {
+    public Server(long port) {
         this.log = new LogUtil();
-        this.port = port;
+        this.port = (short) port;
     }
 
     public void start() {

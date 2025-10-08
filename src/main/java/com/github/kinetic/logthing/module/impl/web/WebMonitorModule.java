@@ -6,10 +6,10 @@ import com.github.kinetic.logthing.event.impl.FinishedProcessingEvent;
 import com.github.kinetic.logthing.event.impl.ProcessLogEvent;
 import com.github.kinetic.logthing.module.Category;
 import com.github.kinetic.logthing.module.Module;
-import com.github.kinetic.logthing.processor.impl.LevelExtractorProcessor;
+import com.github.kinetic.logthing.features.processor.impl.DataExtractorProcessor;
 import com.github.kinetic.logthing.util.misc.HashUtil;
 import com.github.kinetic.logthing.util.types.ParsedLog;
-import com.github.kinetic.logthing.web.Server;
+import com.github.kinetic.logthing.features.web.Server;
 
 import static com.github.kinetic.logthing.util.web.WebConstants.PORT;
 
@@ -29,15 +29,15 @@ public final class WebMonitorModule extends Module {
         Thread.currentThread().setName(getThreadName());
 
         final String theLog = event.getLog().rawLog();
-        final LevelExtractorProcessor levelExtractorProcessor = new LevelExtractorProcessor(theLog);
-        final ParsedLog parsedLog = levelExtractorProcessor.process();
+        final DataExtractorProcessor dataExtractorProcessor = new DataExtractorProcessor(theLog);
+        final ParsedLog parsedLog = dataExtractorProcessor.process();
         final String hashText = hashUtil.toMD5(theLog);
 
         LogThing.getInstance().getEventBus().dispatch(new FinishedProcessingEvent(hashText, parsedLog));
     };
 
     @Override
-    public void onEnable() {
+    protected void onEnable() {
         super.onEnable();
 
         final Thread thread = new Thread(server::start);
@@ -47,7 +47,7 @@ public final class WebMonitorModule extends Module {
     }
 
     @Override
-    public void onDisable() {
+    protected void onDisable() {
         server.stop();
 
         super.onDisable();

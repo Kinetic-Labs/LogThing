@@ -1,4 +1,4 @@
-package com.github.kinetic.logthing.storage;
+package com.github.kinetic.logthing.features.storage;
 
 import com.github.kinetic.logthing.util.io.log.LogUtil;
 import com.github.kinetic.logthing.util.types.ParsedLog;

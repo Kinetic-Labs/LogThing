@@ -1,6 +1,6 @@
-package com.github.kinetic.logthing.web.impl;
+package com.github.kinetic.logthing.features.web.impl;
 
-import com.github.kinetic.logthing.web.AbstractHandler;
+import com.github.kinetic.logthing.features.web.AbstractHandler;
 import com.sun.net.httpserver.HttpExchange;
 
 import java.io.IOException;
