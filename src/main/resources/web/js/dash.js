@@ -82,14 +82,15 @@ document.addEventListener('DOMContentLoaded', async _event => {
 
 function getLevelColor(level) {
     const colors = {
-        'INFO': '#4a9eff',
-        'WARNING': '#ffa500',
+        'INFO': '#c94aff',
+        'WARNING': '#ffdd00',
         'ERROR': '#ff4444',
-        'DEBUG': '#44ff44',
-        'TRACE': '#888888',
+        'DEBUG': '#44ff85',
+        'TRACE': '#00ffe1',
         'FATAL': '#ff0000',
-        'UNKNOWN': '#9e3ddc'
+        'UNKNOWN': '#555555'
     };
+
     return colors[level] || '#9e3ddc';
 }
 
@@ -102,7 +103,7 @@ window.filterLogs = (level) => {
     );
 
     filterButtons.forEach(button => {
-        if(button.textContent.startsWith(level) || (level === 'ALL' && button.textContent === 'All')) {
+        if (button.textContent.startsWith(level) || (level === 'ALL' && button.textContent === 'All')) {
             button.classList.add('active');
         } else {
             button.classList.remove('active');
