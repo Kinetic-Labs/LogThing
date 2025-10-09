@@ -1,5 +1,21 @@
 # LogThing
 
+## Build
+```shell
+./gradlew jar copyDependencies
+```
+
+
+## Running
+LogThing does *not* generate a fat jar, instead you will need to use a classpath.
+
+for example (after running the build command):
+```shell
+cd env/
+java -classpath "../build/libs/*:../build/libs/libraries/*" com.github.kinetic.logthing.Start
+```
+
+
 ## Threads
 ### Names
 - WMM = [Class: WebMonitorModule | Purpose: Powers the web dashboard](src/main/java/com/github/kinetic/logthing/module/impl/web/WebMonitorModule.java) (class)

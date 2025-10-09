@@ -47,3 +47,12 @@ kotlin {
 tasks.withType<JavaCompile> {
     options.release.set(24)
 }
+
+tasks.register<Copy>("copyDependencies") {
+    from(configurations.runtimeClasspath)
+    into("${layout.buildDirectory.get()}/libs/libraries")
+}
+
+tasks.named("build") {
+    dependsOn("copyDependencies")
+}
