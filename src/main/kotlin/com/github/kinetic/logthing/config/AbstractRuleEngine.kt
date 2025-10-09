@@ -5,7 +5,7 @@ package com.github.kinetic.logthing.config
  */
 abstract class AbstractRuleEngine(
     /**
-     * Get path of config file to be parsed
+     * Get path of the config file to be parsed
      *
      * @return the raw condition
      */

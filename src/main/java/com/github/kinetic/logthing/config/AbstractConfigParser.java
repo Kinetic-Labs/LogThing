@@ -12,7 +12,7 @@ public abstract class AbstractConfigParser implements Config {
     /**
      * Create a new {@link AbstractConfigParser}
      *
-     * @param path the path to config to be parsed
+     * @param path the file to config to be parsed
      */
     public AbstractConfigParser(final String path) {
         this.path = path;
@@ -30,9 +30,9 @@ public abstract class AbstractConfigParser implements Config {
     protected abstract LogThingConfig parse();
 
     /**
-     * Get path of config file to be parsed
+     * Get file of config file to be parsed
      *
-     * @return the path
+     * @return the file
      */
     public String getPath() {
         return path;

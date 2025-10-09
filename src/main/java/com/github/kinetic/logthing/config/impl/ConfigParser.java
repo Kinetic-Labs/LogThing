@@ -35,8 +35,9 @@ public final class ConfigParser extends AbstractConfigParser {
 
         result.errors().forEach(error -> log.error("ConfigError: " + error.toString()));
 
+        // get keys
         final String inputFile_path = result.getString("inputs.file.path");
-        final List<Object> inputFileLogKinds = checkNullKey(result.getArray("inputs.file.log_kinds")).toList();
+        final List<Object> inputFile_LogKinds = checkNullKey(result.getArray("inputs.file.log_kinds")).toList();
         final String processorTimestamp_pattern = checkNullKey(result.getString("processor.timestamp_pattern"));
         final String processorLevel_pattern = checkNullKey(result.getString("processor.level_pattern"));
         final String processorTag_pattern = checkNullKey(result.getString("processor.tag_pattern"));
@@ -44,7 +45,8 @@ public final class ConfigParser extends AbstractConfigParser {
         final String alertsErrorSpike_condition = result.getString("alerts.error_spike.condition");
         final String alertsErrorSpike_window = result.getString("alerts.error_spike.window");
 
-        final InputFileKey inputFileKey = new InputFileKey(inputFile_path, inputFileLogKinds);
+        // construct keys
+        final InputFileKey inputFileKey = new InputFileKey(inputFile_path, inputFile_LogKinds);
         final InputKey inputKey = new InputKey(inputFileKey);
         final ProcessorKey processorKey = new ProcessorKey(
                 processorLevel_pattern,

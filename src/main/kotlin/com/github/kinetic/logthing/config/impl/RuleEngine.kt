@@ -5,7 +5,7 @@ import com.github.kinetic.logthing.config.type.RuleCondition
 import java.util.regex.Pattern
 
 /**
- * Implementation of rule engine for parsing condition strings
+ * Implementation of the rule engine for parsing condition strings
  */
 class RuleEngine(rawCondition: String) : AbstractRuleEngine(rawCondition) {
 

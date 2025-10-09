@@ -1,6 +1,6 @@
 # * LogThing Configuration File
 #
-# If you leave delete/comment out a key, LogThing will not use it
+# If you delete/comment out a key, LogThing will not use it
 # e.g Comment out `timestamp_pattern` and LogThing will not look for timestamps
 
 [inputs.file]

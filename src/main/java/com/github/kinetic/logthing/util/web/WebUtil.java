@@ -46,10 +46,10 @@ public final class WebUtil implements Util {
     }
 
     /**
-     * Get the content type of file
+     * Get the content type of the file
      *
-     * @param fileName the name of file
-     * @return the content type of file
+     * @param fileName the name of the file
+     * @return the content type of the file
      */
     private String getContentType(final String fileName) {
         final int lastDotIndex = fileName.lastIndexOf('.');

@@ -37,6 +37,7 @@ public abstract class AbstractHandler implements HttpHandler {
 
     /**
      * Handle a network request
+     *
      * @param exchange {@link HttpExchange}
      * @throws IOException on error whilst handling request, method will throw {@link IOException}
      */

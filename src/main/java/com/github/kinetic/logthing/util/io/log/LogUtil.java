@@ -2,8 +2,12 @@ package com.github.kinetic.logthing.util.io.log;
 
 import com.github.kinetic.logthing.LogThing;
 import com.github.kinetic.logthing.util.Util;
+import com.github.kinetic.logthing.util.io.fs.DirUtil;
+import com.github.kinetic.logthing.util.io.fs.FileUtil;
+import com.github.kinetic.logthing.util.misc.AnsiUtil;
 import org.jetbrains.annotations.NotNull;
 
+import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -18,9 +22,11 @@ public final class LogUtil implements Util {
     private static final String GREEN = "\u001B[32m";
     private static final String CYAN = "\u001B[36m";
     private static final DateTimeFormatter DATE_FORMATTER;
+    private static final String LOG_FILE_NAME;
 
     static {
         DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss");
+        LOG_FILE_NAME = LocalDateTime.now().format(DATE_FORMATTER);
     }
 
     /**
@@ -90,6 +96,12 @@ public final class LogUtil implements Util {
     private void log(final String msg, final LogLevel level) {
         final String timestamp = LocalDateTime.now().format(DATE_FORMATTER);
         final String finalMessage = getFinalMessage(msg, level, timestamp);
+        final DirUtil logDirectory = new DirUtil(Path.of("kinetic.logthing"));
+        final FileUtil logFile = new FileUtil(Path.of("kinetic.logthing", LOG_FILE_NAME + ".log"));
+        final AnsiUtil ansiUtil = new AnsiUtil(finalMessage);
+
+        logDirectory.create();
+        logFile.append(ansiUtil.stripAnsi());
 
         System.out.print(finalMessage);
     }

@@ -72,9 +72,6 @@ public final class LogThing {
     private void initialize() {
         log.info("Initializing LogThing...");
 
-        log.info("Disabling control echo");
-        terminal.disableControlEcho();
-
         log.info("Loading config...");
         this.logThingConfig = loadConfig();
 
@@ -99,9 +96,6 @@ public final class LogThing {
 
         log.info("Unloading Modules...");
         destroyModules();
-
-        log.info("Re-enabling control echo...");
-        terminal.enableControlEcho();
 
         log.info("LogThing shut down.");
     }

@@ -48,7 +48,7 @@ public final class LogServiceModule extends Module {
     public void startWatcher() {
         try {
             watchUtil.startWatcher();
-        } catch(IOException ioException) {
+        } catch(final IOException ioException) {
             log.trace("Failed to start watcher", ioException);
         }
     }

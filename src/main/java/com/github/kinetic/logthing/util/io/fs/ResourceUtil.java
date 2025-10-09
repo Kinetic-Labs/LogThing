@@ -83,9 +83,9 @@ public record ResourceUtil(String domain, String path) implements Util {
     }
 
     /**
-     * Get full path to resource
+     * Get full file to resource
      *
-     * @return domain and path combined (full path)
+     * @return domain and file combined (full file)
      */
     public String getFullPath() {
         return domain + path;
