@@ -12,6 +12,6 @@ public class Start {
 
         log.info("Booting...");
 
-        LogThing.getInstance().launch(stdUtil.concat(new String[]{"-X:debug"}, args));
+        LogThing.getInstance().launch(stdUtil.concat(new String[]{""}, args));
     }
 }

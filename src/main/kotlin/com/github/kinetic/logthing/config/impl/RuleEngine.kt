@@ -29,12 +29,12 @@ class RuleEngine(rawCondition: String) : AbstractRuleEngine(rawCondition) {
      * @throws IllegalArgumentException if the condition format is invalid
      */
     override fun parse() {
-        if (rawCondition.trim().isEmpty())
+        if(rawCondition.trim().isEmpty())
             throw IllegalArgumentException("Condition cannot be null or empty")
 
         val matcher = CONDITION_PATTERN.matcher(rawCondition.trim())
 
-        if (!matcher.matches()) {
+        if(!matcher.matches()) {
             throw IllegalArgumentException(
                 $$"Invalid condition format. Expected: 'when $variable operator threshold [per timeunit]'"
             )
@@ -43,7 +43,7 @@ class RuleEngine(rawCondition: String) : AbstractRuleEngine(rawCondition) {
         val variable = matcher.group(1)
         val operator = matcher.group(2)
         val threshold = matcher.group(3).toDouble()
-        val timeUnit = matcher.group(4) // may be null
+        val timeUnit = matcher.group(4) // maybe null
 
         this.parsedCondition = RuleCondition(variable, operator, threshold, timeUnit)
     }

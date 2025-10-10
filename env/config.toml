@@ -17,7 +17,7 @@ level_pattern = "\\[(INFO|WARNING|ERROR|DEBUG|TRACE|FATAL)\\]"
 # regex to extract timestamp
 timestamp_pattern = "(\\d{4}-\\d{2}-\\d{2}\\_\\d{2}:\\d{2}:\\d{2})"
 
-# regex to extract tag (e.g. thread name)
+# regex to extract tag (e.g., thread name)
 tag_pattern = "\\[([A-Z0-9_]+)\\]"
 
 [web]
