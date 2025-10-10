@@ -1,7 +1,15 @@
 package com.github.kinetic.logthing.features.web;
 
+import com.github.kinetic.logthing.features.web.impl.api.logs.LogLevelApiHandler;
+import com.github.kinetic.logthing.features.web.impl.api.logs.LogsApiGetHandler;
+import com.github.kinetic.logthing.features.web.impl.api.ProcessApiHandler;
+import com.github.kinetic.logthing.features.web.impl.api.settings.SettingsApiGetHandler;
+import com.github.kinetic.logthing.features.web.impl.api.settings.SettingsApiSetHandler;
+import com.github.kinetic.logthing.features.web.impl.files.WebFileHandler;
+import com.github.kinetic.logthing.features.web.impl.html.DashboardHtmlHandler;
+import com.github.kinetic.logthing.features.web.impl.html.UploadHtmlHandler;
+import com.github.kinetic.logthing.features.web.impl.html.SettingsHtmlHandler;
 import com.github.kinetic.logthing.util.io.log.LogUtil;
-import com.github.kinetic.logthing.features.web.impl.*;
 import com.sun.net.httpserver.HttpServer;
 
 import java.io.IOException;
@@ -30,12 +38,15 @@ public final class Server {
             System.exit(-1);
         }
 
-        server.createContext("/", new RootHandler());
-        server.createContext("/dashboard", new DashboardHandler());
-        server.createContext("/web", new WebHandler());
-        server.createContext("/api/process", new ProcessHandler());
-        server.createContext("/api/load", new LogsHandler());
-        server.createContext("/api/logkinds", new LogKindHandler());
+        server.createContext("/", new UploadHtmlHandler());
+        server.createContext("/dashboard", new DashboardHtmlHandler());
+        server.createContext("/web", new WebFileHandler());
+        server.createContext("/settings", new SettingsHtmlHandler());
+        server.createContext("/api/process", new ProcessApiHandler());
+        server.createContext("/api/logs/get", new LogsApiGetHandler());
+        server.createContext("/api/logs/levels", new LogLevelApiHandler());
+        server.createContext("/api/settings/set", new SettingsApiSetHandler());
+        server.createContext("/api/settings/get", new SettingsApiGetHandler());
         server.setExecutor(null);
 
         server.start();

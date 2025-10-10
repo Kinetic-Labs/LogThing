@@ -58,6 +58,13 @@ public final class WatchUtil implements Util {
     }
 
     /**
+     * Re-scan and dispatch new log files
+     */
+    public void rescan() {
+        dispatchExistingFiles();
+    }
+
+    /**
      * Dispatches LogCreatedEvent for each existing file in the directory.
      */
     private void dispatchExistingFiles() {
@@ -100,8 +107,7 @@ public final class WatchUtil implements Util {
                         continue;
                     }
 
-                    @SuppressWarnings("unchecked")
-                    final WatchEvent<Path> pathEvent = (WatchEvent<Path>) event;
+                    @SuppressWarnings("unchecked") final WatchEvent<Path> pathEvent = (WatchEvent<Path>) event;
                     final Path fileName = pathEvent.context();
                     final Path fullPath = directory.resolve(fileName);
 

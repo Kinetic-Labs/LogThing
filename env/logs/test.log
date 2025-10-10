@@ -33,12 +33,12 @@
 stty: stdin isn't a terminal
 2025-10-08_08:58:29 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51886: /
 2025-10-08_08:58:29 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51886: /web/css/default.css
-2025-10-08_08:58:29 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51887: /web/js/app.js
+2025-10-08_08:58:29 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51887: /web/js/upload.js
 2025-10-08_08:58:29 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51886: /web/assets/upload.svg
 2025-10-08_08:58:33 [RLM]  [INFO]   [POST] Request received from /127.0.0.1:51886: /api/upload
 2025-10-08_08:58:34 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51886: /dashboard
 2025-10-08_08:58:34 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51886: /web/css/default.css
-2025-10-08_08:58:34 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51886: /web/js/dash.js
+2025-10-08_08:58:34 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51886: /web/js/dashboard.js
 2025-10-08_08:58:34 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51886: /api/load
 2025-10-08_08:58:34 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51886: /api/logkinds
 2025-10-08_08:59:12 [LCM]  [DEBUG]  Finished processing log: c24b7558ec8051941ea1e52c7fa39807
@@ -47,16 +47,16 @@ stty: stdin isn't a terminal
 2025-10-08_08:59:12 [LCM]  [DEBUG]  Stored log.
 2025-10-08_08:59:15 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51929: /dashboard
 2025-10-08_08:59:15 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51929: /web/css/default.css
-2025-10-08_08:59:15 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51930: /web/js/dash.js
+2025-10-08_08:59:15 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51930: /web/js/dashboard.js
 2025-10-08_08:59:28 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51929: /api/load
 2025-10-08_08:59:28 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51929: /api/logkinds
 2025-10-08_08:59:34 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51929: /
-2025-10-08_08:59:34 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51930: /web/js/app.js
+2025-10-08_08:59:34 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51930: /web/js/upload.js
 2025-10-08_08:59:34 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51929: /web/css/default.css
 2025-10-08_08:59:34 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51930: /web/assets/upload.svg
 2025-10-08_08:59:37 [RLM]  [INFO]   [POST] Request received from /127.0.0.1:51929: /api/upload
 2025-10-08_08:59:38 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51929: /dashboard
 2025-10-08_08:59:38 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51929: /web/css/default.css
-2025-10-08_08:59:38 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51929: /web/js/dash.js
+2025-10-08_08:59:38 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51929: /web/js/dashboard.js
 2025-10-08_08:59:38 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51929: /api/load
 2025-10-08_08:59:38 [RLM]  [INFO]   [GET] Request received from /127.0.0.1:51929: /api/logkinds_

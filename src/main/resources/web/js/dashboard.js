@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', async _event => {
     const logList = document.getElementById('logList');
     const logLevelFilters = document.getElementById('log-level-filters');
-    const logs = await fetch('/api/load').then(response => response.json());
-    const logKinds = await fetch('/api/logkinds').then(response => response.json());
+    const logs = await fetch('/api/logs/get').then(response => response.json());
+    const logKinds = await fetch('/api/logs/levels').then(response => response.json());
     const logCounts = {};
 
     logKinds.forEach(kind => logCounts[kind] = 0);
@@ -103,7 +103,7 @@ window.filterLogs = (level) => {
     );
 
     filterButtons.forEach(button => {
-        if (button.textContent.startsWith(level) || (level === 'ALL' && button.textContent === 'All')) {
+        if(button.textContent.startsWith(level) || (level === 'ALL' && button.textContent === 'All')) {
             button.classList.add('active');
         } else {
             button.classList.remove('active');

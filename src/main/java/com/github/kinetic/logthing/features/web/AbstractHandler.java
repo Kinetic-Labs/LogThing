@@ -3,6 +3,7 @@ package com.github.kinetic.logthing.features.web;
 import com.github.kinetic.logthing.LogThing;
 import com.github.kinetic.logthing.event.impl.RequestReceivedEvent;
 import com.github.kinetic.logthing.util.io.log.LogUtil;
+import com.github.kinetic.logthing.util.web.MethodUtil;
 import com.github.kinetic.logthing.util.web.WebUtil;
 import com.google.gson.Gson;
 import com.sun.net.httpserver.HttpExchange;
@@ -15,6 +16,7 @@ public abstract class AbstractHandler implements HttpHandler {
     protected final WebUtil webUtil;
     protected final Gson gson;
     protected final LogUtil log;
+    protected final MethodUtil methodUtil;
     private final String name;
 
     /**
@@ -24,6 +26,7 @@ public abstract class AbstractHandler implements HttpHandler {
         this.webUtil = new WebUtil();
         this.log = new LogUtil();
         this.gson = new Gson();
+        this.methodUtil = new MethodUtil();
 
         this.name = name;
     }

@@ -3,6 +3,7 @@ package com.github.kinetic.logthing;
 import com.github.kinetic.logthing.config.flags.ArgParse;
 import com.github.kinetic.logthing.config.flags.LogThingFlags;
 import com.github.kinetic.logthing.config.impl.ConfigParser;
+import com.github.kinetic.logthing.config.impl.MiscSettings;
 import com.github.kinetic.logthing.config.type.LogThingConfig;
 import com.github.kinetic.logthing.event.EventBus;
 import com.github.kinetic.logthing.features.storage.impl.memory.LogStorage;
@@ -25,6 +26,7 @@ public final class LogThing {
     private final ModuleRepository moduleRepository = new ModuleRepository();
     private final ModuleUtil moduleUtil = new ModuleUtil();
     private final LogThingFlags flag = new LogThingFlags();
+    private final MiscSettings moduleSettings = new MiscSettings("moduleSettings");
     private static final LogThing instance = new LogThing();
     private EventBus eventBus;
     private LogThingConfig logThingConfig;
@@ -38,8 +40,8 @@ public final class LogThing {
                 new AlertModule()
         );
 
-        // by default, we enable all modules, in future
-        // implement settings panel for choosing what modules to use
+        // by default, we enable all modules, in the future
+        // implement a settings panel for choosing what modules to use
         moduleUtil.enableModule(RequestLoggerModule.class);
         moduleUtil.enableModule(LogConsumerModule.class);
         moduleUtil.enableModule(WebMonitorModule.class);
@@ -141,5 +143,9 @@ public final class LogThing {
 
     public boolean isDebugMode() {
         return flag.isDebug();
+    }
+
+    public MiscSettings getModuleSettings() {
+        return moduleSettings;
     }
 }

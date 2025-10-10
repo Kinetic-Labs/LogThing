@@ -7,9 +7,12 @@ import java.util.Set;
 
 public interface Storage {
     LogUtil log = new LogUtil();
+
     Set<ParsedLog> getLogs();
 
     void insert(final ParsedLog log);
+
     void init();
+
     void destroy();
 }

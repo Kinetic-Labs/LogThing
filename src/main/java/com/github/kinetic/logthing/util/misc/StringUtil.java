@@ -7,6 +7,7 @@ public final class StringUtil implements Util {
 
     /**
      * Indent a string by x tabs
+     *
      * @param string string to be indented
      * @param indent the amount to indent
      * @return the indented string
@@ -24,6 +25,7 @@ public final class StringUtil implements Util {
 
     /**
      * Overloaded of indent without string param
+     *
      * @param indent amount to indent
      * @return the indented whitespace
      */

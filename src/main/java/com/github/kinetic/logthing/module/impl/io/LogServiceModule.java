@@ -45,6 +45,10 @@ public final class LogServiceModule extends Module {
         }
     };
 
+    public void rescan() {
+        watchUtil.rescan();
+    }
+
     public void startWatcher() {
         try {
             watchUtil.startWatcher();

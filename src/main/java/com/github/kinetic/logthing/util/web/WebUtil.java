@@ -36,6 +36,17 @@ public final class WebUtil implements Util {
     }
 
     /**
+     * Send an empty response
+     *
+     * @param exchange   the {@link HttpExchange}
+     * @param statusCode the status to send
+     * @throws IOException on error, throws {@link IOException}
+     */
+    public void sendResponse(final HttpExchange exchange, final int statusCode) throws IOException {
+        exchange.sendResponseHeaders(statusCode, 0);
+    }
+
+    /**
      * Send a method not allowed (405) error
      *
      * @param exchange the {@link HttpExchange}

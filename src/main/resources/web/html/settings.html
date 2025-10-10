@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>LogThing - Settings</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="/web/css/default.css" rel="stylesheet" type="text/css">
+    <script src="/web/js/settings.js" type="module" defer></script>
+</head>
+<body>
+<div class="container">
+    <aside class="sidebar">
+        <header class="sidebar-header">
+            <h1 class="sidebar-title">LogThing</h1>
+        </header>
+        <nav class="sidebar-nav">
+            <a href="/" class="sidebar-link">Upload</a>
+            <a href="/dashboard" class="sidebar-link">Dashboard</a>
+            <a href="/settings" class="sidebar-link active">Settings</a>
+        </nav>
+    </aside>
+    <main class="main-content">
+        <header class="main-header">
+            <h2>Settings</h2>
+        </header>
+
+        <div class="settings-container">
+            <h2>Modules</h2>
+            <h4>Pick and chose what parts of LogThing you need, and what you don&apos;t</h4>
+
+            <div class="setting-item">
+                <div class="setting-info">
+                    <label for="LogConsumerModuleToggle" class="setting-label">Memory Storage</label>
+                    <p class="setting-description">Store logs in memory for faster access</p>
+                </div>
+                <button class="toggle-switch" id="LogConsumerModuleToggle" data-setting="memoryStorage"
+                        aria-label="Toggle Memory Storage"></button>
+            </div>
+
+            <div class="setting-item">
+                <div class="setting-info">
+                    <label for="RequestLoggerModuleToggle" class="setting-label">Request Logger</label>
+                    <p class="setting-description">Log HTTP requests and responses</p>
+                </div>
+                <button class="toggle-switch" id="RequestLoggerModuleToggle" data-setting="requestLogger"
+                        aria-label="Toggle Request Logger"></button>
+            </div>
+        </div>
+    </main>
+</div>
+</body>
+</html>

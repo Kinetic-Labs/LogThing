@@ -25,7 +25,7 @@ class DataExtractorProcessor(rawLog: String) : AbstractProcessor(rawLog) {
         val level: String
         val message: String
 
-        if(matcher.find()) {
+        if (matcher.find()) {
             timestamp = matcher.group(1)
             tag = matcher.group(2)
             level = matcher.group(3)
@@ -36,7 +36,7 @@ class DataExtractorProcessor(rawLog: String) : AbstractProcessor(rawLog) {
             )
             val simpleMatcher = simplePattern.matcher(rawLog)
 
-            if(simpleMatcher.find()) {
+            if (simpleMatcher.find()) {
                 timestamp = null
                 tag = null
                 level = simpleMatcher.group(1)

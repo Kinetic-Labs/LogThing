@@ -10,39 +10,40 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="/web/css/default.css" rel="stylesheet" type="text/css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
-    <script src="/web/js/dash.js" type="module" defer></script>
+    <script src="/web/js/dashboard.js" type="module" defer></script>
 </head>
 <body>
-    <div class="container">
-        <aside class="sidebar">
-            <header class="sidebar-header">
-                <h1 class="sidebar-title">LogThing</h1>
-            </header>
-            <nav class="sidebar-nav">
-                <a href="/" class="sidebar-link">Upload</a>
-                <a href="/dashboard" class="sidebar-link active">Dashboard</a>
-            </nav>
-            <div class="sidebar-filters" id="filters">
-                <h2>Filters</h2>
-                <div id="log-level-filters">
-                    <button data-secondary class="filter-button active" onclick="filterLogs('ALL')">All</button>
-                </div>
+<div class="container">
+    <aside class="sidebar">
+        <header class="sidebar-header">
+            <h1 class="sidebar-title">LogThing</h1>
+        </header>
+        <nav class="sidebar-nav">
+            <a href="/" class="sidebar-link">Upload</a>
+            <a href="/dashboard" class="sidebar-link active">Dashboard</a>
+            <a href="/settings" class="sidebar-link">Settings</a>
+        </nav>
+        <div class="sidebar-filters" id="filters">
+            <h2>Filters</h2>
+            <div id="log-level-filters">
+                <button data-secondary class="filter-button active" onclick="filterLogs('ALL')">All</button>
             </div>
-        </aside>
-        <main class="main-content">
-            <header class="main-header">
-                <h2>Dashboard</h2>
-            </header>
-            <div class="charts">
-                <div class="chart-container">
-                    <canvas id="logChart"></canvas>
-                </div>
+        </div>
+    </aside>
+    <main class="main-content">
+        <header class="main-header">
+            <h2>Dashboard</h2>
+        </header>
+        <div class="charts">
+            <div class="chart-container">
+                <canvas id="logChart"></canvas>
             </div>
-            <div class="log-list-container">
-                <ul class="log-list" id="logList">
-                </ul>
-            </div>
-        </main>
-    </div>
+        </div>
+        <div class="log-list-container">
+            <ul class="log-list" id="logList">
+            </ul>
+        </div>
+    </main>
+</div>
 </body>
 </html>

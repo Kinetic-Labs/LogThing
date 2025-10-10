@@ -10,6 +10,9 @@
     --hover-color: #2a2a2a;
     --button-background: #252525;
     --button-hover-background: #303030;
+    --toggle-background: #333333;
+    --toggle-active-background: #b444ff;
+    --toggle-knob: #ffffff;
 
     font-family: 'Inter', sans-serif;
 }
@@ -282,4 +285,83 @@ html, body {
     margin-top: 0.5rem;
     display: block;
     color: var(--text-muted-color);
+}
+
+.settings-container {
+    padding: 2rem;
+    background-color: var(--sidebar-background);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+}
+
+.setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    background-color: var(--button-background);
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    border: 1px solid var(--border-color);
+    transition: background-color 0.2s ease;
+}
+
+.setting-item:hover {
+    background-color: var(--hover-color);
+}
+
+.setting-info {
+    flex: 1;
+}
+
+.setting-label {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-color);
+    display: block;
+    margin-bottom: 0.25rem;
+    cursor: pointer;
+}
+
+.setting-description {
+    font-size: 0.875rem;
+    color: var(--text-muted-color);
+    margin: 0;
+}
+
+.toggle-switch {
+    position: relative;
+    width: 60px;
+    height: 34px;
+    background-color: var(--toggle-background);
+    border-radius: 17px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    padding: 0;
+    flex-shrink: 0;
+}
+
+.toggle-switch::after {
+    content: '';
+    position: absolute;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background-color: var(--toggle-knob);
+    top: 4px;
+    left: 4px;
+    transition: transform 0.3s ease;
+}
+
+.toggle-switch.active {
+    background-color: var(--toggle-active-background);
+}
+
+.toggle-switch.active::after {
+    transform: translateX(26px);
+}
+
+.toggle-switch:hover {
+    opacity: 0.9;
 }
