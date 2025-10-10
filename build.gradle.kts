@@ -15,7 +15,10 @@ repositories {
 
 dependencies {
     implementation("com.google.code.gson:gson:2.10.1")
-    implementation("org.tomlj:tomlj:1.1.1")
+    implementation("org.jetbrains.kotlin:kotlin-scripting-jsr223:2.2.0")
+    implementation("org.jetbrains.kotlin:kotlin-scripting-common:2.2.0")
+    implementation("org.jetbrains.kotlin:kotlin-scripting-jvm:2.2.0")
+    implementation("org.jetbrains.kotlin:kotlin-scripting-jvm-host:2.2.0")
     implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
     implementation("org.jetbrains.kotlin:kotlin-stdlib")
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
@@ -29,6 +32,10 @@ tasks.test {
 
 application {
     mainClass.set(logThingMainClass)
+    applicationDefaultJvmArgs = listOf(
+        "--add-opens", "java.base/sun.misc=ALL-UNNAMED",
+        "--add-opens", "java.base/java.lang=ALL-UNNAMED"
+    )
 }
 
 java {
@@ -48,6 +55,13 @@ tasks.withType<JavaCompile> {
     options.release.set(24)
 }
 
+tasks.withType<JavaExec> {
+    jvmArgs(
+        "--add-opens", "java.base/sun.misc=ALL-UNNAMED",
+        "--add-opens", "java.base/java.lang=ALL-UNNAMED"
+    )
+}
+
 tasks.register<Copy>("copyDependencies") {
     from(configurations.runtimeClasspath)
     into("${layout.buildDirectory.get()}/libs/libraries")
@@ -55,4 +69,16 @@ tasks.register<Copy>("copyDependencies") {
 
 tasks.named("build") {
     dependsOn("copyDependencies")
+}
+
+tasks.register<JavaExec>("logThingRun") {
+    group = "application"
+    description = "Run LogThing with env as working directory"
+    mainClass.set(logThingMainClass)
+    classpath = sourceSets["main"].runtimeClasspath
+    workingDir = file("env")
+    jvmArgs(
+        "--add-opens", "java.base/sun.misc=ALL-UNNAMED",
+        "--add-opens", "java.base/java.lang=ALL-UNNAMED"
+    )
 }

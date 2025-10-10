@@ -1,6 +1,7 @@
 package com.github.kinetic.logthing.util;
 
 import com.github.kinetic.logthing.util.io.log.LogUtil;
+import com.github.kinetic.logthing.util.misc.ConfigUtil;
 import com.github.kinetic.logthing.util.misc.StringUtil;
 
 /**
@@ -9,4 +10,5 @@ import com.github.kinetic.logthing.util.misc.StringUtil;
 public interface Util {
     LogUtil log = new LogUtil();
     StringUtil stringUtil = new StringUtil();
+    ConfigUtil configUtil = new ConfigUtil();
 }

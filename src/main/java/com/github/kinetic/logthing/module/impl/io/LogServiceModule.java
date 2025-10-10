@@ -12,15 +12,11 @@ import com.github.kinetic.logthing.util.types.Log;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.Objects;
 
 public final class LogServiceModule extends Module {
 
-    private final String logPath = LogThing
-            .getInstance()
-            .getLogThingConfig()
-            .inputKey()
-            .inputFileKey()
-            .inputsFileLogPath();
+    private final String logPath = Objects.requireNonNull(configUtil.getInputsConfig().getFile()).getPath();
     private final WatchUtil watchUtil = new WatchUtil(Path.of(logPath));
     private Thread thread;
 

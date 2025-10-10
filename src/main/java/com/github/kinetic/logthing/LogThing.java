@@ -1,10 +1,10 @@
 package com.github.kinetic.logthing;
 
+import com.github.kinetic.logthing.config.dsl.Config;
 import com.github.kinetic.logthing.config.flags.ArgParse;
 import com.github.kinetic.logthing.config.flags.LogThingFlags;
 import com.github.kinetic.logthing.config.impl.ConfigParser;
 import com.github.kinetic.logthing.config.impl.MiscSettings;
-import com.github.kinetic.logthing.config.type.LogThingConfig;
 import com.github.kinetic.logthing.event.EventBus;
 import com.github.kinetic.logthing.features.storage.impl.memory.LogStorage;
 import com.github.kinetic.logthing.module.ModuleBuilder;
@@ -29,7 +29,7 @@ public final class LogThing {
     private final MiscSettings moduleSettings = new MiscSettings("moduleSettings");
     private static final LogThing instance = new LogThing();
     private EventBus eventBus;
-    private LogThingConfig logThingConfig;
+    private Config logThingConfig;
 
     private void initializeModules() {
         ModuleBuilder.create().putAll(
@@ -53,8 +53,8 @@ public final class LogThing {
         return new EventBus();
     }
 
-    private LogThingConfig loadConfig() {
-        ConfigParser configParser = new ConfigParser("config.toml");
+    private Config loadConfig() {
+        ConfigParser configParser = new ConfigParser();
 
         return configParser.parse();
     }
@@ -133,7 +133,7 @@ public final class LogThing {
         return eventBus;
     }
 
-    public LogThingConfig getLogThingConfig() {
+    public Config getLogThingConfig() {
         return logThingConfig;
     }
 

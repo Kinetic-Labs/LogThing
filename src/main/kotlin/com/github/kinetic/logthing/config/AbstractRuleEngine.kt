@@ -10,7 +10,7 @@ abstract class AbstractRuleEngine(
      * @return the raw condition
      */
     val rawCondition: String
-) : Config {
+) : IConfig {
 
     /**
      * Parse the config

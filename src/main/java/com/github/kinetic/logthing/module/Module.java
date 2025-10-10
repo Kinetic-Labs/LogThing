@@ -2,6 +2,7 @@ package com.github.kinetic.logthing.module;
 
 import com.github.kinetic.logthing.LogThing;
 import com.github.kinetic.logthing.util.io.log.LogUtil;
+import com.github.kinetic.logthing.util.misc.ConfigUtil;
 import com.github.kinetic.logthing.util.misc.StringUtil;
 
 @SuppressWarnings("unused")
@@ -13,6 +14,7 @@ public abstract class Module {
     private boolean enabled;
     protected final LogUtil log = new LogUtil();
     protected final StringUtil stringUtil = new StringUtil();
+    protected final ConfigUtil configUtil = new ConfigUtil();
     private final String padding = stringUtil.indent(3);
 
     /**

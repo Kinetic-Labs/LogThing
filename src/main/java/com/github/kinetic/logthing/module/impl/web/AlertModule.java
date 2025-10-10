@@ -1,11 +1,11 @@
 package com.github.kinetic.logthing.module.impl.web;
 
-import com.github.kinetic.logthing.LogThing;
 import com.github.kinetic.logthing.config.impl.RuleEngine;
-import com.github.kinetic.logthing.config.type.LogThingConfig;
 import com.github.kinetic.logthing.config.type.RuleCondition;
 import com.github.kinetic.logthing.module.Category;
 import com.github.kinetic.logthing.module.Module;
+
+import java.util.Objects;
 
 public final class AlertModule extends Module {
 
@@ -15,9 +15,9 @@ public final class AlertModule extends Module {
     public AlertModule() {
         super("AlertModule", "AM", "Alert daemon", Category.WEB);
 
-        final LogThingConfig config = LogThing.getInstance().getLogThingConfig();
-
-        this.ruleEngine = new RuleEngine(config.alertKey().condition());
+        this.ruleEngine = new RuleEngine(
+                Objects.requireNonNull(configUtil.getAlertsConfig().getErrorSpike()).getCondition()
+        );
     }
 
     private void alertDaemon() {

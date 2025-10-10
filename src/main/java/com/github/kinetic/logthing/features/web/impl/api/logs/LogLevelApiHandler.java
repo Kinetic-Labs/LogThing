@@ -1,13 +1,12 @@
 package com.github.kinetic.logthing.features.web.impl.api.logs;
 
-import com.github.kinetic.logthing.LogThing;
-import com.github.kinetic.logthing.config.type.LogThingConfig;
 import com.github.kinetic.logthing.features.web.AbstractHandler;
 import com.github.kinetic.logthing.util.web.Method;
 import com.sun.net.httpserver.HttpExchange;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 public final class LogLevelApiHandler extends AbstractHandler {
 
@@ -19,8 +18,10 @@ public final class LogLevelApiHandler extends AbstractHandler {
     public void handleRequest(final HttpExchange exchange) throws IOException {
         methodUtil.requireMethod(exchange, Method.GET);
 
-        final LogThingConfig config = LogThing.getInstance().getLogThingConfig();
-        final List<Object> logKinds = config.inputKey().inputFileKey().inputsFileLogKinds();
+        final List<String> logKinds = Objects.requireNonNull(
+                configUtil.getInputsConfig().getFile()
+        ).getLogKinds();
+
         final String json = gson.toJson(logKinds);
 
         webUtil.sendResponse(exchange, 200, json);

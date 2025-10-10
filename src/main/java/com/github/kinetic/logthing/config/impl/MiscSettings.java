@@ -1,12 +1,12 @@
 package com.github.kinetic.logthing.config.impl;
 
-import com.github.kinetic.logthing.config.Config;
+import com.github.kinetic.logthing.config.IConfig;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @SuppressWarnings("unused")
-public final class MiscSettings implements Config {
+public final class MiscSettings implements IConfig {
 
     private final String settingsName;
     private final Map<String, Map<String, Object>> settings;

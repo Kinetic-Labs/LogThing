@@ -1,21 +1,16 @@
 package com.github.kinetic.logthing.config;
 
-import com.github.kinetic.logthing.config.type.LogThingConfig;
+import com.github.kinetic.logthing.config.dsl.Config;
 
 /**
  * Abstract class to create a config parser
  */
-public abstract class AbstractConfigParser implements Config {
-
-    private final String path;
+public abstract class AbstractConfigParser implements IConfig {
 
     /**
      * Create a new {@link AbstractConfigParser}
-     *
-     * @param path the file to config to be parsed
      */
-    public AbstractConfigParser(final String path) {
-        this.path = path;
+    public AbstractConfigParser() {
     }
 
     /**
@@ -25,16 +20,7 @@ public abstract class AbstractConfigParser implements Config {
      * When overridden, the class will implement logic to parse the config file
      * </p>
      *
-     * @return parsed config options for {@link LogThingConfig}
+     * @return parsed config options for {@link Config}
      */
-    protected abstract LogThingConfig parse();
-
-    /**
-     * Get file of config file to be parsed
-     *
-     * @return the file
-     */
-    public String getPath() {
-        return path;
-    }
+    protected abstract Config parse();
 }
