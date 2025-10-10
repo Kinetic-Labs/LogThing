@@ -20,7 +20,7 @@ config {
 
     alerts {
         errorSpike {
-            condition = "when \$error_rate > 100 per min"
+            condition = $$"when $error_rate > 100 per min"
             window = "5m"
         }
     }
