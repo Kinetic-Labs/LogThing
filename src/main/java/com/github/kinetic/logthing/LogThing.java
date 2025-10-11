@@ -61,7 +61,7 @@ public final class LogThing {
 
     private void destroyModules() {
         ModuleRepository.getInstance().getEnabledModules().forEach(module -> {
-            log.info("Removing module: " + module.getName());
+            log.debug("Removing module: " + module.getName());
 
             if(module.isEnabled())
                 module.setEnabled(false);
@@ -72,18 +72,19 @@ public final class LogThing {
      * Initialize LogThing
      */
     private void initialize() {
-        log.info("Initializing LogThing...");
+        final String step = "INITIALIZING";
+        TerminalUtil.startProgress(4, step);
 
-        log.info("Loading config...");
+        TerminalUtil.nextStep(step);
         this.logThingConfig = loadConfig();
 
-        log.info("Initializing EventBus...");
+        TerminalUtil.nextStep(step);
         this.eventBus = initializeEventBus();
 
-        log.info("Initializing Modules...");
+        TerminalUtil.nextStep(step);
         initializeModules();
 
-        log.info("Initialized LogThing.");
+        TerminalUtil.nextStep("RUNNING");
     }
 
     /**
@@ -91,15 +92,17 @@ public final class LogThing {
      */
     private void destroy() {
         Thread.currentThread().setName("MSH");
-        log.info("Shutting down LogThing...");
 
-        log.info("Closing log storage...");
+        final String step = "SHUTDOWN";
+        TerminalUtil.startProgress(3, step);
+
+        TerminalUtil.nextStep(step);
         LogStorage.getInstance().destroy();
 
-        log.info("Unloading Modules...");
+        TerminalUtil.nextStep(step);
         destroyModules();
 
-        log.info("LogThing shut down.");
+        TerminalUtil.nextStep(step);
     }
 
     /**

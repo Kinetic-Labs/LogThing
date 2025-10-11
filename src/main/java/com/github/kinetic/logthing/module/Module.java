@@ -84,6 +84,7 @@ public abstract class Module {
      */
     public final void setEnabled(final boolean enabled) {
         this.enabled = enabled;
+
         if(enabled) {
             onEnable();
         } else {

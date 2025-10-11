@@ -10,8 +10,8 @@ public class Start {
     public static void main(String[] args) {
         Thread.currentThread().setName("B");
 
-        log.info("Booting...");
+        log.debug("Booting...");
 
-        LogThing.getInstance().launch(stdUtil.concat(new String[]{"-X:debug"}, args));
+        LogThing.getInstance().launch(stdUtil.concat(new String[]{""}, args));
     }
 }

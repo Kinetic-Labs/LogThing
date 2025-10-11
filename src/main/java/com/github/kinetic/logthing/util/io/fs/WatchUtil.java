@@ -54,7 +54,7 @@ public final class WatchUtil implements Util {
         watcherThread.setDaemon(true);
         watcherThread.start();
 
-        log.info("File watcher daemon started for directory: " + directory);
+        log.debug("File watcher daemon started for directory: " + directory);
     }
 
     /**
@@ -154,7 +154,7 @@ public final class WatchUtil implements Util {
             }
 
             cleanup();
-            log.info("File watcher stopped for directory: " + directory);
+            log.debug("File watcher stopped for directory: " + directory);
         }
     }
 

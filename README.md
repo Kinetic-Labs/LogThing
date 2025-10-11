@@ -12,7 +12,12 @@ LogThing does *not* generate a fat jar, instead you will need to use a classpath
 for example (after running the build command):
 ```shell
 cd env/
-java -classpath "../build/libs/*:../build/libs/libraries/*" com.github.kinetic.logthing.Start
+java -classpath "../build/libs/*:../build/libs/libraries/*" $(cat args.txt) com.github.kinetic.logthing.Start
+```
+
+##### To make java shut up about deprecation, pass:
+```
+-XX:+IgnoreUnrecognizedVMOptions --add-opens java.base/sun.misc=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/jdk.internal.misc=ALL-UNNAMED --add-exports java.base/jdk.internal.misc=ALL-UNNAMED --sun-misc-unsafe-memory-access=allow
 ```
 
 

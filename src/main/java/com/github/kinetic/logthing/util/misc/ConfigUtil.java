@@ -7,17 +7,16 @@ import com.github.kinetic.logthing.util.Util;
 public class ConfigUtil implements Util {
 
     private final LogThing logThing = LogThing.getInstance();
-    private final Config config = logThing.getLogThingConfig();
 
     public WebConfig getWebConfig() {
-        return config.getWeb();
+        return logThing.getLogThingConfig().getWeb();
     }
 
     public InputsConfig getInputsConfig() {
-        return config.getInputs();
+        return logThing.getLogThingConfig().getInputs();
     }
 
     public AlertsConfig getAlertsConfig() {
-        return config.getAlerts();
+        return logThing.getLogThingConfig().getAlerts();
     }
 }

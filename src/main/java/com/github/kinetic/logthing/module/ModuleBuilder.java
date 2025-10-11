@@ -21,7 +21,7 @@ public final class ModuleBuilder {
      */
     public void putAll(final Module... modules) {
         for(Module module : modules) {
-            log.info("      > Loading module: " + module.getClass().getSimpleName());
+            log.debug("      > Loading module: " + module.getClass().getSimpleName());
             repository.registerModule(module);
         }
     }
