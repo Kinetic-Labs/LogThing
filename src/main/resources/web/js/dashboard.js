@@ -5,22 +5,37 @@ document.addEventListener('DOMContentLoaded', async _event => {
     const logKinds = await fetch('/api/logs/levels').then(response => response.json());
     const logCounts = {};
 
+    window.activeFilters = ['ALL'];
+
     logKinds.forEach(kind => logCounts[kind] = 0);
+    let totalLogs = logs.length;
 
     logs.forEach(log => {
         const level = log.level || 'UNKNOWN';
-
         logCounts[level] = (logCounts[level] || 0) + 1;
     });
 
+    logLevelFilters.innerHTML = `
+        <button data-level="ALL" class="filter-button active">
+            All (${totalLogs})
+        </button>
+    `;
+
     logLevelFilters.innerHTML += Object.keys(logCounts).map(level =>
-        `<button data-secondary class="filter-button" onclick="filterLogs('${level}')">
+        `<button data-level="${level}" class="filter-button">
             ${level} (${logCounts[level]})
         </button>`
     ).join('');
 
-    logList.innerHTML = logs.map(log => `
-        <li class="log-entry" data-level="${log.level || 'UNKNOWN'}" style="border-left-color: ${getLevelColor(log.level || 'UNKNOWN')}">
+    document.querySelectorAll('.filter-button').forEach(button => {
+        button.addEventListener('click', () => filterLogs(button.dataset.level));
+    });
+
+    logList.innerHTML = logs.map((log, index) => `
+        <li class="log-entry" 
+            data-level="${log.level || 'UNKNOWN'}" 
+            style="--i: ${index}; border-left-color: ${getLevelColor(log.level || 'UNKNOWN')}">
+            
             ${(log.timestamp || log.tag) ? `
             <span class="log-meta">
                 ${log.timestamp ? `<span class="log-timestamp">${log.timestamp}</span>` : ''}
@@ -51,29 +66,16 @@ document.addEventListener('DOMContentLoaded', async _event => {
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    display: false,
-                }
-            },
+            plugins: {legend: {display: false}},
             scales: {
                 y: {
                     beginAtZero: true,
-                    ticks: {
-                        color: '#a0a0a0',
-                        stepSize: 1
-                    },
-                    grid: {
-                        color: '#333333'
-                    }
+                    ticks: {color: '#a0a0a0', stepSize: 1},
+                    grid: {color: '#333333'}
                 },
                 x: {
-                    ticks: {
-                        color: '#a0a0a0'
-                    },
-                    grid: {
-                        display: false
-                    }
+                    ticks: {color: '#a0a0a0'},
+                    grid: {display: false}
                 }
             }
         }
@@ -82,31 +84,64 @@ document.addEventListener('DOMContentLoaded', async _event => {
 
 function getLevelColor(level) {
     const colors = {
-        'INFO': '#c94aff',
-        'WARNING': '#ffdd00',
-        'ERROR': '#ff4444',
-        'DEBUG': '#44ff85',
-        'TRACE': '#00ffe1',
-        'FATAL': '#ff0000',
-        'UNKNOWN': '#555555'
+        'INFO': '#a0a8b0',
+        'WARNING': '#d0c8a0',
+        'ERROR': '#f0d0d0',
+        'DEBUG': '#a0b0a8',
+        'TRACE': '#9090a0',
+        'FATAL': '#f0e0e0',
+        'UNKNOWN': '#808080'
     };
 
-    return colors[level] || '#9e3ddc';
+    return colors[level] || '#909090';
 }
 
-window.filterLogs = (level) => {
-    const logEntries = document.querySelectorAll('.log-entry');
+function filterLogs(level) {
     const filterButtons = document.querySelectorAll('.filter-button');
+    const allButton = document.querySelector('.filter-button[data-level="ALL"]');
 
-    logEntries.forEach(entry =>
-        entry.style.display = (level === 'ALL' || entry.dataset.level === level) ? 'flex' : 'none'
-    );
+    if(level === 'ALL') {
+        activeFilters = ['ALL'];
+        allButton.classList.add('active');
+    } else {
+        if(activeFilters.includes('ALL')) {
+            activeFilters = [];
+            allButton.classList.remove('active');
+        }
+
+        const index = activeFilters.indexOf(level);
+        if(index > -1) {
+            activeFilters.splice(index, 1);
+        } else {
+            activeFilters.push(level);
+        }
+
+        if(activeFilters.length === 0) {
+            activeFilters = ['ALL'];
+            allButton.classList.add('active');
+        }
+    }
+
+    const logEntries = document.querySelectorAll('.log-entry');
+
+    logEntries.forEach(entry => {
+        const isVisible = activeFilters.includes('ALL') || activeFilters.includes(entry.dataset.level);
+        const wasVisible = !entry.classList.contains('filtered');
+
+        if(wasVisible && !isVisible) {
+            setTimeout(() => {
+                entry.classList.add('filtered');
+                entry.style.animation = '';
+            }, 400);
+        } else if(!wasVisible && isVisible) {
+            entry.classList.remove('filtered');
+            setTimeout(() => {
+                entry.style.animation = '';
+            }, 500);
+        }
+    });
 
     filterButtons.forEach(button => {
-        if(button.textContent.startsWith(level) || (level === 'ALL' && button.textContent === 'All')) {
-            button.classList.add('active');
-        } else {
-            button.classList.remove('active');
-        }
+        button.classList.toggle('active', activeFilters.includes(button.dataset.level));
     });
 }
