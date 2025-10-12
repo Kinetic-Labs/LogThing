@@ -1,5 +1,3 @@
-import com.github.kinetic.logthing.config.dsl.*
-
 config {
     inputs {
         file {
