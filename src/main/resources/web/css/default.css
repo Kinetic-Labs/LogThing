@@ -243,3 +243,18 @@ html, body {
         transform: translateY(10px);
     }
 }
+
+@media (prefers-reduced-motion: reduce) {
+    .log-entry {
+        animation: none !important;
+    }
+
+    .log-entry.filtered {
+        animation: none !important;
+    }
+
+    * {
+        transition: none !important;
+        animation: none !important;
+    }
+}
