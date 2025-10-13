@@ -9,42 +9,16 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="/web/css/default.css" rel="stylesheet" type="text/css">
-    <script src="/web/js/upload.js" type="module" defer></script>
+    <script src="/web/js/components/Sidebar.js" type="module"></script>
+    <script src="/web/js/components/MainHeader.js" type="module"></script>
+    <script src="/web/js/components/UploadContainer.js" type="module"></script>
 </head>
 <body>
 <div class="container">
-    <aside class="sidebar">
-        <header class="sidebar-header">
-            <h1 class="sidebar-title">LogThing</h1>
-        </header>
-        <nav class="sidebar-nav">
-            <a href="/" class="sidebar-link active">Upload</a>
-            <a href="/dashboard" class="sidebar-link">Dashboard</a>
-            <a href="/settings" class="sidebar-link">Settings</a>
-        </nav>
-    </aside>
+    <sidebar-component active-page="upload"></sidebar-component>
     <main class="main-content">
-        <header class="main-header">
-            <h2>Upload Logs</h2>
-        </header>
-        <div class="upload-container">
-            <form class="upload-form" id="upload-form" action="/api/upload" method="POST" enctype="multipart/form-data">
-                <div class="file-input-wrapper">
-                    <label for="file" class="file-label">
-                        <img src="/web/assets/upload.svg" width="64" height="64" alt="Upload">
-                        <span class="file-name">Choose a file or drag it here</span>
-                    </label>
-                    <input type="file" name="file" id="file" class="file-input" multiple>
-                </div>
-                <button type="submit" class="upload-button">Upload and Process</button>
-            </form>
-            <div class="upload-progress" id="upload-progress" style="display: none;">
-                <div class="progress-bar-container">
-                    <div class="progress-bar" id="progress-bar"></div>
-                </div>
-                <span class="progress-text" id="progress-text">0%</span>
-            </div>
-        </div>
+        <main-header-component header-title="Upload Logs"></main-header-component>
+        <upload-container-component></upload-container-component>
     </main>
 </div>
 </body>

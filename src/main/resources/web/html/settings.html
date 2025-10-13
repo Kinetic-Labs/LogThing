@@ -9,24 +9,15 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="/web/css/default.css" rel="stylesheet" type="text/css">
+    <script src="/web/js/components/Sidebar.js" type="module"></script>
+    <script src="/web/js/components/MainHeader.js" type="module"></script>
     <script src="/web/js/settings.js" type="module" defer></script>
 </head>
 <body>
 <div class="container">
-    <aside class="sidebar">
-        <header class="sidebar-header">
-            <h1 class="sidebar-title">LogThing</h1>
-        </header>
-        <nav class="sidebar-nav">
-            <a href="/" class="sidebar-link">Upload</a>
-            <a href="/dashboard" class="sidebar-link">Dashboard</a>
-            <a href="/settings" class="sidebar-link active">Settings</a>
-        </nav>
-    </aside>
+    <sidebar-component active-page="settings"></sidebar-component>
     <main class="main-content">
-        <header class="main-header">
-            <h2>Settings</h2>
-        </header>
+        <main-header-component header-title="Settings"></main-header-component>
 
         <div class="settings-container">
             <h2>Modules</h2>

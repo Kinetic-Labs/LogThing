@@ -37,53 +37,6 @@ html, body {
     height: 100%;
 }
 
-.sidebar {
-    width: 300px;
-    background-color: var(--sidebar-background);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-right: 1px solid var(--border-color);
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-}
-
-.sidebar-header {
-    margin-bottom: 2.5rem;
-}
-
-.sidebar-title {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: var(--text-color);
-}
-
-.sidebar-nav {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-    margin-bottom: 2.5rem;
-}
-
-.sidebar-link {
-    color: var(--text-muted-color);
-    text-decoration: none;
-    padding: 0.6rem 0.8rem;
-    border-radius: var(--border-radius);
-    transition: background-color var(--transition-speed) var(--transition-curve), color var(--transition-speed) var(--transition-curve);
-    font-weight: 500;
-}
-
-.sidebar-link:hover {
-    background-color: var(--hover-color);
-    color: var(--text-color);
-}
-
-.sidebar-link.active {
-    background-color: var(--hover-color);
-    color: var(--text-color);
-}
-
 .sidebar-filters h2 {
     font-size: 0.875rem;
     font-weight: 500;
@@ -130,10 +83,15 @@ html, body {
     overflow-y: auto;
 }
 
-.main-header h2 {
-    font-size: 1.75rem;
-    font-weight: 600;
+.charts, .settings-container {
     margin-bottom: 2.5rem;
+}
+
+.chart-container, .settings-container {
+    background-color: var(--sidebar-background);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
 }
 
 .log-list {
@@ -201,120 +159,6 @@ html, body {
     white-space: pre-wrap;
     word-break: break-all;
     line-height: 1.6;
-}
-
-.charts, .upload-container, .settings-container {
-    margin-bottom: 2.5rem;
-}
-
-.chart-container, .settings-container {
-    background-color: var(--sidebar-background);
-    padding: 1.5rem;
-    border-radius: 12px;
-    border: 1px solid var(--border-color);
-}
-
-.upload-container {
-    background-color: var(--button-background);
-    border-radius: var(--border-radius);
-    border: none;
-    overflow: hidden;
-}
-
-.upload-form {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-}
-
-.file-input-wrapper {
-    border-radius: 8px 8px 0 0;
-    border: 1px solid var(--border-color);
-    padding: 3rem 2rem;
-    transition: border-color var(--transition-speed) var(--transition-curve);
-    background-image: radial-gradient(circle, var(--button-hover-background) 1px, transparent 1px);
-    background-size: 15px 15px;
-}
-
-.file-input-wrapper:hover {
-    border-color: var(--accent-color);
-}
-
-.file-label {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    cursor: pointer;
-    color: var(--text-muted-color);
-}
-
-.upload-icon {
-    width: 48px;
-    height: 48px;
-    color: var(--border-color);
-    transition: color var(--transition-speed) var(--transition-curve);
-}
-
-.file-input-wrapper:hover .upload-icon {
-    color: var(--accent-color);
-}
-
-.file-label span {
-    font-weight: 500;
-    color: var(--text-color);
-}
-
-.file-name {
-    color: var(--text-muted-color);
-    font-family: var(--font-mono);
-}
-
-.file-input {
-    display: none;
-}
-
-.upload-footer {
-    padding: 1rem 1.5rem;
-    background-color: #050505;
-    border-top: 1px solid var(--border-color);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.upload-button {
-    background-color: var(--accent-color);
-    color: var(--accent-color-text);
-    border: 1px solid var(--accent-color);
-    padding: 0.5rem 1rem;
-    border-radius: 0 0 8px 8px;
-    font-size: 0.9375rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: opacity var(--transition-speed) var(--transition-curve);
-}
-
-.upload-button:hover {
-    opacity: 80%;
-}
-
-.upload-progress {
-    width: 100%;
-}
-
-.progress-bar-container {
-    background-color: var(--button-hover-background);
-    border-radius: 4px;
-    overflow: hidden;
-    height: 8px;
-}
-
-.progress-bar {
-    width: 0;
-    height: 100%;
-    background-color: var(--accent-color);
-    transition: width 0.3s var(--transition-curve);
 }
 
 .setting-item {
