@@ -16,7 +16,7 @@ class MainHeader extends LitElement {
   render() {
     return html`
       <header class="main-header">
-        <h2>${this.headerTitle}</h2>
+        <h1>${this.headerTitle}</h1>
       </header>
     `;
   }

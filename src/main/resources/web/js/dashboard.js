@@ -129,15 +129,11 @@ function filterLogs(level) {
         const wasVisible = !entry.classList.contains('filtered');
 
         if(wasVisible && !isVisible) {
-            setTimeout(() => {
-                entry.classList.add('filtered');
-                entry.style.animation = '';
-            }, 400);
+            entry.classList.add('filtered');
+            entry.style.animation = '';
         } else if(!wasVisible && isVisible) {
             entry.classList.remove('filtered');
-            setTimeout(() => {
-                entry.style.animation = '';
-            }, 500);
+            entry.style.animation = '';
         }
     });
 
