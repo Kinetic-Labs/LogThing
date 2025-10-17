@@ -2,6 +2,9 @@ package com.github.kinetic.logthing.util.misc;
 
 import com.github.kinetic.logthing.util.Util;
 
+/**
+ * Utilities for working with strings
+ */
 @SuppressWarnings("unused")
 public final class StringUtil implements Util {
 

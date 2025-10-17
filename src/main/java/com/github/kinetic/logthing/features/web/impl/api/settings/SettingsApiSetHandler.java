@@ -13,12 +13,24 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+/**
+ * Sets a setting for the LogThing module
+ */
 public final class SettingsApiSetHandler extends AbstractHandler {
 
+    /**
+     * Create a new {@link SettingsApiSetHandler}
+     */
     public SettingsApiSetHandler() {
         super("SettingsApiHandler");
     }
 
+    /**
+     * Handle the request
+     *
+     * @param exchange {@link HttpExchange} the request is coming from
+     * @throws IOException on error, throws {@link IOException}
+     */
     @Override
     public void handleRequest(final HttpExchange exchange) throws IOException {
         methodUtil.requireMethod(exchange, Method.POST);
@@ -36,6 +48,12 @@ public final class SettingsApiSetHandler extends AbstractHandler {
         webUtil.sendResponse(exchange, 200);
     }
 
+    /**
+     * Update a setting
+     *
+     * @param setting the setting to update
+     * @param value   the value to set the setting to
+     */
     void updateSetting(final String setting, final String value) {
         final ModuleUtil moduleUtil = new ModuleUtil();
 

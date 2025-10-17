@@ -3,12 +3,21 @@ package com.github.kinetic.logthing.util.misc;
 import com.github.kinetic.logthing.LogThing;
 import com.github.kinetic.logthing.util.Util;
 
+/**
+ * Utilities for working with terminals
+ */
 public final class TerminalUtil implements Util {
 
+    /**
+     * Colors
+     */
     private static final String ANSI_RESET = "\u001B[0m";
     private static final String ANSI_BOLD = "\u001B[1m";
     private static final String ANSI_PURPLE = "\u001B[35m";
 
+    /**
+     * Progress bar state
+     */
     private static boolean progressBarActive = false;
     private static int currentStep = 0;
     private static int totalSteps = 0;
@@ -33,6 +42,7 @@ public final class TerminalUtil implements Util {
         progressBarActive = false;
         lastLineLength = 0;
         startTime = System.currentTimeMillis();
+
         drawProgressBar(currentStep, totalSteps, task);
     }
 
@@ -43,9 +53,8 @@ public final class TerminalUtil implements Util {
      */
     public static void nextStep(String task) {
         final boolean debug = LogThing.getInstance().isDebugMode();
-        if(debug) {
+        if(debug)
             return;
-        }
 
         currentStep++;
         drawProgressBar(currentStep, totalSteps, task);
@@ -62,6 +71,7 @@ public final class TerminalUtil implements Util {
         final boolean debug = LogThing.getInstance().isDebugMode();
         if(debug) {
             log.debug(task + " [" + current + "]");
+
             return;
         }
 

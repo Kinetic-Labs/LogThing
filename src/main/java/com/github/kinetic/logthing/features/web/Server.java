@@ -15,9 +15,24 @@ import com.sun.net.httpserver.HttpServer;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 
+/**
+ * Class for starting the web server
+ */
 public final class Server {
+
+    /**
+     * The port to serve on
+     */
     private final short port;
+
+    /**
+     * {@link LogUtil} instance
+     */
     private final LogUtil log;
+
+    /**
+     * The server
+     */
     private HttpServer server;
 
     /**
@@ -30,6 +45,9 @@ public final class Server {
         this.port = (short) port;
     }
 
+    /**
+     * Start the server
+     */
     public void start() {
         try {
             server = HttpServer.create(new InetSocketAddress(port), 0);
@@ -53,6 +71,9 @@ public final class Server {
         log.info("Server started on :" + port);
     }
 
+    /**
+     * Stop the server
+     */
     public void stop() {
         if(server != null)
             server.stop(0);

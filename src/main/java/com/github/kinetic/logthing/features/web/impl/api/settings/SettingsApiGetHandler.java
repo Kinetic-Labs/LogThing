@@ -9,12 +9,24 @@ import com.sun.net.httpserver.HttpExchange;
 import java.io.IOException;
 import java.util.Map;
 
+/**
+ * Returns all settings for the LogThing module
+ */
 public final class SettingsApiGetHandler extends AbstractHandler {
 
+    /**
+     * Create a new {@link SettingsApiGetHandler}
+     */
     public SettingsApiGetHandler() {
         super("SettingsApiGetHandler");
     }
 
+    /**
+     * Handle the request
+     *
+     * @param exchange {@link HttpExchange} the request is coming from
+     * @throws IOException on error, throws {@link IOException}
+     */
     @Override
     public void handleRequest(final HttpExchange exchange) throws IOException {
         methodUtil.requireMethod(exchange, Method.GET);

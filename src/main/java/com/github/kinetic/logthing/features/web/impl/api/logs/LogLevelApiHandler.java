@@ -8,12 +8,24 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Returns a list of log kinds that can be used in the log file selector
+ */
 public final class LogLevelApiHandler extends AbstractHandler {
 
+    /**
+     * Create a new {@link LogLevelApiHandler}
+     */
     public LogLevelApiHandler() {
         super("LogLevelApiHandler");
     }
 
+    /**
+     * Handle the request
+     *
+     * @param exchange {@link HttpExchange} the request is coming from
+     * @throws IOException on error, throws {@link IOException}
+     */
     @Override
     public void handleRequest(final HttpExchange exchange) throws IOException {
         methodUtil.requireMethod(exchange, Method.GET);

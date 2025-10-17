@@ -12,13 +12,23 @@ import com.sun.net.httpserver.HttpHandler;
 
 import java.io.IOException;
 
+/**
+ * Abstract class for handling network requests
+ */
 public abstract class AbstractHandler implements HttpHandler {
 
+    /**
+     * Utilities commonly used for working with web requests/responses
+     */
     protected final WebUtil webUtil;
     protected final Gson gson;
     protected final LogUtil log;
     protected final MethodUtil methodUtil;
     protected final ConfigUtil configUtil;
+
+    /**
+     * The name of the {@link AbstractHandler}
+     */
     private final String name;
 
     /**
@@ -34,6 +44,13 @@ public abstract class AbstractHandler implements HttpHandler {
         this.name = name;
     }
 
+    /**
+     * Handle a network request
+     *
+     * @param exchange the exchange containing the request from the
+     *                 client and used to send the response
+     * @throws IOException on error whilst handling request, method will throw {@link IOException}
+     */
     @Override
     public final void handle(final HttpExchange exchange) throws IOException {
         Thread.currentThread().setName("WD");

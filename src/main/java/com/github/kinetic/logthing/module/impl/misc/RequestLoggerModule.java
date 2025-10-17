@@ -9,10 +9,17 @@ import com.github.kinetic.logthing.module.Module;
  * Logs incoming network requests
  */
 public final class RequestLoggerModule extends Module {
+
+    /**
+     * Create a new {@link RequestLoggerModule}
+     */
     public RequestLoggerModule() {
         super("RequestLoggerModule", "RLM", "Logs all incoming requests", Category.MISC);
     }
 
+    /**
+     * The event listener for {@link RequestReceivedEvent}
+     */
     @SuppressWarnings("unused")
     private final IEventListener<RequestReceivedEvent> requestReceivedEvent = event -> {
         Thread.currentThread().setName(getThreadName());

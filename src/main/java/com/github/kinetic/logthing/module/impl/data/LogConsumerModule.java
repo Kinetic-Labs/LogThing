@@ -15,10 +15,16 @@ import com.github.kinetic.logthing.util.types.ParsedLog;
  */
 public final class LogConsumerModule extends Module {
 
+    /**
+     * Create a new {@link LogConsumerModule}
+     */
     public LogConsumerModule() {
         super("LogConsumerModule", "LCM", "Handles automated database actions", Category.DATA);
     }
 
+    /**
+     * The event listener for {@link FinishedProcessingEvent}
+     */
     @SuppressWarnings("unused")
     private final IEventListener<FinishedProcessingEvent> eventListener = event -> {
         Thread.currentThread().setName(getThreadName());
@@ -27,7 +33,7 @@ public final class LogConsumerModule extends Module {
         final ParsedLog parsedLog = event.getParsedLog();
 
         if(name == null) {
-            log.warn("Could not get name for log!");
+            log.warn("Could not get the name of the log!");
 
             return;
         }
@@ -38,6 +44,9 @@ public final class LogConsumerModule extends Module {
         log.debug("Stored log.");
     };
 
+    /**
+     * Initialize the {@link LogConsumerModule}
+     */
     @Override
     protected void onEnable() {
         final ModuleRepository moduleRepository = LogThing.getInstance().getModuleRepository();
@@ -49,6 +58,9 @@ public final class LogConsumerModule extends Module {
         super.onEnable();
     }
 
+    /**
+     * De-initialize the {@link LogConsumerModule}
+     */
     @Override
     protected void onDisable() {
         LogStorage.getInstance().destroy();

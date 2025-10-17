@@ -1,5 +1,8 @@
 import { LitElement, html, css } from '/web/assets/lib/lit-core.min.js';
 
+/**
+ * MainHeader Component
+ */
 class MainHeader extends LitElement {
   static properties = {
     headerTitle: { type: String, attribute: 'header-title' },

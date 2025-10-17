@@ -11,13 +11,35 @@ import java.util.stream.Stream;
 
 import static java.nio.file.StandardWatchEventKinds.*;
 
+/**
+ * Class to make it easier to watch a directory for new log files.
+ */
 public final class WatchUtil implements Util {
 
+    /**
+     * The directory to watch for new log files.
+     */
     private final Path directory;
+
+    /**
+     * Whether the watcher is running.
+     */
     private final AtomicBoolean running;
+
+    /**
+     * The watch service.
+     */
     private WatchService watcher;
+
+    /**
+     * The watcher thread.
+     */
     private Thread watcherThread;
 
+    /**
+     * Create a new {@link WatchUtil}
+     * @param directory the directory to watch for new log files
+     */
     public WatchUtil(final Path directory) {
         if(directory == null)
             throw new IllegalArgumentException("Directory cannot be null");
@@ -45,16 +67,18 @@ public final class WatchUtil implements Util {
             throw new IllegalStateException("Watcher is already running");
 
         watcher = FileSystems.getDefault().newWatchService();
+
         // register events
         directory.register(watcher, ENTRY_CREATE, ENTRY_DELETE, ENTRY_MODIFY);
 
         dispatchExistingFiles();
 
+        // start the daemon watcher thread
         watcherThread = new Thread(this::watchLoop, "FWD");
         watcherThread.setDaemon(true);
         watcherThread.start();
 
-        log.debug("File watcher daemon started for directory: " + directory);
+        log.debug("File watcher daemon started for the directory: " + directory);
     }
 
     /**
@@ -68,6 +92,7 @@ public final class WatchUtil implements Util {
      * Dispatches LogCreatedEvent for each existing file in the directory.
      */
     private void dispatchExistingFiles() {
+        // dispatch process events for existing files
         try(final Stream<Path> files = Files.list(directory)) {
             files.filter(Files::isRegularFile)
                     .forEach(file -> {
@@ -91,6 +116,7 @@ public final class WatchUtil implements Util {
             while(running.get() && !Thread.currentThread().isInterrupted()) {
                 WatchKey key;
 
+                // wait for events
                 try {
                     key = watcher.take();
                 } catch(final InterruptedException interruptedException) {
@@ -99,6 +125,7 @@ public final class WatchUtil implements Util {
                     break;
                 }
 
+                // process events
                 for(final WatchEvent<?> event : key.pollEvents()) {
                     final WatchEvent.Kind<?> kind = event.kind();
 
@@ -125,6 +152,7 @@ public final class WatchUtil implements Util {
 
                 boolean valid = key.reset();
 
+                // check if the watch key is valid
                 if(!valid) {
                     log.warn("Watch key no longer valid - directory may have been deleted");
                     break;

@@ -14,6 +14,9 @@ import java.time.format.DateTimeFormatter;
 @SuppressWarnings({"unused"})
 public final class LogUtil implements Util {
 
+    /**
+     * Colors
+     */
     private static final String RESET = "\u001B[0m";
     private static final String PURPLE = "\u001B[35m";
     private static final String YELLOW = "\u001B[33m";
@@ -21,7 +24,15 @@ public final class LogUtil implements Util {
     private static final String BRIGHT_RED = "\u001B[91m";
     private static final String GREEN = "\u001B[32m";
     private static final String CYAN = "\u001B[36m";
+
+    /**
+     * Date formatter
+     */
     private static final DateTimeFormatter DATE_FORMATTER;
+
+    /**
+     * Log file name
+     */
     private static final String LOG_FILE_NAME;
 
     static {
@@ -73,6 +84,7 @@ public final class LogUtil implements Util {
     public void debug(final String message) {
         final boolean debug = LogThing.getInstance().isDebugMode();
 
+        // don't print if debug mode is disabled
         if(debug)
             log(message, LogLevel.DEBUG);
     }
@@ -89,6 +101,7 @@ public final class LogUtil implements Util {
         log(message, LogLevel.TRACE);
         log("Stack Trace: ", LogLevel.TRACE);
 
+        // print elements of stacktrace
         for(StackTraceElement element : exception.getStackTrace())
             log(padding + element.toString(), LogLevel.TRACE);
     }

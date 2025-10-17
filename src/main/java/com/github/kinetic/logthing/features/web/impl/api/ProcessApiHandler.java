@@ -12,12 +12,24 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+/**
+ * Handles requests to the process API
+ */
 public final class ProcessApiHandler extends AbstractHandler {
 
+    /**
+     * Create a new {@link ProcessApiHandler}
+     */
     public ProcessApiHandler() {
         super("ProcessHandler");
     }
 
+    /**
+     * Handle the request
+     *
+     * @param exchange {@link HttpExchange} the request is coming from
+     * @throws IOException on error, throws {@link IOException}
+     */
     @Override
     public void handleRequest(final HttpExchange exchange) throws IOException {
         methodUtil.requireMethod(exchange, Method.POST);

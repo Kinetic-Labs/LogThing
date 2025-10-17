@@ -4,12 +4,30 @@ import com.github.kinetic.logthing.util.io.log.LogUtil;
 
 import java.util.*;
 
+/**
+ * Repository for modules
+ */
 @SuppressWarnings("unused")
 public final class ModuleRepository {
+
+    /**
+     * Singleton instance
+     */
     private static final ModuleRepository INSTANCE = new ModuleRepository();
+
+    /**
+     * The modules stored in the repository
+     */
     private final Map<String, Module> modules = new HashMap<>();
+
+    /**
+     * Utilities
+     */
     private final LogUtil log = new LogUtil();
 
+    /**
+     * Private constructor
+     */
     public ModuleRepository() {
     }
 

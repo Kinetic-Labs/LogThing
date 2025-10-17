@@ -17,13 +17,27 @@ import static com.github.kinetic.logthing.util.web.WebConstants.PORT;
  * Handles web dashboard and receiving logs
  */
 public final class WebMonitorModule extends Module {
+
+    /**
+     * The web server
+     */
     private final Server server = new Server(PORT);
+
+    /**
+     * The hash util
+     */
     private final HashUtil hashUtil = new HashUtil();
 
+    /**
+     * Create a new WebMonitorModule instance
+     */
     public WebMonitorModule() {
         super("WebMonitorModule", "WMM", "Dashboard for alerts and data", Category.WEB);
     }
 
+    /**
+     * The event listener for {@link ProcessLogEvent}
+     */
     @SuppressWarnings("unused")
     private final IEventListener<ProcessLogEvent> eventListener = event -> {
         Thread.currentThread().setName(getThreadName());
@@ -36,6 +50,9 @@ public final class WebMonitorModule extends Module {
         LogThing.getInstance().getEventBus().dispatch(new FinishedProcessingEvent(hashText, parsedLog));
     };
 
+    /**
+     * Enable the module
+     */
     @Override
     protected void onEnable() {
         final Thread thread = new Thread(server::start);
@@ -46,6 +63,9 @@ public final class WebMonitorModule extends Module {
         super.onEnable();
     }
 
+    /**
+     * Disable the module
+     */
     @Override
     protected void onDisable() {
         server.stop();

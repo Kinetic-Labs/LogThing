@@ -2,6 +2,9 @@
 
 import { css, html, LitElement } from '/web/assets/lib/lit-core.min.js';
 
+/**
+ * UploadContainer Component
+ */
 class UploadContainer extends LitElement {
     static styles = css`
         .upload-container {

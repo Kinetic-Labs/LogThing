@@ -14,6 +14,9 @@ import java.util.concurrent.CopyOnWriteArrayList;
 @SuppressWarnings("unchecked")
 public final class EventSubscriberPool {
 
+    /**
+     * Cache of event subscribers by event type
+     */
     private final Map<Type, List<EventSubscriber<?>>> subscriberCacheMap = new HashMap<>();
 
     /**

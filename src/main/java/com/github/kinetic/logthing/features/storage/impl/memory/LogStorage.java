@@ -5,11 +5,24 @@ import com.github.kinetic.logthing.util.types.ParsedLog;
 
 import java.util.*;
 
+/**
+ * In-memory storage for logs
+ */
 public final class LogStorage implements Storage {
 
+    /**
+     * LogUtil instance
+     */
     private static final LogStorage INSTANCE = new LogStorage();
+
+    /**
+     * The logs stored in storage
+     */
     private final Set<ParsedLog> logs = new HashSet<>();
 
+    /**
+     * Private constructor
+     */
     private LogStorage() {
         init();
     }

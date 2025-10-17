@@ -3,8 +3,8 @@ package com.github.kinetic.logthing.util.types;
 /**
  * Represents parsed log
  *
- * @param timestamp the timestamp of log
- * @param tag       the tag of log (e.g. thread name)
+ * @param timestamp the timestamp of the log
+ * @param tag       the tag of log (e.g., thread name)
  * @param level     the log level
  * @param message   the log message
  */

@@ -7,11 +7,24 @@ import com.github.kinetic.logthing.module.Module;
 
 import java.util.Objects;
 
+/**
+ * Module for alerting when a spike in error logs is detected
+ */
 public final class AlertModule extends Module {
 
+    /**
+     * The rule engine for parsing the alert condition
+     */
     private final RuleEngine ruleEngine;
+
+    /**
+     * The thread for running the alert daemon
+     */
     private Thread thread;
 
+    /**
+     * Create a new {@link AlertModule}
+     */
     public AlertModule() {
         super("AlertModule", "AM", "Alert daemon", Category.WEB);
 
@@ -20,6 +33,9 @@ public final class AlertModule extends Module {
         );
     }
 
+    /**
+     * The daemon thread for alerting
+     */
     private void alertDaemon() {
         ruleEngine.parse();
 
@@ -33,6 +49,9 @@ public final class AlertModule extends Module {
         log.debug(ruleCondition.toString());
     }
 
+    /**
+     * Enable the module
+     */
     @Override
     protected void onEnable() {
         super.onEnable();
@@ -43,6 +62,9 @@ public final class AlertModule extends Module {
         thread.start();
     }
 
+    /**
+     * Disable the module
+     */
     @Override
     protected void onDisable() {
         thread.interrupt();

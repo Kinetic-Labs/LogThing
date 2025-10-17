@@ -5,8 +5,14 @@ import com.github.kinetic.logthing.features.processor.AbstractProcessor
 import com.github.kinetic.logthing.util.types.ParsedLog
 import java.util.regex.Pattern
 
+/**
+ * This processor parses the raw log into a ParsedLog object.
+ */
 class DataExtractorProcessor(rawLog: String) : AbstractProcessor(rawLog) {
 
+    /**
+     * Parses the raw log into a ParsedLog object.
+     */
     override fun process(): ParsedLog {
         val config = LogThing.getInstance().logThingConfig
 

@@ -6,6 +6,9 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * Utilities for working with hashes
+ */
 public final class HashUtil implements Util {
 
     /**
@@ -33,9 +36,11 @@ public final class HashUtil implements Util {
      */
     public String toMD5(final String string) {
         try {
+            // create MD5 hash
             final MessageDigest md = MessageDigest.getInstance("MD5");
             final byte[] messageDigest = md.digest(string.getBytes());
 
+            // convert the byte to hex format method 1
             return convertToHex(messageDigest);
         } catch(final NoSuchAlgorithmException noSuchAlgorithmException) {
             log.trace("Failed to hash MD5", noSuchAlgorithmException);

@@ -18,17 +18,35 @@ import com.github.kinetic.logthing.util.io.log.LogUtil;
 import com.github.kinetic.logthing.util.misc.ModuleUtil;
 import com.github.kinetic.logthing.util.misc.TerminalUtil;
 
+/**
+ * Main class for LogThing, called by {@link Start}
+ */
 @SuppressWarnings("unused")
 public final class LogThing {
 
+    /**
+     * Utilities
+     */
     private final LogUtil log = new LogUtil();
     private final TerminalUtil terminal = new TerminalUtil();
     private final ModuleRepository moduleRepository = new ModuleRepository();
     private final ModuleUtil moduleUtil = new ModuleUtil();
     private final LogThingFlags flag = new LogThingFlags();
     private final MiscSettings moduleSettings = new MiscSettings("moduleSettings");
+
+    /**
+     * The LogThing instance
+     */
     private static final LogThing instance = new LogThing();
+
+    /**
+     * The EventBus
+     */
     private EventBus eventBus;
+
+    /**
+     * The config
+     */
     private Config logThingConfig;
 
     private void initializeModules() {
@@ -42,6 +60,7 @@ public final class LogThing {
 
         // by default, we enable all modules, in the future
         // implement a settings panel for choosing what modules to use
+        // and save the state
         moduleUtil.enableModule(RequestLoggerModule.class);
         moduleUtil.enableModule(LogConsumerModule.class);
         moduleUtil.enableModule(WebMonitorModule.class);
@@ -49,16 +68,29 @@ public final class LogThing {
         moduleUtil.enableModule(AlertModule.class);
     }
 
+    /**
+     * Initialize the EventBus
+     *
+     * @return the initialized EventBus
+     */
     private EventBus initializeEventBus() {
         return new EventBus();
     }
 
+    /**
+     * Load the config file
+     *
+     * @return the loaded config
+     */
     private Config loadConfig() {
         ConfigParser configParser = new ConfigParser();
 
         return configParser.parse();
     }
 
+    /**
+     * Destroy all modules
+     */
     private void destroyModules() {
         ModuleRepository.getInstance().getEnabledModules().forEach(module -> {
             log.debug("Removing module: " + module.getName());
@@ -128,26 +160,56 @@ public final class LogThing {
         }
     }
 
+    /**
+     * Get the module repository
+     *
+     * @return the module repository
+     */
     public ModuleRepository getModuleRepository() {
         return ModuleRepository.getInstance();
     }
 
+    /**
+     * Get the event bus
+     *
+     * @return the event bus
+     */
     public EventBus getEventBus() {
         return eventBus;
     }
 
+    /**
+     * Get the config file
+     *
+     * @return the config file
+     */
     public Config getLogThingConfig() {
         return logThingConfig;
     }
 
+    /**
+     * Get the LogThing instance
+     *
+     * @return the LogThing instance
+     */
     public static LogThing getInstance() {
         return instance;
     }
 
+    /**
+     * Check if debug mode is enabled
+     *
+     * @return true if debug mode is enabled
+     */
     public boolean isDebugMode() {
         return flag.isDebug();
     }
 
+    /**
+     * Get the module settings
+     *
+     * @return the module settings
+     */
     public MiscSettings getModuleSettings() {
         return moduleSettings;
     }

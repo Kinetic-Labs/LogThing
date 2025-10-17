@@ -14,16 +14,36 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Objects;
 
+/**
+ * Module for watching a given directory and dispatching events when logs are created.
+ */
 public final class LogServiceModule extends Module {
 
+    /**
+     * The path to the directory to watch
+     */
     private final String logPath = Objects.requireNonNull(configUtil.getInputsConfig().getFile()).getPath();
+
+    /**
+     * The watch utility
+     */
     private final WatchUtil watchUtil = new WatchUtil(Path.of(logPath));
+
+    /**
+     * The thread running the watcher
+     */
     private Thread thread;
 
+    /**
+     * Create a new {@link LogServiceModule}
+     */
     public LogServiceModule() {
         super("LogServiceModule", "LSM", "Watches a given directory and dispatches events when logs are created.", Category.IO);
     }
 
+    /**
+     * The event listener for {@link LogCreatedEvent}
+     */
     @SuppressWarnings("unused")
     private final IEventListener<LogCreatedEvent> eventListener = event -> {
         final Path path = event.getPath();
@@ -41,10 +61,16 @@ public final class LogServiceModule extends Module {
         }
     };
 
+    /**
+     * Rescan the directory for new logs.
+     */
     public void rescan() {
         watchUtil.rescan();
     }
 
+    /**
+     * Start the watcher thread.
+     */
     public void startWatcher() {
         try {
             watchUtil.startWatcher();
@@ -53,6 +79,9 @@ public final class LogServiceModule extends Module {
         }
     }
 
+    /**
+     * Enable the module.
+     */
     @Override
     protected void onEnable() {
         thread = new Thread(this::startWatcher);
@@ -62,6 +91,9 @@ public final class LogServiceModule extends Module {
         super.onEnable();
     }
 
+    /**
+     * Disable the module.
+     */
     @Override
     protected void onDisable() {
         watchUtil.stopWatcher();

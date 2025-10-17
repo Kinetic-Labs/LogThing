@@ -9,11 +9,24 @@ import com.sun.net.httpserver.HttpExchange;
 import java.io.IOException;
 import java.util.Set;
 
+/**
+ * Returns a list of all logs in the log storage
+ */
 public class LogsApiGetHandler extends AbstractHandler {
+
+    /**
+     * Create a new {@link LogsApiGetHandler}
+     */
     public LogsApiGetHandler() {
         super("LogsApiGetHandler");
     }
 
+    /**
+     * Handle the request
+     *
+     * @param exchange {@link HttpExchange} the request is coming from
+     * @throws IOException on error, throws {@link IOException}
+     */
     @Override
     public void handleRequest(HttpExchange exchange) throws IOException {
         methodUtil.requireMethod(exchange, Method.GET);

@@ -9,9 +9,15 @@ import java.util.regex.Pattern
  */
 class RuleEngine(rawCondition: String) : AbstractRuleEngine(rawCondition) {
 
+    /**
+     * The parsed condition, or null if it couldn't be parsed.
+     */
     var parsedCondition: RuleCondition? = null
         private set
 
+    /**
+     * The regex pattern used to parse conditions.
+     */
     companion object {
         private val CONDITION_PATTERN = Pattern.compile(
             "when\\s+\\$(\\w+)\\s*(>|<|>=|<=|==|!=)\\s*(\\d+(?:\\.\\d+)?)\\s*(?:per\\s+(\\w+))?"

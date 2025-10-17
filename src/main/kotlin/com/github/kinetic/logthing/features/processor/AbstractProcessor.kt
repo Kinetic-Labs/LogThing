@@ -3,7 +3,14 @@ package com.github.kinetic.logthing.features.processor
 import com.github.kinetic.logthing.util.io.log.LogUtil
 import com.github.kinetic.logthing.util.types.ParsedLog
 
+/**
+ * This is the abstract class for a log processor.
+ */
 abstract class AbstractProcessor(protected val rawLog: String) {
+
+    /**
+     * The parsed log.
+     */
     protected val log = LogUtil()
 
     /**

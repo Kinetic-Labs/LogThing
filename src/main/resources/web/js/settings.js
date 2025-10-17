@@ -1,6 +1,17 @@
+/**
+ * Settings
+ */
 document.addEventListener('DOMContentLoaded', () => {
+    /**
+     * Toggle Switches
+     *
+     * @type {NodeListOf<Element>} all toggle switches
+     */
     const toggleSwitches = document.querySelectorAll('.toggle-switch');
 
+    /**
+     * For each toggle switch, add an event listener to toggle the switch
+     */
     toggleSwitches.forEach(async toggle => {
         const settingName = toggle.dataset.setting;
         const savedState = await fetch(`/api/settings/get`, {
@@ -24,6 +35,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
+        /**
+         * Toggle the switch
+         */
         toggle.addEventListener('click', async _event => {
             toggle.classList.toggle('active');
             const isActive = toggle.classList.contains('active');
@@ -38,6 +52,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const settingLabels = document.querySelectorAll('.setting-label');
 
+    /**
+     * For each setting label, add an event listener to toggle the switch
+     */
     settingLabels.forEach(label => {
         label.addEventListener('click', _event => {
             const toggleId = label.getAttribute('for');

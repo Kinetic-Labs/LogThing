@@ -5,16 +5,47 @@ import com.github.kinetic.logthing.util.io.log.LogUtil;
 import com.github.kinetic.logthing.util.misc.ConfigUtil;
 import com.github.kinetic.logthing.util.misc.StringUtil;
 
+/**
+ * Abstract class for modules
+ */
 @SuppressWarnings("unused")
 public abstract class Module {
+
+    /**
+     * Module name
+     */
     private final String name;
+
+    /**
+     * The name of the thread the module uses
+     */
     private final String threadName;
+
+    /**
+     * The description of the module
+     */
     private final String description;
+
+    /**
+     * The category of the module
+     */
     private final Category category;
+
+    /**
+     * Whether the module is enabled or not
+     */
     private boolean enabled;
+
+    /**
+     * Utilities
+     */
     protected final LogUtil log = new LogUtil();
     protected final StringUtil stringUtil = new StringUtil();
     protected final ConfigUtil configUtil = new ConfigUtil();
+
+    /**
+     * Padding
+     */
     private final String padding = stringUtil.indent(3);
 
     /**

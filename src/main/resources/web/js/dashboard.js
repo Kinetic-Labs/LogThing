@@ -1,15 +1,47 @@
+/**
+ * Dashboard
+ */
 document.addEventListener('DOMContentLoaded', async _event => {
+    /**
+     * The log list element
+     * @type {HTMLElement}
+     */
     const logList = document.getElementById('logList');
+
+    /**
+     * The log level filters element
+     * @type {HTMLElement}
+     */
     const logLevelFilters = document.getElementById('log-level-filters');
+
+    /**
+     * The log chart element
+     */
     const logs = await fetch('/api/logs/get').then(response => response.json());
+
+    /**
+     * The log kinds
+     */
     const logKinds = await fetch('/api/logs/levels').then(response => response.json());
+
+    /**
+     * The log counts
+     *
+     * @type {{}}
+     */
     const logCounts = {};
 
     window.activeFilters = ['ALL'];
 
+    /**
+     * Initialize the log counts
+     */
     logKinds.forEach(kind => logCounts[kind] = 0);
     let totalLogs = logs.length;
 
+    /**
+     * Count the number of logs for each level
+     */
     logs.forEach(log => {
         const level = log.level || 'UNKNOWN';
         logCounts[level] = (logCounts[level] || 0) + 1;
@@ -49,6 +81,7 @@ document.addEventListener('DOMContentLoaded', async _event => {
         </li>
     `).join('');
 
+    // setup chart.js
     const ctx = document.getElementById('logChart').getContext('2d');
     new Chart(ctx, {
         type: 'bar',
@@ -82,6 +115,11 @@ document.addEventListener('DOMContentLoaded', async _event => {
     });
 });
 
+/**
+ * Get the color for a log level
+ * @param level log level
+ * @returns {*|string} color
+ */
 function getLevelColor(level) {
     const colors = {
         'INFO': '#a0a8b0',
@@ -96,6 +134,10 @@ function getLevelColor(level) {
     return colors[level] || '#909090';
 }
 
+/**
+ * Filter the logs by level
+ * @param level log level
+ */
 function filterLogs(level) {
     const filterButtons = document.querySelectorAll('.filter-button');
     const allButton = document.querySelector('.filter-button[data-level="ALL"]');

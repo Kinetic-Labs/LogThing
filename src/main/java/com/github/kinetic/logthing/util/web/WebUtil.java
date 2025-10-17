@@ -7,6 +7,9 @@ import com.sun.net.httpserver.HttpExchange;
 import java.io.IOException;
 import java.io.OutputStream;
 
+/**
+ * Utilities for working with web requests
+ */
 public final class WebUtil implements Util {
 
     /**
@@ -15,7 +18,7 @@ public final class WebUtil implements Util {
      * @param exchange the {@link HttpExchange}
      * @throws IOException on error, throws {@link IOException}
      */
-    public void send404(HttpExchange exchange) throws IOException {
+    public void send404(final HttpExchange exchange) throws IOException {
         sendResponse(exchange, 404, "404 Not Found");
     }
 
@@ -94,7 +97,7 @@ public final class WebUtil implements Util {
      * @param resourcePath path to resource
      * @throws IOException on error, throws {@link IOException}
      */
-    public void serveResource(HttpExchange exchange, String resourcePath) throws IOException {
+    public void serveResource(final HttpExchange exchange, final String resourcePath) throws IOException {
         final ResourceUtil resourceUtil = new ResourceUtil("", resourcePath);
         final byte[] content = resourceUtil.readBytes();
         final String contentType = getContentType(resourcePath);

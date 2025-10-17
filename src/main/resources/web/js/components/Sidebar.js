@@ -2,6 +2,9 @@
 
 import { LitElement, html, css } from '/web/assets/lib/lit-core.min.js';
 
+/**
+ * Sidebar Component
+ */
 class Sidebar extends LitElement {
   static properties = {
     activePage: { type: String, attribute: 'active-page' },

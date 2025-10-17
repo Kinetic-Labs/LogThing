@@ -51,7 +51,7 @@ public record ResourceUtil(String domain, String path) implements Util {
             inputStream.close();
 
             return true;
-        } catch(IOException ioException) {
+        } catch(final IOException ioException) {
             log.trace("Error closing stream while checking existence", ioException);
 
             return false;
@@ -75,7 +75,7 @@ public record ResourceUtil(String domain, String path) implements Util {
             }
 
             return in.readAllBytes();
-        } catch(IOException ioException) {
+        } catch(final IOException ioException) {
             log.trace("Failed to read resource bytes: " + resourcePath, ioException);
 
             return null;

@@ -7,7 +7,13 @@ import kotlin.script.experimental.host.toScriptSource
 import kotlin.script.experimental.jvmhost.BasicJvmScriptingHost
 import kotlin.script.experimental.jvmhost.createJvmCompilationConfigurationFromTemplate
 
+/**
+ * This is the class that actually loads the config script.
+ */
 object ConfigLoader {
+    /**
+     * Loads the config script from the given file path.
+     */
     fun loadConfig(filePath: String): Config {
         val scriptFile = File(filePath)
 

@@ -10,13 +10,26 @@ public enum Category {
     IO("IO"),
     DATA("Data");
 
+    /**
+     * The display name of the category
+     */
     private final String displayName;
 
-    Category(String displayName) {
+    /**
+     * Create a new {@link Category}
+     *
+     * @param displayName the display name of the category
+     */
+    Category(final String displayName) {
         this.displayName = displayName;
     }
 
-    public String getDisplayName() {
+    /**
+     * Get the display name of the category
+     *
+     * @return the display name of the category
+     */
+    public final String getDisplayName() {
         return displayName;
     }
 }
