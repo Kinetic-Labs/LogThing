@@ -23,7 +23,9 @@ class UploadContainer extends LitElement {
 
         .file-input-wrapper {
             border-radius: 8px 8px 0 0;
-            border: 1px solid var(--border-color);
+            border-left: 2px solid var(--border-color);
+            border-top: 2px solid var(--border-color);
+            border-right: 2px solid var(--border-color);
             padding: 3rem 2rem;
             transition: border-color var(--transition-speed) var(--transition-curve);
             background-image: radial-gradient(circle, var(--button-hover-background) 1px, transparent 1px);
@@ -71,14 +73,14 @@ class UploadContainer extends LitElement {
         .upload-button {
             background-color: var(--accent-color);
             color: var(--accent-color-text);
-            border: 1px solid var(--accent-color);
+            border: none;
+            outline: none;
             padding: 1rem 1.5rem;
-            font-size: 0.9375rem;
+            font-size: 0.9rem;
             font-weight: 500;
             cursor: pointer;
             transition: opacity var(--transition-speed) var(--transition-curve);
             border-radius: 0;
-            border-top: 1px solid var(--border-color);
         }
 
         .upload-button:hover {
