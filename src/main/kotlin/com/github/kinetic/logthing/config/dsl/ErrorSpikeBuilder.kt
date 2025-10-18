@@ -4,6 +4,7 @@ package com.github.kinetic.logthing.config.dsl
  * The builder for the error spike config
  */
 class ErrorSpikeBuilder {
+
     /**
      * The condition for the error spike.
      */

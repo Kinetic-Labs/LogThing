@@ -4,6 +4,7 @@ package com.github.kinetic.logthing.config.dsl
  * The builder for the inputs config
  */
 class InputsBuilder {
+
     /**
      * The file input config, or null if it's not enabled.
      */

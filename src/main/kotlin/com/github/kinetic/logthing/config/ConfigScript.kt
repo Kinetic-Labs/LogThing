@@ -16,6 +16,7 @@ import kotlin.script.experimental.jvm.jvm
     compilationConfiguration = ConfigScriptCompilationConfiguration::class
 )
 abstract class ConfigScript {
+
     /**
      * The config object.
      */
@@ -26,6 +27,7 @@ abstract class ConfigScript {
  * The compilation configuration for the config script.
  */
 object ConfigScriptCompilationConfiguration : ScriptCompilationConfiguration({
+
     /**
      * The default imports for the config script.
      */

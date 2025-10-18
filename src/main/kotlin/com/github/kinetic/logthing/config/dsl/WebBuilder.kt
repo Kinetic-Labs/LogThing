@@ -4,6 +4,7 @@ package com.github.kinetic.logthing.config.dsl
  * The builder for the web config
  */
 class WebBuilder {
+
     /**
      * The port for the web server to use.
      */

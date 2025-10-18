@@ -4,6 +4,7 @@ package com.github.kinetic.logthing.config.dsl
  * The builder for the processor config
  */
 class ProcessorBuilder {
+
     /**
      * The log level pattern for the processor to use.
      */

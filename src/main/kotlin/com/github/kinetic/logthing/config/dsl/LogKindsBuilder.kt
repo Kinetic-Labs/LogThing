@@ -4,6 +4,7 @@ package com.github.kinetic.logthing.config.dsl
  * The builder for the log kinds config
  */
 class LogKindsBuilder {
+
     /**
      * The list of log kinds.
      */
