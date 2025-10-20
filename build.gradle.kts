@@ -30,9 +30,65 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-scripting-jvm-host:$kotlinVersion")
     implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
     implementation("org.jetbrains.kotlin:kotlin-stdlib")
+
+    implementation(files("${layout.buildDirectory.get()}/git-deps/NixThing/nix-thing/build/libs/nix-thing.jar"))
+
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+}
+
+val nixThingDir = "${layout.buildDirectory.get()}/git-deps/NixThing"
+
+abstract class GitCloneTask : DefaultTask() {
+    @get:Input
+    abstract val gitUrl: Property<String>
+
+    @get:Input
+    abstract val targetDir: Property<String>
+
+    @get:Inject
+    abstract val execOperations: ExecOperations
+
+    @TaskAction
+    fun cloneOrUpdate() {
+        val dir = project.file(targetDir.get())
+        if (!dir.exists()) {
+            execOperations.exec {
+                commandLine("git", "clone", gitUrl.get(), targetDir.get())
+            }
+        } else {
+            execOperations.exec {
+                workingDir(dir)
+                commandLine("git", "pull")
+            }
+        }
+    }
+}
+
+tasks.register<GitCloneTask>("cloneNixThing") {
+    gitUrl.set("git@github.com:Kinetic-Labs/NixThing.git")
+    targetDir.set(nixThingDir)
+}
+
+tasks.register<Exec>("buildNixThing") {
+    dependsOn("cloneNixThing")
+    workingDir(file(nixThingDir))
+    commandLine("./gradlew", "build", "-x", "test")
+
+    doFirst {
+        if (!file("$nixThingDir/gradlew").exists()) {
+            throw GradleException("NixThing repository doesn't have gradlew. Adjust build command accordingly.")
+        }
+    }
+}
+
+tasks.named("compileJava") {
+    dependsOn("buildNixThing")
+}
+
+tasks.named("compileKotlin") {
+    dependsOn("buildNixThing")
 }
 
 tasks.test {

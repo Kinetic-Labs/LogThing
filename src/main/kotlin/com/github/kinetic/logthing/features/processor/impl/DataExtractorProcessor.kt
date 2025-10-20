@@ -1,3 +1,5 @@
+@file:Suppress("RegExpRedundantEscape") // reason: uses for combining
+
 package com.github.kinetic.logthing.features.processor.impl
 
 import com.github.kinetic.logthing.LogThing
@@ -19,10 +21,8 @@ class DataExtractorProcessor(rawLog: String) : AbstractProcessor(rawLog) {
         val timestampPattern = config.processor?.timestampPattern
         val tagPattern = config.processor?.tagPattern
         val levelPattern = config.processor?.levelPattern
-        val fullPattern = String.format(
-            "^%s\\s+%s\\s+%s\\s+(.*)$",
-            timestampPattern, tagPattern, levelPattern
-        )
+        val fullPattern = "^${timestampPattern}\\s+\\[${tagPattern}\\]\\s+\\[${levelPattern}\\]\\s+(.*)$"
+
         val pattern = Pattern.compile(fullPattern)
         val matcher = pattern.matcher(rawLog)
 

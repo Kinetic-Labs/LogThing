@@ -1,7 +1,9 @@
 package com.github.kinetic.logthing.util.misc;
 
 import com.github.kinetic.logthing.LogThing;
-import com.github.kinetic.logthing.config.dsl.*;
+import com.github.kinetic.logthing.config.dsl.AlertsConfig;
+import com.github.kinetic.logthing.config.dsl.InputsConfig;
+import com.github.kinetic.logthing.config.dsl.WebConfig;
 import com.github.kinetic.logthing.util.Util;
 
 /**
@@ -38,4 +40,3 @@ public final class ConfigUtil implements Util {
         return logThing.getLogThingConfig().getAlerts();
     }
 }
-

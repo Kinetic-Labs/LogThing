@@ -32,7 +32,9 @@ public final class LogThing {
     private final ModuleRepository moduleRepository = new ModuleRepository();
     private final ModuleUtil moduleUtil = new ModuleUtil();
     private final LogThingFlags flag = new LogThingFlags();
-    private final MiscSettings moduleSettings = new MiscSettings("moduleSettings");
+    private final MiscSettings moduleSettings = new MiscSettings(
+        "moduleSettings"
+    );
 
     /**
      * The LogThing instance
@@ -51,11 +53,11 @@ public final class LogThing {
 
     private void initializeModules() {
         ModuleBuilder.create().putAll(
-                new RequestLoggerModule(),
-                new WebMonitorModule(),
-                new LogConsumerModule(),
-                new LogServiceModule(),
-                new AlertModule()
+            new RequestLoggerModule(),
+            new WebMonitorModule(),
+            new LogConsumerModule(),
+            new LogServiceModule(),
+            new AlertModule()
         );
 
         // by default, we enable all modules, in the future
@@ -92,12 +94,13 @@ public final class LogThing {
      * Destroy all modules
      */
     private void destroyModules() {
-        ModuleRepository.getInstance().getEnabledModules().forEach(module -> {
-            log.debug("Removing module: " + module.getName());
+        ModuleRepository.getInstance()
+            .getEnabledModules()
+            .forEach(module -> {
+                log.debug("Removing module: " + module.getName());
 
-            if(module.isEnabled())
-                module.setEnabled(false);
-        });
+                if (module.isEnabled()) module.setEnabled(false);
+            });
     }
 
     /**
@@ -154,7 +157,7 @@ public final class LogThing {
 
         try {
             Thread.currentThread().join();
-        } catch(final InterruptedException interruptedException) {
+        } catch (final InterruptedException interruptedException) {
             Thread.currentThread().interrupt();
             log.info("Interrupted thread: " + Thread.currentThread().getName());
         }

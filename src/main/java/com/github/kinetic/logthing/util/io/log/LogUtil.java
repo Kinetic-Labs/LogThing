@@ -99,6 +99,7 @@ public final class LogUtil implements Util {
         final String padding = stringUtil.indent(2);
 
         log(message, LogLevel.TRACE);
+        log("Message: " + exception.getMessage(), LogLevel.TRACE);
         log("Stack Trace: ", LogLevel.TRACE);
 
         // print elements of stacktrace

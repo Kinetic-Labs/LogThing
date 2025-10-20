@@ -10,8 +10,7 @@ public abstract class AbstractConfigParser implements IConfig {
     /**
      * Create a new {@link AbstractConfigParser}
      */
-    public AbstractConfigParser() {
-    }
+    public AbstractConfigParser() {}
 
     /**
      * Parse the config
