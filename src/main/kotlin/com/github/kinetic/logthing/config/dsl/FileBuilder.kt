@@ -4,6 +4,7 @@ package com.github.kinetic.logthing.config.dsl
  * The builder for the file config
  */
 class FileBuilder {
+
     /**
      * The path of the file to be read.
      */

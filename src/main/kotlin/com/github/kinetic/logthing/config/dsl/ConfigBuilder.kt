@@ -4,6 +4,7 @@ package com.github.kinetic.logthing.config.dsl
  * The builder for the config class, created by the DSL.
  */
 class ConfigBuilder {
+
     /**
      * The inputs config, or null if it's not enabled.
      */

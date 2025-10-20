@@ -4,6 +4,7 @@ package com.github.kinetic.logthing.config
  * Abstract class to create a rule parser
  */
 abstract class AbstractRuleEngine(
+
     /**
      * Get the path of the config file to be parsed
      *

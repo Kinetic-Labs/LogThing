@@ -11,6 +11,7 @@ import kotlin.script.experimental.jvmhost.createJvmCompilationConfigurationFromT
  * This is the class that actually loads the config script.
  */
 object ConfigLoader {
+
     /**
      * Loads the config script from the given file path.
      */
