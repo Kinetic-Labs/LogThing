@@ -12,12 +12,7 @@ public final class Config {
     private final WebConfig web;
     private final AlertsConfig alerts;
 
-    private Config(
-        InputsConfig inputs,
-        ProcessorConfig processor,
-        WebConfig web,
-        AlertsConfig alerts
-    ) {
+    private Config(InputsConfig inputs, ProcessorConfig processor, WebConfig web, AlertsConfig alerts) {
         this.inputs = inputs;
         this.processor = processor;
         this.web = web;
@@ -50,90 +45,66 @@ public final class Config {
         private ProcessorConfig processor;
         private WebConfig web;
         private AlertsConfig alerts;
-
         private String inputPath;
         private List<String> logKinds;
-
         private String levelPattern;
         private String timestampPattern;
         private String tagPattern;
-
         private Integer webPort;
-
         private String alertCondition;
         private String alertWindow;
 
-        public Builder inputPath(String path) {
+        public void inputPath(String path) {
             this.inputPath = path;
-            return this;
         }
 
-        public Builder logKinds(List<String> kinds) {
+        public void logKinds(List<String> kinds) {
             this.logKinds = kinds;
-            return this;
         }
 
-        public Builder levelPattern(String pattern) {
+        public void levelPattern(String pattern) {
             this.levelPattern = pattern;
-            return this;
         }
 
-        public Builder timestampPattern(String pattern) {
+        public void timestampPattern(String pattern) {
             this.timestampPattern = pattern;
-            return this;
         }
 
-        public Builder tagPattern(String pattern) {
+        public void tagPattern(String pattern) {
             this.tagPattern = pattern;
-            return this;
         }
 
-        public Builder webPort(int port) {
+        public void webPort(int port) {
             this.webPort = port;
-            return this;
         }
 
-        public Builder alertCondition(String condition) {
+        public void alertCondition(String condition) {
             this.alertCondition = condition;
-            return this;
         }
 
-        public Builder alertWindow(String window) {
+        public void alertWindow(String window) {
             this.alertWindow = window;
-            return this;
         }
 
         public Config build() {
             FileConfig fileConfig = null;
-            if (inputPath != null || logKinds != null) {
+
+            if(inputPath != null || logKinds != null)
                 fileConfig = new FileConfig(inputPath, logKinds);
-            }
 
-            if (fileConfig != null) {
+            if(fileConfig != null)
                 inputs = new InputsConfig(fileConfig);
-            }
 
-            if (
-                levelPattern != null ||
-                timestampPattern != null ||
-                tagPattern != null
-            ) {
-                processor = new ProcessorConfig(
-                    levelPattern,
-                    timestampPattern,
-                    tagPattern
-                );
-            }
+            if(levelPattern != null || timestampPattern != null || tagPattern != null)
+                processor = new ProcessorConfig(levelPattern, timestampPattern, tagPattern);
 
-            if (webPort != null) {
+            if(webPort != null)
                 web = new WebConfig(webPort);
-            }
 
-            if (alertCondition != null || alertWindow != null) {
-                ErrorSpikeConfig errorSpikeConfig = new ErrorSpikeConfig(
-                    alertCondition,
-                    alertWindow
-                );
+
+            if(alertCondition != null || alertWindow != null) {
+                final ErrorSpikeConfig errorSpikeConfig = new ErrorSpikeConfig(alertCondition, alertWindow);
+
                 alerts = new AlertsConfig(errorSpikeConfig);
             }
 
