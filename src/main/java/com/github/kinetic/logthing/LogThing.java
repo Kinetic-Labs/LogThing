@@ -120,6 +120,8 @@ public final class LogThing {
         initializeModules();
 
         TerminalUtil.nextStep("RUNNING");
+
+        System.out.println();
     }
 
     /**
@@ -127,6 +129,8 @@ public final class LogThing {
      */
     private void destroy() {
         Thread.currentThread().setName("MSH");
+
+        System.out.println();
 
         final String step = "SHUTDOWN";
         TerminalUtil.startProgress(3, step);
