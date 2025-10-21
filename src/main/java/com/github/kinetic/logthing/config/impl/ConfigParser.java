@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 @SuppressWarnings("SameParameterValue")
 public final class ConfigParser extends AbstractConfigParser {
 
-    private static final String CONFIG_FILE = "logthing.nix";
+    private static final String CONFIG_FILE = "main.logthing.nix";
 
     /**
      * Create a new {@link ConfigParser}

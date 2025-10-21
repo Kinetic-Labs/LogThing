@@ -18,6 +18,8 @@
           buildInputs = with pkgs; [
             openjdk25
             gradle
+            nil
+            nixd
           ];
 
           shellHook = ''
