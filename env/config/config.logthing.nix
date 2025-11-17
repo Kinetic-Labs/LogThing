@@ -5,7 +5,7 @@
 ################################################
 
 let
-  # port to searc dashboard on
+  # port to serve dashboard on
   webPort = 9595;
 
   # enable or disable alerts
@@ -39,6 +39,15 @@ let
       tagPattern = scripting.processor.tagPattern;
       levelPattern = scripting.processor.levelPattern;
     };
+    database = {
+        database = scripting.database.database;
+        username = scripting.database.username;
+        password = scripting.database.password;
+        port = scripting.database.port;
+        host = scripting.database.host;
+        uri = scripting.database.uri;
+    };
+
     alerts =
       if enableAlerts then
         {

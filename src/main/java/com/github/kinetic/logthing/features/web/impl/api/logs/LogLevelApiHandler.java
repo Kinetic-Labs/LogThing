@@ -31,8 +31,8 @@ public final class LogLevelApiHandler extends AbstractHandler {
         methodUtil.requireMethod(exchange, Method.GET);
 
         final List<String> logKinds = Objects.requireNonNull(
-                configUtil.getInputsConfig().getFile()
-        ).getLogKinds();
+                configUtil.getInputsConfig().file()
+        ).logKinds();
 
         final String json = gson.toJson(logKinds);
 

@@ -18,9 +18,9 @@ class DataExtractorProcessor(rawLog: String) : AbstractProcessor(rawLog) {
     override fun process(): ParsedLog {
         val config = LogThing.getInstance().logThingConfig
 
-        val timestampPattern = config.processor?.timestampPattern
-        val tagPattern = config.processor?.tagPattern
-        val levelPattern = config.processor?.levelPattern
+        val timestampPattern = config.processor?.timestampPattern()
+        val tagPattern = config.processor?.tagPattern()
+        val levelPattern = config.processor?.levelPattern()
         val fullPattern = "^${timestampPattern}\\s+\\[${tagPattern}\\]\\s+\\[${levelPattern}\\]\\s+(.*)$"
 
         val pattern = Pattern.compile(fullPattern)

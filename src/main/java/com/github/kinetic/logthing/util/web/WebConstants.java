@@ -15,6 +15,6 @@ public final class WebConstants implements Util {
     /**
      * Web server port
      */
-    public static final long PORT = configUtil.getWebConfig().getPort();
+    public static final long PORT = configUtil.getWebConfig().port();
 
 }

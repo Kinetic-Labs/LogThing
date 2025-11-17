@@ -22,7 +22,7 @@ public final class LogServiceModule extends Module {
     /**
      * The path to the directory to watch
      */
-    private final String logPath = Objects.requireNonNull(configUtil.getInputsConfig().getFile()).getPath();
+    private final String logPath = Objects.requireNonNull(configUtil.getInputsConfig().file()).path();
 
     /**
      * The watch utility

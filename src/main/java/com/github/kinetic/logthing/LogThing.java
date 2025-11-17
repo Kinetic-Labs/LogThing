@@ -9,6 +9,7 @@ import com.github.kinetic.logthing.event.EventBus;
 import com.github.kinetic.logthing.features.storage.impl.memory.LogStorage;
 import com.github.kinetic.logthing.module.ModuleBuilder;
 import com.github.kinetic.logthing.module.ModuleRepository;
+import com.github.kinetic.logthing.module.impl.data.DatabaseModule;
 import com.github.kinetic.logthing.module.impl.data.LogConsumerModule;
 import com.github.kinetic.logthing.module.impl.io.LogServiceModule;
 import com.github.kinetic.logthing.module.impl.misc.RequestLoggerModule;
@@ -33,7 +34,7 @@ public final class LogThing {
     private final ModuleUtil moduleUtil = new ModuleUtil();
     private final LogThingFlags flag = new LogThingFlags();
     private final MiscSettings moduleSettings = new MiscSettings(
-        "moduleSettings"
+            "moduleSettings"
     );
 
     /**
@@ -53,11 +54,12 @@ public final class LogThing {
 
     private void initializeModules() {
         ModuleBuilder.create().putAll(
-            new RequestLoggerModule(),
-            new WebMonitorModule(),
-            new LogConsumerModule(),
-            new LogServiceModule(),
-            new AlertModule()
+                new RequestLoggerModule(),
+                new WebMonitorModule(),
+                new LogConsumerModule(),
+                new LogServiceModule(),
+                new AlertModule(),
+                new DatabaseModule()
         );
 
         // by default, we enable all modules, in the future
@@ -68,6 +70,7 @@ public final class LogThing {
         moduleUtil.enableModule(WebMonitorModule.class);
         moduleUtil.enableModule(LogServiceModule.class);
         moduleUtil.enableModule(AlertModule.class);
+        moduleUtil.enableModule(DatabaseModule.class);
     }
 
     /**
@@ -91,16 +94,29 @@ public final class LogThing {
     }
 
     /**
+     * Debug log configs
+     */
+    private void debugPrintConfigs() {
+        final Config config = getLogThingConfig();
+
+        log.debug(config.getAlerts().toString());
+        log.debug(config.getDatabase().toString());
+        log.debug(config.getInputs().toString());
+        log.debug(config.getWeb().toString());
+        log.debug(config.getProcessor().toString());
+    }
+
+    /**
      * Destroy all modules
      */
     private void destroyModules() {
         ModuleRepository.getInstance()
-            .getEnabledModules()
-            .forEach(module -> {
-                log.debug("Removing module: " + module.getName());
+                .getEnabledModules()
+                .forEach(module -> {
+                    log.debug("Removing module: " + module.getName());
 
-                if (module.isEnabled()) module.setEnabled(false);
-            });
+                    if(module.isEnabled()) module.setEnabled(false);
+                });
     }
 
     /**
@@ -118,6 +134,8 @@ public final class LogThing {
 
         TerminalUtil.nextStep(step);
         initializeModules();
+
+        debugPrintConfigs();
 
         TerminalUtil.nextStep("RUNNING");
 
@@ -161,7 +179,7 @@ public final class LogThing {
 
         try {
             Thread.currentThread().join();
-        } catch (final InterruptedException interruptedException) {
+        } catch(final InterruptedException interruptedException) {
             Thread.currentThread().interrupt();
             log.info("Interrupted thread: " + Thread.currentThread().getName());
         }

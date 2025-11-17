@@ -1,5 +1,7 @@
 package com.github.kinetic.logthing.util.types;
 
+import java.io.Serializable;
+
 /**
  * Represents parsed log
  *
@@ -8,5 +10,5 @@ package com.github.kinetic.logthing.util.types;
  * @param level     the log level
  * @param message   the log message
  */
-public record ParsedLog(String timestamp, String tag, String level, String message) {
+public record ParsedLog(String timestamp, String tag, String level, String message) implements Serializable {
 }

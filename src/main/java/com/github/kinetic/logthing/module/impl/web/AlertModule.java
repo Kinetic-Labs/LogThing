@@ -29,7 +29,7 @@ public final class AlertModule extends Module {
         super("AlertModule", "AM", "Alert daemon", Category.WEB);
 
         this.ruleEngine = new RuleEngine(
-                Objects.requireNonNull(configUtil.getAlertsConfig().getErrorSpike()).getCondition()
+                Objects.requireNonNull(configUtil.getAlertsConfig().errorSpike()).condition()
         );
     }
 

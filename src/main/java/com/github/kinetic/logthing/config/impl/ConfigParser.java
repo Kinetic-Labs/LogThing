@@ -103,6 +103,15 @@ public final class ConfigParser extends AbstractConfigParser {
                     getString(errorSpike, "window").ifPresent(builder::alertWindow);
                 });
 
+        getSet(config, "database").ifPresent(processor -> {
+            getString(processor, "database").ifPresent(builder::databaseName);
+            getString(processor, "username").ifPresent(builder::databaseUsername);
+            getString(processor, "password").ifPresent(builder::databasePassword);
+            getInteger(processor, "port").ifPresent(builder::databasePort);
+            getString(processor, "host").ifPresent(builder::databaseHost);
+            getString(processor, "uri").ifPresent(builder::databaseUri);
+        });
+
         return builder.build();
     }
 

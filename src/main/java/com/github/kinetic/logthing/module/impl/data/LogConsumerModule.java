@@ -3,6 +3,7 @@ package com.github.kinetic.logthing.module.impl.data;
 import com.github.kinetic.logthing.LogThing;
 import com.github.kinetic.logthing.event.IEventListener;
 import com.github.kinetic.logthing.event.impl.FinishedProcessingEvent;
+import com.github.kinetic.logthing.event.impl.StoreDatabaseEvent;
 import com.github.kinetic.logthing.module.Category;
 import com.github.kinetic.logthing.module.Module;
 import com.github.kinetic.logthing.features.storage.impl.memory.LogStorage;
@@ -31,6 +32,7 @@ public final class LogConsumerModule extends Module {
 
         final String name = event.getName();
         final ParsedLog parsedLog = event.getParsedLog();
+        final StoreDatabaseEvent storeDatabaseEvent = new StoreDatabaseEvent(parsedLog);
 
         if(name == null) {
             log.warn("Could not get the name of the log!");
@@ -41,7 +43,7 @@ public final class LogConsumerModule extends Module {
         log.debug("Finished processing log: " + name);
 
         LogStorage.getInstance().insert(parsedLog);
-        log.debug("Stored log.");
+        LogThing.getInstance().getEventBus().dispatch(storeDatabaseEvent);
     };
 
     /**
