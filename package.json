@@ -1,0 +1,16 @@
+{
+  "name": "logthingts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "tsc && tsc-esm-fix --out=dist --ext=.js",
+    "start": "npm run build && cd env && node ../dist/main.js"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "tsc-esm-fix": "^3.1.2"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}

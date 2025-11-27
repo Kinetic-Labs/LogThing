@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>LogThing - 404</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+        :root {
+            --background-color: oklch(0.14 0 89.876);
+            --foreground: oklch(0.949 0 89.876);
+            --border-color: oklch(0.409 0 89.876);
+
+            scroll-behavior: smooth;
+
+            font-family: "Montserrat", sans-serif;
+            font-weight: 400;
+            font-size: 100%;
+            -moz-osx-font-smoothing: grayscale;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .vertical-divider {
+            width: 1px;
+            background-color: var(--border-color);
+            height: 50px;
+            margin: 0 15px;
+        }
+
+        html {
+            width: 100%;
+            height: 100vh;
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--foreground);
+        }
+
+        h1 {
+            font-family: "Montserrat", sans-serif;
+            font-weight: 300;
+        }
+
+        .page {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            height: 90vh;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <h1 class="code">404</h1>
+
+        <div class="vertical-divider"></div>
+
+        <h1 class="message">LogThing could not route your request.</h1>
+    </div>
+</body>
+
+</html>
