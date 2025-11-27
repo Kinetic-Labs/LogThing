@@ -1,0 +1,21 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.{js,jsx,ts,tsx}]
+ij_javascript_space_before_if_parentheses = false
+ij_typescript_space_before_if_parentheses = false
+ij_javascript_space_before_while_parentheses = false
+ij_typescript_space_before_while_parentheses = false
+ij_javascript_space_before_for_parentheses = false
+ij_typescript_space_before_for_parentheses = false
+ij_javascript_space_before_switch_parentheses = false
+ij_typescript_space_before_switch_parentheses = false
+ij_javascript_space_before_catch_parentheses = false
+ij_typescript_space_before_catch_parentheses = false
+ij_javascript_spaces_within_imports = true
+ij_typescript_spaces_within_imports = true
