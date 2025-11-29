@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "build": "tsc && tsc-esm-fix --out=dist --ext=.js",
-    "start": "npm run build && cd env && NODE_COMPILE_CACHE=~/.node_cache node ../dist/main.js",
-    "start:deno": "npm run build && cd env && deno --allow-read --allow-write --allow-net --allow-env ../dist/main.js",
+    "start": "npm run build && cd env && deno --allow-read --allow-write --allow-net --allow-env ../dist/main.js",
+    "start:node": "npm run build && cd env && NODE_COMPILE_CACHE=~/.node_cache node ../dist/main.js",    
     "start:bun": "npm run build && cd env && bun --bun --optimize --smol ../dist/main.js",
     "bench:bun": "cd env && bun --bun --optimize --smol ../dist/main.js -X:bench",
     "bench:deno": "cd env && deno --allow-read --allow-write --allow-net --allow-env ../dist/main.js -X:bench",
