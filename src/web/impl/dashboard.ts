@@ -5,6 +5,7 @@ import { Server } from "../server";
 import { createServer } from 'node:http';
 import { LogStorage } from "../../features/storage";
 import type { ParsedLog } from "../../features/process";
+import { options } from "../../main";
 
 type Handler = (req: IncomingMessage, res: ServerResponse) => void;
 type Route = { path: string; handler: Handler };
@@ -54,6 +55,10 @@ export class DashboardServer extends Server {
     }
 
     override serve(): void {
+        if(options.bench) {
+            return;
+        }
+
         super.serve();
 
         createServer(async(req, res) => {
