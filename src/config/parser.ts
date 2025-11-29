@@ -20,7 +20,7 @@ export async function parse_config(configPath: string): Promise<Config> {
 }
 
 export const get_config = (): Promise<Config> => {
-  configCache ??= parse_config("config.cjs");
+  configCache ??= parse_config("config.mjs");
   return configCache;
 };
 
