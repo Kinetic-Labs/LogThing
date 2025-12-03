@@ -1,5 +1,4 @@
-document.addEventListener('DOMContentLoaded', async _event => {
-    const logList = document.getElementById('logList');
+document.addEventListener('DOMContentLoaded', async () => {
     const logLevelFilters = document.getElementById('log-level-filters');
     const logs = await fetch('/api/logs/get').then(response => response.json());
     const logKinds = await fetch('/api/logs/levels').then(response => response.json());
@@ -20,33 +19,17 @@ document.addEventListener('DOMContentLoaded', async _event => {
         </button>
     `;
 
-    logLevelFilters.innerHTML += Object.keys(logCounts).map(level =>
-        `<button data-level="${level}" class="filter-button">
-            ${level} (${logCounts[level]})
-        </button>`
-    ).join('');
+    logKinds.forEach(level => {
+        logLevelFilters.innerHTML += `
+            <button data-level="${level}" class="filter-button">
+                ${level} (${logCounts[level]})
+            </button>
+        `;
+    });
 
     document.querySelectorAll('.filter-button').forEach(button => {
         button.addEventListener('click', () => filterLogs(button.dataset.level));
     });
-
-    logList.innerHTML = logs.map((log, index) => `
-        <li class="log-entry" 
-            data-level="${log.level || 'UNKNOWN'}" 
-            style="--i: ${index}; border-left-color: ${getLevelColor(log.level || 'UNKNOWN')}">
-            
-            ${(log.timestamp || log.tag) ? `
-            <span class="log-meta">
-                ${log.timestamp ? `<span class="log-timestamp">${log.timestamp}</span>` : ''}
-                ${log.tag ? `<span class="log-tag">${log.tag}</span>` : ''}
-            </span>
-            ` : ''}
-            <span class="log-level" style="color: ${getLevelColor(log.level || 'UNKNOWN')}">
-                [${log.level || 'UNKNOWN'}]
-            </span>
-            <span class="log-message">${log.message}</span>
-        </li>
-    `).join('');
 
     const ctx = document.getElementById('logChart').getContext('2d');
     new Chart(ctx, {
@@ -79,6 +62,99 @@ document.addEventListener('DOMContentLoaded', async _event => {
             }
         }
     });
+
+    const logViewport = document.getElementById('logViewport');
+
+    const Datasource = VScroll.makeDatasource();
+
+    const datasource = new Datasource({
+        get: (index, count, success) => {
+            const filteredLogs = logs.filter(log => {
+                const level = log.level || 'UNKNOWN';
+                return activeFilters.includes('ALL') || activeFilters.includes(level);
+            });
+
+            const endIndex = Math.min(index + count, filteredLogs.length);
+            const slice = [];
+
+            for(let i = index; i < endIndex; i++) {
+                if(filteredLogs[i]) {
+                    slice.push(filteredLogs[i]);
+                }
+            }
+
+            success(slice);
+        }
+    });
+
+    let oldItems = [];
+
+    const workflow = new VScroll.Workflow({
+        element: logViewport,
+        datasource: datasource,
+        run: (newItems) => {
+            if(!newItems.length && !oldItems.length) {
+                return;
+            }
+
+            oldItems.forEach(item => {
+                if(!newItems.find(newItem => newItem.element === item.element)) {
+                    if(item.element && item.element.parentNode) {
+                        item.element.parentNode.removeChild(item.element);
+                    }
+                }
+            });
+
+            newItems.forEach(item => {
+                if(!item.element) {
+                    const div = document.createElement('div');
+                    div.className = 'log-entry';
+                    div.dataset.level = item.data.level || 'UNKNOWN';
+                    div.dataset.sid = item.$index;
+                    div.style.borderLeftColor = getLevelColor(item.data.level || 'UNKNOWN');
+                    div.style.position = 'fixed';
+                    div.style.left = '-9999px';
+                    div.style.top = '-9999px';
+
+                    div.innerHTML = `
+                        ${(item.data.timestamp || item.data.tag) ? `
+                        <span class="log-meta">
+                            ${item.data.timestamp ? `<span class="log-timestamp">${item.data.timestamp}</span>` : ''}
+                            ${item.data.tag ? `<span class="log-tag">${item.data.tag}</span>` : ''}
+                        </span>
+                        ` : ''}
+                        <span class="log-level" style="color: ${getLevelColor(item.data.level || 'UNKNOWN')}">
+                            [${item.data.level || 'UNKNOWN'}]
+                        </span>
+                        <span class="log-message">${item.data.message}</span>
+                    `;
+
+                    item.element = div;
+                    logViewport.appendChild(div);
+                }
+
+                if(!item.invisible) {
+                    item.element.style.position = '';
+                    item.element.style.left = '';
+                    item.element.style.top = '';
+                }
+            });
+
+            oldItems = newItems;
+        },
+        consumer: {
+            name: 'logthing',
+            version: '1.0.0'
+        }
+    });
+
+    window.updateVScroll = () => {
+        workflow.call({
+            process: 'adapter.reload',
+            status: 'start',
+            payload: {}
+        });
+    };
 });
 
 function getLevelColor(level) {
@@ -91,7 +167,6 @@ function getLevelColor(level) {
         'FATAL': '#f0e0e0',
         'UNKNOWN': '#808080'
     };
-
     return colors[level] || '#909090';
 }
 
@@ -107,36 +182,23 @@ function filterLogs(level) {
             activeFilters = [];
             allButton.classList.remove('active');
         }
-
         const index = activeFilters.indexOf(level);
         if(index > -1) {
             activeFilters.splice(index, 1);
         } else {
             activeFilters.push(level);
         }
-
         if(activeFilters.length === 0) {
             activeFilters = ['ALL'];
             allButton.classList.add('active');
         }
     }
 
-    const logEntries = document.querySelectorAll('.log-entry');
-
-    logEntries.forEach(entry => {
-        const isVisible = activeFilters.includes('ALL') || activeFilters.includes(entry.dataset.level);
-        const wasVisible = !entry.classList.contains('filtered');
-
-        if(wasVisible && !isVisible) {
-            entry.classList.add('filtered');
-            entry.style.animation = '';
-        } else if(!wasVisible && isVisible) {
-            entry.classList.remove('filtered');
-            entry.style.animation = '';
-        }
-    });
-
     filterButtons.forEach(button => {
         button.classList.toggle('active', activeFilters.includes(button.dataset.level));
     });
+
+    if(window.updateVScroll) {
+        window.updateVScroll();
+    }
 }

@@ -7,4 +7,3 @@ export type Config = {
     message_pattern: RegExp;
     tag_pattern: RegExp;
 };
-

@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "required": {
+      "read": true,
+      "write": true,
+      "net": true,
+      "env": true,
+      "sys": true
+    }
+  },
+  "tasks": {
+    "dev": "deno task build && cd env && deno run -P=required --watch ../dist/main.js",
+    "start": "cd env && deno run -P=required ../dist/main.js",
+    "prebuild": "deno task build && mkdir -p build",
+    "clean:build": "rm -rf build",
+    "build:native": "deno task prebuild && deno compile -A -o build/logthing ./dist/main.js",
+    "build:native:win32-x64": "deno task prebuild && deno compile -A --target x86_64-pc-windows-msvc -o build/logthing-win32-x64.exe ./dist/main.js",
+    "build:native:linux-x64": "ddeno task prebuild && deno compile -A --target x86_64-unknown-linux-gnu -o build/logthing-linux-x64 ./dist/main.js",
+    "build:native:darwin-x64": "deno task prebuild && deno compile -A --target x86_64-apple-darwin -o build/logthing-darwin-x64 ./dist/main.js",
+    "build:native:darwin-arm64": "deno task prebuild &&6 deno compile -A --target aarch64-apple-darwin -o build/logthing-darwin-arm64 ./dist/main.js",
+    "build:native:all": "deno task clean:build && deno task build:native:win32-x64 && deno task build:native:linux-x64 && deno task build:native:darwin-x64 && deno task build:native:darwin-arm64"
+  },
+  "imports": {
+    "typescript": "npm:typescript@5.9.3",
+    "tsc-esm-fix": "npm:tsc-esm-fix@3.1.2",
+    "@types/node": "npm:@types/node@24.10.1"
+  }
+}
