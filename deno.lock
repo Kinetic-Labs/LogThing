@@ -1,10 +1,6 @@
 {
   "version": "5",
   "specifiers": {
-    "npm:@types/node@24.10.1": "24.10.1",
-    "npm:@types/node@^24.10.1": "24.10.1",
-    "npm:tsc-esm-fix@3.1.2": "3.1.2",
-    "npm:tsc-esm-fix@^3.1.2": "3.1.2",
     "npm:typescript@5.9.3": "5.9.3"
   },
   "npm": {
@@ -25,6 +21,9 @@
         "fastq"
       ]
     },
+    "@standard-schema/spec@1.1.0": {
+      "integrity": "sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w=="
+    },
     "@topoconfig/extends@0.16.2": {
       "integrity": "sha512-sTF+qpWakr5jf1Hn/kkFSi833xPW15s/loMAiKSYSSVv4vDonxf6hwCGzMXjLq+7HZoaK6BgaV72wXr1eY7FcQ==",
       "bin": true
@@ -43,6 +42,19 @@
     },
     "depseek@0.4.3": {
       "integrity": "sha512-0Ex/Uoz9Y9oipbqvgSc7FoV2q4GTDGORkg8TGgM9Pd3RyvRzrDYScKplWiqHU7WqckbKN5kukqD0opEayu2bXg=="
+    },
+    "effect@3.19.15": {
+      "integrity": "sha512-vzMmgfZKLcojmUjBdlQx+uaKryO7yULlRxjpDnHdnvcp1NPHxJyoM6IOXBLlzz2I/uPtZpGKavt5hBv7IvGZkA==",
+      "dependencies": [
+        "@standard-schema/spec",
+        "fast-check"
+      ]
+    },
+    "fast-check@3.23.2": {
+      "integrity": "sha512-h5+1OzzfCC3Ef7VbtKdcv7zsstUQwUDlYpUTvjeUsJAssPgLn7QzbboPtL5ro04Mq0rPOsMzl7q5hIbRs2wD1A==",
+      "dependencies": [
+        "pure-rand"
+      ]
     },
     "fast-glob@3.3.3": {
       "integrity": "sha512-7MptL8U0cqcFdzIzwOTHoilX9x5BrNqye7Z/LuC7kCMRio1EMSyqRK3BEAUD7sXRq4iT4AzTVuZdhgQ2TCvYLg==",
@@ -121,6 +133,9 @@
     "picomatch@2.3.1": {
       "integrity": "sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA=="
     },
+    "pure-rand@6.1.0": {
+      "integrity": "sha512-bVWawvoZoBYpp6yIoQtQXHZjmz35RSVHnUOTefl8Vcjr8snTPY1wnpSPMWekcFwbxI6gtmT7rSYPFvz71ldiOA=="
+    },
     "queue-microtask@1.2.3": {
       "integrity": "sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A=="
     },
@@ -165,16 +180,21 @@
       "integrity": "sha512-gptHNQghINnc/vTGIk0SOFGFNXw7JVrlRUtConJRlvaw6DuX0wO5Jeko9sWrMBhh+PsYAZ7oXAiOnf/UKogyiw=="
     }
   },
+  "remote": {
+    "https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js": "a511976d328c8565dd9afb7ced1bbece82b2b40078c6e2fa69967aefade265f5"
+  },
   "workspace": {
     "dependencies": [
       "npm:@types/node@24.10.1",
+      "npm:effect@3.19",
       "npm:tsc-esm-fix@3.1.2",
       "npm:typescript@5.9.3"
     ],
     "packageJson": {
       "dependencies": [
-        "npm:@types/node@^24.10.1",
-        "npm:tsc-esm-fix@^3.1.2"
+        "npm:@types/node@24.10.1",
+        "npm:effect@3.19.15",
+        "npm:tsc-esm-fix@3.1.2"
       ]
     }
   }

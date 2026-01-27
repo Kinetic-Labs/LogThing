@@ -21,8 +21,12 @@
     "build:native:all": "deno task clean:build && deno task build:native:win32-x64 && deno task build:native:linux-x64 && deno task build:native:darwin-x64 && deno task build:native:darwin-arm64"
   },
   "imports": {
+    "effect": "npm:effect@3.19",
     "typescript": "npm:typescript@5.9.3",
     "tsc-esm-fix": "npm:tsc-esm-fix@3.1.2",
     "@types/node": "npm:@types/node@24.10.1"
+  },
+  "compilerOptions": {
+    "lib": ["dom", "deno.ns"]
   }
 }

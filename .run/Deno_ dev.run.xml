@@ -1,5 +1,11 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Deno: dev" type="DenoConfigurationType" inputPath="dist/main.js" programParameters="task dev">
+  <configuration
+    default="false"
+    name="Deno: dev"
+    type="DenoConfigurationType"
+    inputPath="dist/main.js"
+    programParameters="task dev"
+  >
     <method v="2">
       <option name="Make" enabled="true" />
     </method>

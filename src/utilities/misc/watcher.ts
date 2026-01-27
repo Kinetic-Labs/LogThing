@@ -1,8 +1,8 @@
-import { globSync, watch } from 'node:fs';
-import { join } from 'node:path';
-import type { Logger } from './logger';
-import type { EventEmitter } from 'node:events';
-import { options } from '../../main';
+import { globSync, watch } from "node:fs";
+import { join } from "node:path";
+import type { Logger } from "./logger.ts";
+import type { EventEmitter } from "node:events";
+import { options } from "../../main.ts";
 
 export type LogEvent = {
   event: string;
@@ -15,25 +15,25 @@ export let t0 = 0;
 export const watch_logs = (
   directory: string,
   logger: Logger,
-  bus: EventEmitter
+  bus: EventEmitter,
 ): void => {
-  if(options.bench) {
+  if (options.bench) {
     t0 = performance.now();
   }
 
   logger.info(`Scanning ${directory} for existing files…`);
 
-  const existing = globSync('**/*', { cwd: directory });
+  const existing = globSync("**/*", { cwd: directory });
 
-  for(const relative of existing) {
-    bus.emit('log', {
-      event: 'change',
+  for (const relative of existing) {
+    bus.emit("log", {
+      event: "change",
       file: join(directory, relative),
       when: Date.now().toString(),
     });
   }
 
-  if(options.bench) {
+  if (options.bench) {
     const elapsed = performance.now() - t0;
     logger.info(`Scanned ${existing.length} files in ${elapsed.toFixed(2)}ms`);
     return;
@@ -42,9 +42,9 @@ export const watch_logs = (
   logger.info(`Watching ${directory} for changes…`);
 
   watch(directory, { recursive: true }, (event, file) => {
-    if(file) {
+    if (file) {
       logger.debug(`Changed: ${event}: ${file}`);
-      bus.emit('log', {
+      bus.emit("log", {
         event,
         file: join(directory, file),
         when: Date.now().toString(),
@@ -52,4 +52,3 @@ export const watch_logs = (
     }
   });
 };
-

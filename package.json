@@ -11,11 +11,14 @@
     "bench:deno": "cd env && deno --allow-read --allow-write --allow-net --allow-env ../dist/main.js -X:bench",
     "bench:node": "cd env && NODE_COMPILE_CACHE=~/.node_cache node ../dist/main.js -X:bench"
   },
+  "dependencies": {
+    "effect": "3.19.15"
+  },
   "devDependencies": {
-    "@types/node": "^24.10.1",
-    "tsc-esm-fix": "^3.1.2"
+    "@types/node": "24.10.1",
+    "tsc-esm-fix": "3.1.2"
   },
   "peerDependencies": {
-    "typescript": "^5"
+    "typescript": "5.9.3"
   }
 }

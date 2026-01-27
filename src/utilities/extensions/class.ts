@@ -1,44 +1,22 @@
-export function sealed<T extends { new (...args: any[]): object}>(
-    Target: T
+// deno is highly intelligent and believes that any is bad
+// while this is (like 99% of the time) true, it also believes
+// that Mixin classes need to take an `any` rest parameter.
+// It also flags that as any so to bypass this pure genius
+// from spamming ignore comments, this shitty hack is used.
+// for fuck's sake.
+// deno-lint-ignore no-explicit-any
+type Any = any;
+
+export function final<T extends { new (...args: Any[]): object }>(
+    Target: T,
 ): T {
-    return class Sealed extends Target {
-        constructor(...args: any[]) {
-            if(new.target !== Sealed) {
-                console.warn("Children allowed to inherit not implemented yet...");
-                throw new Error("Cannot inherit from sealed class [unless allowed]!");
+    return class Final extends Target {
+        constructor(...args: Any[]) {
+            if (new.target !== Final) {
+                throw new Error("Cannot inherit from a final class!");
             }
 
             super(...args);
         }
-    }
-}
-
-export function open<T extends { new (...args: any[]): object}>(
-    Target: T
-): T {
-    return class Open extends Target {
-        constructor(...args: any[]) {
-            if(new.target === Open) {
-                throw new Error("Cannot create an open class that is not inherited from! (Hint: mark as @sealed)");
-            }
-
-            super(...args);
-        }
-    }
-}
-
-export function mono<T extends { new (...args: any[]): object }>(Target: T): T {
-    let instance: object | undefined;
-
-    return class Mono extends Target {
-        constructor(...args: any[]) {
-            if(instance) {
-                throw new Error(
-                    'Cannot instantiate a mono class more than once! (hint: remove @mono or use @poly!)'
-                );
-            }
-            super(...args);
-            instance = this;
-        }
-    } as T;
+    };
 }

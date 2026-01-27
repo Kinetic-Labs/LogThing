@@ -1,5 +1,5 @@
-import { pathToFileURL } from 'node:url';
-import type { Config } from './types';
+import { pathToFileURL } from "node:url";
+import type { Config } from "./types.ts";
 
 let configCache: Promise<Config> | null = null;
 
@@ -23,4 +23,3 @@ export const get_config = (): Promise<Config> => {
   configCache ??= parse_config("config.mjs");
   return configCache;
 };
-
