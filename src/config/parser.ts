@@ -1,5 +1,6 @@
 import { pathToFileURL } from "node:url";
-import type { Config } from "./types.ts";
+import type { Config } from "~/src/config/types.ts";
+import { Effect } from "effect";
 
 let configCache: Promise<Config> | null = null;
 
@@ -19,7 +20,7 @@ export async function parse_config(configPath: string): Promise<Config> {
   };
 }
 
-export const get_config = (): Promise<Config> => {
-  configCache ??= parse_config("config.mjs");
-  return configCache;
+export const get_config = (): Effect.Effect<Config> => {
+    configCache ??= parse_config("config.mjs");
+    return Effect.promise(() => configCache!);
 };

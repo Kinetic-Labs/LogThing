@@ -1,4 +1,4 @@
-import type { Logger } from "../utilities/misc/logger.ts";
+import type { Logger } from "~/src/utilities/misc/logger.ts";
 
 import { extname, join } from "node:path";
 import * as node_fs from "node:fs";

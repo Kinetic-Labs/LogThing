@@ -1,11 +1,11 @@
-import type { Logger } from "../../utilities/misc/logger.ts";
+import type { Logger } from "~/src/utilities/misc/logger.ts";
 import type { IncomingMessage, ServerResponse } from "node:http";
-import { final } from "../../utilities/extensions/class.ts";
-import { Server } from "../server.ts";
+import { final } from "~/src/utilities/extensions/class.ts";
+import { Server } from "~/src/web/server.ts";
 import { createServer } from "node:http";
-import { LogStorage } from "../../features/storage.ts";
-import type { ParsedLog } from "../../features/process.ts";
-import { options } from "../../main.ts";
+import { LogStorage } from "~/src/features/storage.ts";
+import type { ParsedLog } from "~/src/features/process.ts";
+import { options } from "~/src/main.ts";
 
 type Handler = (req: IncomingMessage, res: ServerResponse) => void;
 type Route = { path: string; handler: Handler };

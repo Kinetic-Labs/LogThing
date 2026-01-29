@@ -1,8 +1,8 @@
 import { globSync, watch } from "node:fs";
 import { join } from "node:path";
-import type { Logger } from "./logger.ts";
+import type { Logger } from "~/src/utilities/misc/logger.ts";
 import type { EventEmitter } from "node:events";
-import { options } from "../../main.ts";
+import { options } from "~/src/main.ts";
 
 export type LogEvent = {
   event: string;

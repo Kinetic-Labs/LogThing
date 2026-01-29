@@ -1,8 +1,8 @@
-import type { LogEvent } from "../utilities/misc/watcher.ts";
-import { get_config } from "../config/parser.ts";
-import { resolve } from "node:path";
+import type { LogEvent } from "~/src/utilities/misc/watcher.ts";
+import { get_config } from "~/src/config/parser.ts";
 import { readFileSync } from "node:fs";
-import { bus } from "../event/eventbus.ts";
+import { bus } from "~/src/event/eventbus.ts";
+import { Effect } from "effect";
 
 export type ParsedLog = {
   timestamp: string;
@@ -12,10 +12,10 @@ export type ParsedLog = {
 };
 
 export const process_log_handler = async (event: LogEvent): Promise<void> => {
-  const config = await get_config();
+  const config = await Effect.runPromise(get_config());
   const { date_pattern, level_pattern, message_pattern, tag_pattern } = config;
 
-  const logFile = resolve(event.file);
+  const logFile = event.file;
   const text = readFileSync(logFile, "utf8");
   const lines = text.trim().split("\n");
   const result: ParsedLog[] = new Array(lines.length);

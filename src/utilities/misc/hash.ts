@@ -1,3 +1,10 @@
+/**
+ * Simple algorithm to generate a hash from a string
+ *
+ * NOTE: THIS IS NOT CRYPTOGRAPHICALLY SECURE
+ *
+ * @param string the string to hash
+ */
 export const generate_hash = (string: string) => {
   let hash = 0;
 

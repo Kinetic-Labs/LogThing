@@ -1,12 +1,13 @@
-import { final } from "./utilities/extensions/class.ts";
-import { Logger } from "./utilities/misc/logger.ts";
-import { DashboardServer } from "./web/impl/dashboard.ts";
-import { get_config } from "./config/parser.ts";
-import { watch_logs } from "./utilities/misc/watcher.ts";
-import { bus } from "./event/eventbus.ts";
-import { process_log_handler } from "./features/process.ts";
-import { insert_log_handler } from "./features/storage.ts";
+import { final } from "~/src/utilities/extensions/class.ts";
+import { Logger } from "~/src/utilities/misc/logger.ts";
+import { DashboardServer } from "~/src/web/impl/dashboard.ts";
+import { get_config } from "~/src/config/parser.ts";
+import { watch_logs } from "~/src/utilities/misc/watcher.ts";
+import { bus } from "~/src/event/eventbus.ts";
+import { process_log_handler } from "~/src/features/process.ts";
+import { insert_log_handler } from "~/src/features/storage.ts";
 import process from "node:process";
+import { Effect } from "effect";
 
 const Flags = {
   debug: "-X:debug",
@@ -23,7 +24,7 @@ class Main {
   }
 
   public async main(): Promise<void> {
-    const config = await get_config();
+    const config = await Effect.runPromise(get_config());
     const dashboard = new DashboardServer(config.web_port, this.logger);
 
     dashboard.serve();
@@ -44,7 +45,7 @@ if (import.meta.main) {
   const [_runtime, _script, ...args] = process.argv;
 
   const flagByValue = Object.fromEntries(
-    Object.entries(Flags).map(([k, v]) => [v, k]),
+    Object.entries(Flags).map(([key, value]) => [value, key]),
   ) as Record<string, keyof typeof Flags>;
 
   for (const arg of args) {

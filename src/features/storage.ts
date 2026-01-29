@@ -1,8 +1,8 @@
-import { options } from "../main.ts";
-import { generate_hash } from "../utilities/misc/hash.ts";
-import { Logger } from "../utilities/misc/logger.ts";
-import { t0 } from "../utilities/misc/watcher.ts";
-import type { ParsedLog } from "./process.ts";
+import { options } from "~/src/main.ts";
+import { generate_hash } from "~/src/utilities/misc/hash.ts";
+import { Logger } from "~/src/utilities/misc/logger.ts";
+import { t0 } from "~/src/utilities/misc/watcher.ts";
+import type { ParsedLog } from "~/src/features/process.ts";
 
 interface LogEvent {
   logs: ParsedLog[];
